@@ -15,6 +15,7 @@ class DiscussionViewModel: ObservableObject {
     init() {
         let db = Firestore.firestore()
         db.collection("discussions")
+            .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
                     print("hello Fail getting documents: \(error)")
