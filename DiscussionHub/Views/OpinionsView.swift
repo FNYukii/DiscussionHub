@@ -45,7 +45,7 @@ struct OpinionsView: View {
             
             // New opinion content input area
             HStack(alignment: .bottom) {
-                TextField("メッセージを入力", text: $inputStr)
+                TextField("Your opinion", text: $inputStr)
                     .submitLabel(.done)
                     .font(.body)
                     .frame(height: 30)
