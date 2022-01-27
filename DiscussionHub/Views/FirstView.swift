@@ -15,24 +15,26 @@ struct FirstView: View {
     
     var body: some View {
         
-        List {
-            ForEach(threadViewModel.threads) {thread in
-                NavigationLink(destination: ThreadView(threadId: thread.id, threadTitle: thread.title)) {
-                    Text(thread.title)
+        NavigationView {
+            List {
+                ForEach(threadViewModel.threads) {thread in
+                    NavigationLink(destination: ThreadView(threadId: thread.id, threadTitle: thread.title)) {
+                        Text(thread.title)
+                    }
                 }
             }
+                .sheet(isPresented: $isShowSheet) {
+                    CreateThreadView()
+                }
+                .navigationBarTitle("スレッド")
+                .navigationBarItems(
+                    trailing: Button(action: {
+                        isShowSheet.toggle()
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                        Text("New thread")
+                    }
+                )
         }
-            .sheet(isPresented: $isShowSheet) {
-                CreateThreadView()
-            }
-            .navigationBarTitle("スレッド")
-            .navigationBarItems(
-                trailing: Button(action: {
-                    isShowSheet.toggle()
-                }){
-                    Image(systemName: "plus.circle.fill")
-                    Text("New thread")
-                }
-            )
     }
 }
