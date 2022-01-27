@@ -11,16 +11,16 @@ import Firebase
 class OpinionViewModel: ObservableObject {
     
     @Published var opinions: [Opinion] = []
-    var discussionId = ""
+    var threadId = ""
     
-    init(discussionId: String) {
-        // Set discussionId
-        self.discussionId = discussionId
+    init(threadId: String) {
+        // Set threadId
+        self.threadId = threadId
         
         // Get opinion documents
         let db = Firestore.firestore()
-        db.collection("discussions")
-            .document(self.discussionId)
+        db.collection("threads")
+            .document(self.threadId)
             .collection("opinions")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
@@ -55,8 +55,8 @@ class OpinionViewModel: ObservableObject {
         
         // Add new opinion
         let db = Firestore.firestore()
-        db.collection("discussions")
-            .document(discussionId)
+        db.collection("threads")
+            .document(threadId)
             .collection("opinions")
             .addDocument(data: [
                 "order": order,

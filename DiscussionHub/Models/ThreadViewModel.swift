@@ -8,33 +8,33 @@
 import Foundation
 import Firebase
 
-class DiscussionViewModel: ObservableObject {
+class ThreadViewModel: ObservableObject {
     
-    @Published var discussions: [Discussion] = []
+    @Published var threads: [Thread] = []
     
     init() {
         
-        // Get discussion documents
+        // Get thread documents
         let db = Firestore.firestore()
-        db.collection("discussions")
+        db.collection("threads")
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
                     print("HELLO Failed to getting documents: \(error)")
                 } else {
                     
-                    // Create discussions array
-                    self.discussions = []
+                    // Create threads array
+                    self.threads = []
                     for document in snapshot!.documents {
                         let id = document.documentID
                         let title = document.get("title") as! String
                         let createdAt: Timestamp = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newDiscusstion = Discussion(id: id, title: title, createdAt: createdDate)
-                        self.discussions.append(newDiscusstion)
+                        let newDiscusstion = Thread(id: id, title: title, createdAt: createdDate)
+                        self.threads.append(newDiscusstion)
                     }
                     
-                    print("HELLO discussions: \(self.discussions)")
+                    print("HELLO threads: \(self.threads)")
                 }
             }
     }
@@ -42,7 +42,7 @@ class DiscussionViewModel: ObservableObject {
     func addDiscussion(title: String, firstOpinionContent: String) {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
-        ref = db.collection("discussions")
+        ref = db.collection("threads")
             .addDocument(data: [
                 "title": title,
                 "createdAt": Date()
@@ -52,8 +52,8 @@ class DiscussionViewModel: ObservableObject {
                 } else {
                     print("HELLO Successful adding new document \(ref!.documentID)")
                     
-                    // Add first opinion in this discussion
-                    let opinionViewModel = OpinionViewModel(discussionId: ref!.documentID)
+                    // Add first opinion in this thread
+                    let opinionViewModel = OpinionViewModel(threadId: ref!.documentID)
                     opinionViewModel.addOpinion(content: firstOpinionContent)
                 }
             }

@@ -10,21 +10,21 @@ import Firebase
 
 struct FirstView: View {
     
-    @ObservedObject var discussionViewModel = DiscussionViewModel()
+    @ObservedObject var threadViewModel = ThreadViewModel()
     @State var isShowSheet = false
     
     var body: some View {
         
         NavigationView {
             List {
-                ForEach(discussionViewModel.discussions) {discussion in
-                    NavigationLink(destination: OpinionsView(discussionId: discussion.id, discussionTitle: discussion.title)) {
+                ForEach(threadViewModel.threads) {discussion in
+                    NavigationLink(destination: ThreadView(threadId: discussion.id, discussionTitle: discussion.title)) {
                         Text(discussion.title)
                     }
                 }
             }
             .sheet(isPresented: $isShowSheet) {
-                CreateDiscussionView()
+                CreateThreadView()
             }
             .navigationBarTitle("Threads")
             .navigationBarItems(

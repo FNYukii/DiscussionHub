@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateDiscussionView: View {
+struct CreateThreadView: View {
     
     @Environment(\.dismiss) var dismiss
     @State var title = ""
@@ -21,13 +21,13 @@ struct CreateDiscussionView: View {
                 TextField("Description", text: $firstOpinionContent)
                     .submitLabel(.done)
             }
-                .navigationBarTitle("New Discussion", displayMode: .inline)
+                .navigationBarTitle("New Thread", displayMode: .inline)
                 .navigationBarItems(leading:
                     Button("Cancel"){
                         dismiss()
                     }, trailing:
                     Button(action: {
-                        let discussionViewModel = DiscussionViewModel()
+                        let discussionViewModel = ThreadViewModel()
                         discussionViewModel.addDiscussion(title: title, firstOpinionContent: firstOpinionContent)
                         dismiss()
                     }){

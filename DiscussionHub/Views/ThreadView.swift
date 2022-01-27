@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct OpinionsView: View {
+struct ThreadView: View {
     
-    let discussionId: String
-    let discussionTitle: String
+    let threadId: String
+    let threadTitle: String
     @ObservedObject var opinionViewModel: OpinionViewModel
     
     @State var inputStr = ""
     
-    init(discussionId: String, discussionTitle: String) {
-        self.discussionId = discussionId
-        self.discussionTitle = discussionTitle
-        self.opinionViewModel = OpinionViewModel(discussionId: self.discussionId)
+    init(threadId: String, discussionTitle: String) {
+        self.threadId = threadId
+        self.threadTitle = discussionTitle
+        self.opinionViewModel = OpinionViewModel(threadId: self.threadId)
     }
 
     var body: some View {
@@ -69,7 +69,7 @@ struct OpinionsView: View {
                     .disabled(inputStr.isEmpty)
             }
         }
-            .navigationBarTitle(discussionTitle)
+            .navigationBarTitle(threadTitle)
     }
     
     func formatDate(inputDate: Date) -> String {
