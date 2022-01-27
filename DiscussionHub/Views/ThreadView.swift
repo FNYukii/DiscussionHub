@@ -53,9 +53,10 @@ struct ThreadView: View {
                     .padding(.leading, 16)
                     .overlay(
                         RoundedRectangle(cornerRadius: 19)
-                            .stroke(Color.secondary, lineWidth: 1)
+                            .stroke(Color.secondary.opacity(0.8), lineWidth: 0.8)
                     )
                     .padding(8)
+                    .padding(.leading, 10)
                 
                 Button(action: {
                     commentViewModel.addComment(content: inputStr)
