@@ -28,7 +28,7 @@ struct CreateDiscussionView: View {
                     }, trailing:
                     Button(action: {
                         let discussionViewModel = DiscussionViewModel()
-                        discussionViewModel.addDiscussion(title: title)
+                        discussionViewModel.addDiscussion(title: title, firstOpinionContent: firstOpinionContent)
                         dismiss()
                     }){
                         Text("Create")

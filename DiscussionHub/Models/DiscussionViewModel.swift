@@ -39,9 +39,10 @@ class DiscussionViewModel: ObservableObject {
             }
     }
     
-    func addDiscussion(title: String) {
+    func addDiscussion(title: String, firstOpinionContent: String) {
         let db = Firestore.firestore()
-        db.collection("discussions")
+        var ref: DocumentReference? = nil
+        ref = db.collection("discussions")
             .addDocument(data: [
                 "title": title,
                 "createdAt": Date()
@@ -49,7 +50,11 @@ class DiscussionViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO Failed to adding new document \(error)")
                 } else {
-                    print("HELLO Successful adding new document")
+                    print("HELLO Successful adding new document \(ref!.documentID)")
+                    
+                    // Add first opinion in this discussion
+                    let opinionViewModel = OpinionViewModel(discussionId: ref!.documentID)
+                    opinionViewModel.addOpinion(content: firstOpinionContent)
                 }
             }
     }
