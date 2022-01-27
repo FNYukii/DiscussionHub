@@ -21,7 +21,7 @@ struct OpinionsView: View {
 
     var body: some View {
         List {
-            ForEach(opinionViewModel.opinions, id: \.id) {opinion in
+            ForEach(opinionViewModel.opinions) {opinion in
                 VStack(alignment: .leading) {
                     HStack {
                         Text("\(opinion.order)")

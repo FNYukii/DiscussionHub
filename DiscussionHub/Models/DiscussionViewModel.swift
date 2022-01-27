@@ -13,13 +13,17 @@ class DiscussionViewModel: ObservableObject {
     @Published var discussions: [Discussion] = []
     
     init() {
+        
+        // Get discussion documents
         let db = Firestore.firestore()
         db.collection("discussions")
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
-                    print("hello Fail getting documents: \(error)")
+                    print("HELLO Failed to getting documents: \(error)")
                 } else {
+                    
+                    // Create discussions array
                     self.discussions = []
                     for document in snapshot!.documents {
                         let id = document.documentID
@@ -29,7 +33,8 @@ class DiscussionViewModel: ObservableObject {
                         let newDiscusstion = Discussion(id: id, title: title, createdAt: createdDate)
                         self.discussions.append(newDiscusstion)
                     }
-                    print("hello discussions: \(self.discussions)")
+                    
+                    print("HELLO discussions: \(self.discussions)")
                 }
             }
     }
@@ -42,9 +47,9 @@ class DiscussionViewModel: ObservableObject {
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
-                    print("hello Fail adding document \(error)")
+                    print("HELLO Failed to adding new document \(error)")
                 } else {
-                    print("hello Success Added new document")
+                    print("HELLO Successful adding new document")
                 }
             }
     }

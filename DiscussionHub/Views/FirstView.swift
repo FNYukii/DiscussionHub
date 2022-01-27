@@ -17,7 +17,7 @@ struct FirstView: View {
         
         NavigationView {
             List {
-                ForEach(discussionViewModel.discussions, id: \.id) {discussion in
+                ForEach(discussionViewModel.discussions) {discussion in
                     NavigationLink(destination: OpinionsView(discussionId: discussion.id, discussionTitle: discussion.title)) {
                         Text(discussion.title)
                     }

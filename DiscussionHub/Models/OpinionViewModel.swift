@@ -14,6 +14,7 @@ class OpinionViewModel: ObservableObject {
     
     init(discussionId: String) {
         
+        // Get opinion documents
         let db = Firestore.firestore()
         db.collection("discussions")
             .document(discussionId)
@@ -22,8 +23,10 @@ class OpinionViewModel: ObservableObject {
             .addSnapshotListener {(snapshot, error) in
                 
                 if let error = error {
-                    print("hello Fail getting documents: \(error)")
+                    print("HELLO Failed to getting documents: \(error)")
                 } else {
+                    
+                    // Create opinions array
                     self.opinions = []
                     for document in snapshot!.documents {
                         let id = document.documentID
@@ -35,7 +38,8 @@ class OpinionViewModel: ObservableObject {
                         let newOpinion = Opinion(id: id, order: order, content: content, speakerId: speakerId, createdAt: createdDate)
                         self.opinions.append(newOpinion)
                     }
-                    print("hello opinions: \(self.opinions)")
+                    
+                    print("HELLO opinions: \(self.opinions)")
                 }
             }
     }
