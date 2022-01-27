@@ -11,13 +11,17 @@ import Firebase
 class OpinionViewModel: ObservableObject {
     
     @Published var opinions: [Opinion] = []
+    var discussionId = ""
     
     init(discussionId: String) {
+        
+        // Set discussionId
+        self.discussionId = discussionId
         
         // Get opinion documents
         let db = Firestore.firestore()
         db.collection("discussions")
-            .document(discussionId)
+            .document(self.discussionId)
             .collection("opinions")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
@@ -40,6 +44,31 @@ class OpinionViewModel: ObservableObject {
                     }
                     
                     print("HELLO opinions: \(self.opinions)")
+                }
+            }
+    }
+    
+    func createOpinion(content: String) {
+        
+        // Create order and speakerId value
+        let order = opinions.count + 1
+        let speakerId = "fadfljkj"
+        
+        // Add new opinion
+        let db = Firestore.firestore()
+        db.collection("discussions")
+            .document(discussionId)
+            .collection("opinions")
+            .addDocument(data: [
+                "order": order,
+                "content": content,
+                "speakerId": speakerId,
+                "createdAt": Date()
+            ]) { error in
+                if let error = error {
+                    print("HELLO Failed to adding new document \(error)")
+                } else {
+                    print("HELLO Successful adding new document")
                 }
             }
     }

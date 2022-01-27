@@ -37,6 +37,9 @@ struct OpinionsView: View {
         }
         .listStyle(PlainListStyle())
             .navigationBarTitle(discussionTitle)
+            .navigationBarItems(trailing: Button("plus") {
+                    opinionViewModel.createOpinion(content: "I think so too")
+            })
     }
     
     func formatDate(inputDate: Date) -> String {
