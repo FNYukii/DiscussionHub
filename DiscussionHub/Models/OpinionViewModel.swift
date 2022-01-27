@@ -12,13 +12,15 @@ class OpinionViewModel: ObservableObject {
     
     @Published var opinions: [Opinion] = []
     
-    init() {
+    init(discussionId: String) {
+        
         let db = Firestore.firestore()
         db.collection("discussions")
-            .document("fhaghladkj")
+            .document(discussionId)
             .collection("opinions")
-            .order(by: "createdAt", descending: true)
+            .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
+                
                 if let error = error {
                     print("hello Fail getting documents: \(error)")
                 } else {
@@ -33,7 +35,7 @@ class OpinionViewModel: ObservableObject {
                         let newOpinion = Opinion(id: id, order: order, content: content, speakerId: speakerId, createdAt: createdDate)
                         self.opinions.append(newOpinion)
                     }
-                    print("hello discussions: \(self.opinions)")
+                    print("hello opinions: \(self.opinions)")
                 }
             }
     }
