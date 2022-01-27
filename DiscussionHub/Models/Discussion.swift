@@ -10,4 +10,5 @@ import Foundation
 struct Discussion: Identifiable {
     var id: String
     var title: String
+    var createdAt: Date
 }
