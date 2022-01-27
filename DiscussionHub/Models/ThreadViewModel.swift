@@ -30,8 +30,8 @@ class ThreadViewModel: ObservableObject {
                         let title = document.get("title") as! String
                         let createdAt: Timestamp = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newDiscusstion = Thread(id: id, title: title, createdAt: createdDate)
-                        self.threads.append(newDiscusstion)
+                        let newThread = Thread(id: id, title: title, createdAt: createdDate)
+                        self.threads.append(newThread)
                     }
                     
                     print("HELLO threads: \(self.threads)")
@@ -53,7 +53,7 @@ class ThreadViewModel: ObservableObject {
                     print("HELLO Successful adding new document \(ref!.documentID)")
                     
                     // Add first opinion in this thread
-                    let opinionViewModel = OpinionViewModel(threadId: ref!.documentID)
+                    let opinionViewModel = CommentViewModel(threadId: ref!.documentID)
                     opinionViewModel.addOpinion(content: firstOpinionContent)
                 }
             }
