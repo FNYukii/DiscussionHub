@@ -15,17 +15,16 @@ struct FirstView: View {
     
     var body: some View {
         
-        NavigationView {
-            List {
-                ForEach(threadViewModel.threads) {thread in
-                    NavigationLink(destination: ThreadView(threadId: thread.id, threadTitle: thread.title)) {
-                        Text(thread.title)
-                    }
+        List {
+            ForEach(threadViewModel.threads) {thread in
+                NavigationLink(destination: ThreadView(threadId: thread.id, threadTitle: thread.title)) {
+                    Text(thread.title)
                 }
             }
-            .sheet(isPresented: $isShowSheet) {
-                CreateThreadView()
-            }
+        }
+        .sheet(isPresented: $isShowSheet) {
+            CreateThreadView()
+        }
             .navigationBarTitle("Threads")
             .navigationBarItems(
                 trailing: Button(action: {
@@ -35,7 +34,6 @@ struct FirstView: View {
                     Text("New thread")
                 }
             )
-        }
         
     }
 }

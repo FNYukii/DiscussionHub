@@ -9,19 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            FirstView()
-                .tabItem {
-                    Label("home", systemImage: "house")
-                }
-            SecondView()
-                .tabItem {
-                    Label("Star", systemImage: "star")
-                }
-            ThirdView()
-                .tabItem {
-                    Label("Notice", systemImage: "bell")
-                }
+        
+        NavigationView {
+            TabView {
+                FirstView()
+                    .tabItem {
+                        Label("home", systemImage: "house")
+                    }
+                SecondView()
+                    .tabItem {
+                        Label("Star", systemImage: "star")
+                    }
+                ThirdView()
+                    .tabItem {
+                        Label("Notice", systemImage: "bell")
+                    }
+            }
         }
     }
 }
