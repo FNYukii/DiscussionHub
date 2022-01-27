@@ -17,7 +17,7 @@ class DiscussionViewModel: ObservableObject {
         db.collection("discussions")
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
-                    print("hello FAIL getting documents: \(error)")
+                    print("hello Fail getting documents: \(error)")
                 } else {
                     self.discussions = []
                     for document in snapshot!.documents {
