@@ -18,7 +18,9 @@ struct FirstView: View {
         NavigationView {
             List {
                 ForEach(discussionViewModel.discussions, id: \.id) {discussion in
-                    Text(discussion.title)
+                    NavigationLink(destination: OpinionsView(discussionId: discussion.id, discussionTitle: discussion.title)) {
+                        Text(discussion.title)
+                    }
                 }
             }
             .sheet(isPresented: $isShowSheet) {
