@@ -49,7 +49,8 @@ class OpinionViewModel: ObservableObject {
     
     func addOpinion(content: String) {
         // Create order and speakerId value
-        let order = opinions.count + 1
+        let latestOpinionOrder = opinions.last?.order ?? 0
+        let order = latestOpinionOrder + 1
         let speakerId = "fadfljkj"
         
         // Add new opinion
