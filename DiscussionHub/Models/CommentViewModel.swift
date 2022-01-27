@@ -35,10 +35,10 @@ class CommentViewModel: ObservableObject {
                         let id = document.documentID
                         let order = document.get("order") as! Int
                         let content = document.get("content") as! String
-                        let speakerId = document.get("speakerId") as! String
+                        let userId = document.get("userId") as! String
                         let createdAt = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, order: order, content: content, speakerId: speakerId, createdAt: createdDate)
+                        let newComment = Comment(id: id, order: order, content: content, userId: userId, createdAt: createdDate)
                         self.comments.append(newComment)
                     }
                     
@@ -51,7 +51,7 @@ class CommentViewModel: ObservableObject {
         // Create order and speakerId value
         let latestCommentOrder = comments.last?.order ?? 0
         let order = latestCommentOrder + 1
-        let speakerId = "fadfljkj"
+        let userId = "fadfljkj"
         
         // Add new comment
         let db = Firestore.firestore()
@@ -61,7 +61,7 @@ class CommentViewModel: ObservableObject {
             .addDocument(data: [
                 "order": order,
                 "content": content,
-                "speakerId": speakerId,
+                "userId": userId,
                 "createdAt": Date()
             ]) { error in
                 if let error = error {

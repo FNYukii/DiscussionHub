@@ -31,7 +31,7 @@ struct ThreadView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("\(comment.order)")
-                            Text(comment.speakerId)
+                            Text(comment.userId)
                             Text("\(formatDate(inputDate: comment.createdAt))")
                                 .foregroundColor(.secondary)
                         }
