@@ -27,8 +27,8 @@ class DiscussionViewModel: ObservableObject {
                         let title = document.get("title") as! String
                         let newDiscusstion = Discussion(id: id, title: title)
                         self.discussions.append(newDiscusstion)
-                        print("hello \(self.discussions)")
                     }
+                    print("hello \(self.discussions)")
                 }
             }
     }
