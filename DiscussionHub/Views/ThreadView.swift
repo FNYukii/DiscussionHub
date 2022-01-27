@@ -11,31 +11,31 @@ struct ThreadView: View {
     
     let threadId: String
     let threadTitle: String
-    @ObservedObject var opinionViewModel: OpinionViewModel
+    @ObservedObject var commentViewModel: CommentViewModel
     
     @State var inputStr = ""
     
-    init(threadId: String, discussionTitle: String) {
+    init(threadId: String, threadTitle: String) {
         self.threadId = threadId
-        self.threadTitle = discussionTitle
-        self.opinionViewModel = OpinionViewModel(threadId: self.threadId)
+        self.threadTitle = threadTitle
+        self.commentViewModel = CommentViewModel(threadId: self.threadId)
     }
 
     var body: some View {
         
         VStack {
             
-            // Opinions list
+            // Comments list
             List {
-                ForEach(opinionViewModel.opinions) {opinion in
+                ForEach(commentViewModel.comments) {comment in
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("\(opinion.order)")
-                            Text(opinion.speakerId)
-                            Text("\(formatDate(inputDate: opinion.createdAt))")
+                            Text("\(comment.order)")
+                            Text(comment.speakerId)
+                            Text("\(formatDate(inputDate: comment.createdAt))")
                                 .foregroundColor(.secondary)
                         }
-                        Text(opinion.content)
+                        Text(comment.content)
                             .padding(.top, 2)
                     }
                     .padding(6)
@@ -43,9 +43,9 @@ struct ThreadView: View {
             }
                 .listStyle(PlainListStyle())
             
-            // New opinion content input area
+            // New comment content input area
             HStack(alignment: .bottom) {
-                TextField("Your opinion", text: $inputStr)
+                TextField("Your comment", text: $inputStr)
                     .submitLabel(.done)
                     .font(.body)
                     .frame(height: 30)
@@ -58,7 +58,7 @@ struct ThreadView: View {
                     .padding(8)
                 
                 Button(action: {
-                    opinionViewModel.addOpinion(content: inputStr)
+                    commentViewModel.addComment(content: inputStr)
                     inputStr = ""
                 }){
                     Image(systemName: "paperplane.fill")

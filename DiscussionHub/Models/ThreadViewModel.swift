@@ -39,7 +39,7 @@ class ThreadViewModel: ObservableObject {
             }
     }
     
-    func addDiscussion(title: String, firstOpinionContent: String) {
+    func addThread(title: String, firstCommentContent: String) {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("threads")
@@ -53,8 +53,8 @@ class ThreadViewModel: ObservableObject {
                     print("HELLO Successful adding new document \(ref!.documentID)")
                     
                     // Add first opinion in this thread
-                    let opinionViewModel = CommentViewModel(threadId: ref!.documentID)
-                    opinionViewModel.addOpinion(content: firstOpinionContent)
+                    let commentViewModel = CommentViewModel(threadId: ref!.documentID)
+                    commentViewModel.addComment(content: firstCommentContent)
                 }
             }
     }

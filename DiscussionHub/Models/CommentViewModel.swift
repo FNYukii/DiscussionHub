@@ -8,20 +8,20 @@
 import Foundation
 import Firebase
 
-class OpinionViewModel: ObservableObject {
+class CommentViewModel: ObservableObject {
     
-    @Published var opinions: [Opinion] = []
+    @Published var comments: [Comment] = []
     var threadId = ""
     
     init(threadId: String) {
         // Set threadId
         self.threadId = threadId
         
-        // Get opinion documents
+        // Get comment documents
         let db = Firestore.firestore()
         db.collection("threads")
             .document(self.threadId)
-            .collection("opinions")
+            .collection("comments")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
                 
@@ -29,8 +29,8 @@ class OpinionViewModel: ObservableObject {
                     print("HELLO Failed to getting documents: \(error)")
                 } else {
                     
-                    // Create opinions array
-                    self.opinions = []
+                    // Create comments array
+                    self.comments = []
                     for document in snapshot!.documents {
                         let id = document.documentID
                         let order = document.get("order") as! Int
@@ -38,26 +38,26 @@ class OpinionViewModel: ObservableObject {
                         let speakerId = document.get("speakerId") as! String
                         let createdAt = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newOpinion = Opinion(id: id, order: order, content: content, speakerId: speakerId, createdAt: createdDate)
-                        self.opinions.append(newOpinion)
+                        let newComment = Comment(id: id, order: order, content: content, speakerId: speakerId, createdAt: createdDate)
+                        self.comments.append(newComment)
                     }
                     
-                    print("HELLO opinions: \(self.opinions)")
+                    print("HELLO comments: \(self.comments)")
                 }
             }
     }
     
-    func addOpinion(content: String) {
+    func addComment(content: String) {
         // Create order and speakerId value
-        let latestOpinionOrder = opinions.last?.order ?? 0
-        let order = latestOpinionOrder + 1
+        let latestCommentOrder = comments.last?.order ?? 0
+        let order = latestCommentOrder + 1
         let speakerId = "fadfljkj"
         
-        // Add new opinion
+        // Add new comment
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
-            .collection("opinions")
+            .collection("comments")
             .addDocument(data: [
                 "order": order,
                 "content": content,

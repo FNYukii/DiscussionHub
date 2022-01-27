@@ -18,8 +18,8 @@
 		5457137427A22B1200B2D5CD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5457137327A22B1200B2D5CD /* FirebaseFirestore */; };
 		547047C627A250AF00D4A6BA /* CreateThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547047C527A250AF00D4A6BA /* CreateThreadView.swift */; };
 		54C2E77627A266A6001EFE27 /* ThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C2E77527A266A6001EFE27 /* ThreadView.swift */; };
-		54DB5DEF27A27D9E007089EC /* Opinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DEE27A27D9E007089EC /* Opinion.swift */; };
-		54DB5DF127A27F52007089EC /* OpinionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DF027A27F52007089EC /* OpinionViewModel.swift */; };
+		54DB5DEF27A27D9E007089EC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DEE27A27D9E007089EC /* Comment.swift */; };
+		54DB5DF127A27F52007089EC /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DF027A27F52007089EC /* CommentViewModel.swift */; };
 		54F3A33027A2384E00C0AEE0 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3A32F27A2384E00C0AEE0 /* Thread.swift */; };
 		54F3A33227A2385B00C0AEE0 /* ThreadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3A33127A2385B00C0AEE0 /* ThreadViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -36,8 +36,8 @@
 		5457137027A2297300B2D5CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		547047C527A250AF00D4A6BA /* CreateThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThreadView.swift; sourceTree = "<group>"; };
 		54C2E77527A266A6001EFE27 /* ThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadView.swift; sourceTree = "<group>"; };
-		54DB5DEE27A27D9E007089EC /* Opinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opinion.swift; sourceTree = "<group>"; };
-		54DB5DF027A27F52007089EC /* OpinionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpinionViewModel.swift; sourceTree = "<group>"; };
+		54DB5DEE27A27D9E007089EC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		54DB5DF027A27F52007089EC /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		54F3A32F27A2384E00C0AEE0 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		54F3A33127A2385B00C0AEE0 /* ThreadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,8 +109,8 @@
 			children = (
 				54F3A32F27A2384E00C0AEE0 /* Thread.swift */,
 				54F3A33127A2385B00C0AEE0 /* ThreadViewModel.swift */,
-				54DB5DEE27A27D9E007089EC /* Opinion.swift */,
-				54DB5DF027A27F52007089EC /* OpinionViewModel.swift */,
+				54DB5DEE27A27D9E007089EC /* Comment.swift */,
+				54DB5DF027A27F52007089EC /* CommentViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,10 +192,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54DB5DF127A27F52007089EC /* OpinionViewModel.swift in Sources */,
+				54DB5DF127A27F52007089EC /* CommentViewModel.swift in Sources */,
 				547047C627A250AF00D4A6BA /* CreateThreadView.swift in Sources */,
 				5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */,
-				54DB5DEF27A27D9E007089EC /* Opinion.swift in Sources */,
+				54DB5DEF27A27D9E007089EC /* Comment.swift in Sources */,
 				54C2E77627A266A6001EFE27 /* ThreadView.swift in Sources */,
 				5457136F27A224E500B2D5CD /* ThirdView.swift in Sources */,
 				5457136B27A224CC00B2D5CD /* FirstView.swift in Sources */,
