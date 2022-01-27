@@ -80,7 +80,7 @@ struct ThreadView: View {
                     .disabled(inputStr.isEmpty)
             }
         }
-            .navigationBarTitle("Thread detail", displayMode: .inline)
+            .navigationBarTitle("", displayMode: .inline)
     }
     
     func formatDate(inputDate: Date) -> String {

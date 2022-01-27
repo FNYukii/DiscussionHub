@@ -25,7 +25,7 @@ struct FirstView: View {
             .sheet(isPresented: $isShowSheet) {
                 CreateThreadView()
             }
-            .navigationBarTitle("Threads")
+            .navigationBarTitle("スレッド")
             .navigationBarItems(
                 trailing: Button(action: {
                     isShowSheet.toggle()
