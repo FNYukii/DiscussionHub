@@ -11,6 +11,7 @@ import Firebase
 struct FirstView: View {
     
     @ObservedObject var discussionViewModel = DiscussionViewModel()
+    @State var isShowSheet = false
     
     var body: some View {
         
@@ -20,7 +21,18 @@ struct FirstView: View {
                     Text(discussion.title)
                 }
             }
+            .sheet(isPresented: $isShowSheet) {
+                CreateDiscussionView()
+            }
             .navigationBarTitle("Discussions")
+            .navigationBarItems(
+                trailing: Button(action: {
+                    isShowSheet.toggle()
+                }){
+                    Image(systemName: "plus.circle.fill")
+                    Text("New discussion")
+                }
+            )
         }
         
     }
