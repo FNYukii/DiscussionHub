@@ -39,7 +39,7 @@ class DiscussionViewModel: ObservableObject {
             }
     }
     
-    func createDiscussion(title: String) {
+    func addDiscussion(title: String) {
         let db = Firestore.firestore()
         db.collection("discussions")
             .addDocument(data: [

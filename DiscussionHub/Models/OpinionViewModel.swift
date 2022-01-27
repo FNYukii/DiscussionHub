@@ -14,7 +14,6 @@ class OpinionViewModel: ObservableObject {
     var discussionId = ""
     
     init(discussionId: String) {
-        
         // Set discussionId
         self.discussionId = discussionId
         
@@ -48,8 +47,7 @@ class OpinionViewModel: ObservableObject {
             }
     }
     
-    func createOpinion(content: String) {
-        
+    func addOpinion(content: String) {
         // Create order and speakerId value
         let order = opinions.count + 1
         let speakerId = "fadfljkj"
