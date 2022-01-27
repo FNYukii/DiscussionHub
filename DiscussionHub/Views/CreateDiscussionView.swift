@@ -22,7 +22,7 @@ struct CreateDiscussionView: View {
                     Button(action: {
                         dismiss()
                     }){
-                        Text("Done")
+                        Text("Create")
                             .fontWeight(.bold)
                     }
                 )
