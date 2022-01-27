@@ -51,7 +51,7 @@ class CommentViewModel: ObservableObject {
         // Create order and speakerId value
         let latestCommentOrder = comments.last?.order ?? 0
         let order = latestCommentOrder + 1
-        let userId = "fadfljkj"
+        let userId = UserDefaults.standard.string(forKey: "userId")!
         
         // Add new comment
         let db = Firestore.firestore()

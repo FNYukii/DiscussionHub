@@ -24,6 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Connect to Firebase
         FirebaseApp.configure()
         
+        // At the first startup, create userId
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        if userId == nil {
+            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            let newUserId = String((0..<10).map{ _ in characters.randomElement()! })
+            UserDefaults.standard.set(newUserId, forKey: "userId")
+        }
+        
         return true
     }
 }
