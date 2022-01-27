@@ -11,11 +11,14 @@ struct CreateDiscussionView: View {
     
     @Environment(\.dismiss) var dismiss
     @State var title = ""
+    @State var firstOpinionContent = ""
     
     var body: some View {
         NavigationView {
             Form {
-                TextField("Discussion title", text: $title)
+                TextField("Title", text: $title)
+                    .submitLabel(.done)
+                TextField("Description", text: $firstOpinionContent)
                     .submitLabel(.done)
             }
                 .navigationBarTitle("New Discussion", displayMode: .inline)
