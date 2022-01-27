@@ -10,10 +10,14 @@ import SwiftUI
 struct CreateDiscussionView: View {
     
     @Environment(\.dismiss) var dismiss
+    @State var title = ""
     
     var body: some View {
         NavigationView {
-            Text("hello")
+            Form {
+                TextField("Discussion title", text: $title)
+                    .submitLabel(.done)
+            }
                 .navigationBarTitle("New Discussion", displayMode: .inline)
                 .navigationBarItems(leading:
                     Button("Cancel"){
