@@ -28,17 +28,25 @@ struct ThreadView: View {
             
             // Comments list
             List {
+                Text(threadTitle)
+                    .font(.title)
+                    .fontWeight(.bold)
                 ForEach(commentViewModel.comments) {comment in
                     VStack(alignment: .leading) {
+                        Divider()
                         HStack {
                             Text("\(comment.order)")
                             Text(comment.userId)
                             Text("\(formatDate(inputDate: comment.createdAt))")
                                 .foregroundColor(.secondary)
                         }
+                        .padding(.horizontal, 12)
                         Text(comment.content)
                             .padding(.top, 2)
+                            .padding(.horizontal, 12)
                     }
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets())
                     .padding(6)
                 }
             }
@@ -72,7 +80,7 @@ struct ThreadView: View {
                     .disabled(inputStr.isEmpty)
             }
         }
-            .navigationBarTitle(threadTitle)
+            .navigationBarTitle("Thread detail", displayMode: .inline)
     }
     
     func formatDate(inputDate: Date) -> String {

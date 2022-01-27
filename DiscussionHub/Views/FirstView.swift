@@ -22,9 +22,9 @@ struct FirstView: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowSheet) {
-            CreateThreadView()
-        }
+            .sheet(isPresented: $isShowSheet) {
+                CreateThreadView()
+            }
             .navigationBarTitle("Threads")
             .navigationBarItems(
                 trailing: Button(action: {
@@ -34,6 +34,5 @@ struct FirstView: View {
                     Text("New thread")
                 }
             )
-        
     }
 }
