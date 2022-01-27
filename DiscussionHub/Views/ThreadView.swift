@@ -54,7 +54,7 @@ struct ThreadView: View {
             
             // New comment content input area
             HStack(alignment: .bottom) {
-                TextField("Your comment", text: $inputStr)
+                TextField("コメント", text: $inputStr)
                     .focused($isTextFieldFocused)
                     .submitLabel(.done)
                     .frame(height: 30)
