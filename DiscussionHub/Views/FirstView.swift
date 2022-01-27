@@ -26,13 +26,13 @@ struct FirstView: View {
             .sheet(isPresented: $isShowSheet) {
                 CreateDiscussionView()
             }
-            .navigationBarTitle("Discussions")
+            .navigationBarTitle("Threads")
             .navigationBarItems(
                 trailing: Button(action: {
                     isShowSheet.toggle()
                 }){
                     Image(systemName: "plus.circle.fill")
-                    Text("New discussion")
+                    Text("New thread")
                 }
             )
         }
