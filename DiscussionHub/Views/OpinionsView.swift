@@ -11,7 +11,7 @@ struct OpinionsView: View {
     
     let discussionId: String
     let discussionTitle: String
-    
+
     var body: some View {
         List {
             VStack(alignment: .leading) {

@@ -19,6 +19,7 @@
 		547047C627A250AF00D4A6BA /* CreateDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547047C527A250AF00D4A6BA /* CreateDiscussionView.swift */; };
 		54C2E77627A266A6001EFE27 /* OpinionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C2E77527A266A6001EFE27 /* OpinionsView.swift */; };
 		54DB5DEF27A27D9E007089EC /* Opinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DEE27A27D9E007089EC /* Opinion.swift */; };
+		54DB5DF127A27F52007089EC /* OpinionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB5DF027A27F52007089EC /* OpinionViewModel.swift */; };
 		54F3A33027A2384E00C0AEE0 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3A32F27A2384E00C0AEE0 /* Discussion.swift */; };
 		54F3A33227A2385B00C0AEE0 /* DiscussionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3A33127A2385B00C0AEE0 /* DiscussionViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		547047C527A250AF00D4A6BA /* CreateDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiscussionView.swift; sourceTree = "<group>"; };
 		54C2E77527A266A6001EFE27 /* OpinionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpinionsView.swift; sourceTree = "<group>"; };
 		54DB5DEE27A27D9E007089EC /* Opinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opinion.swift; sourceTree = "<group>"; };
+		54DB5DF027A27F52007089EC /* OpinionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpinionViewModel.swift; sourceTree = "<group>"; };
 		54F3A32F27A2384E00C0AEE0 /* Discussion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		54F3A33127A2385B00C0AEE0 /* DiscussionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 				54F3A32F27A2384E00C0AEE0 /* Discussion.swift */,
 				54F3A33127A2385B00C0AEE0 /* DiscussionViewModel.swift */,
 				54DB5DEE27A27D9E007089EC /* Opinion.swift */,
+				54DB5DF027A27F52007089EC /* OpinionViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54DB5DF127A27F52007089EC /* OpinionViewModel.swift in Sources */,
 				547047C627A250AF00D4A6BA /* CreateDiscussionView.swift in Sources */,
 				5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */,
 				54DB5DEF27A27D9E007089EC /* Opinion.swift in Sources */,
