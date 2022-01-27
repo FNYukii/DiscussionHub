@@ -40,11 +40,13 @@ class ThreadViewModel: ObservableObject {
     }
     
     func addThread(title: String, firstCommentContent: String) {
+        let userId = UserDefaults.standard.string(forKey: "userId")!
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("threads")
             .addDocument(data: [
                 "title": title,
+                "userId": userId,
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
