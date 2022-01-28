@@ -12,7 +12,9 @@ struct TitleAndCommentList: View {
     @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
+    let userId = UserDefaults.standard.string(forKey: "userId")
     @State var isShowEditThreadSheet = false
+    @State var isShowEditCommentSheet = false
     
     var body: some View {
         
@@ -27,6 +29,7 @@ struct TitleAndCommentList: View {
                     .fontWeight(.bold)
             }
             .buttonStyle(PlainButtonStyle())
+            .disabled(threadViewModel.currentThread!.authorId != userId)
             
             // Comments
             ForEach(commentViewModel.comments, id: \.self) {comment in
@@ -43,7 +46,7 @@ struct TitleAndCommentList: View {
                     .padding(.horizontal, 12)
                     
                     Button(action: {
-                        // TODO: Open EditCommentView
+                        isShowEditCommentSheet.toggle()
                     }) {
                         Text(comment.content)
                             .fixedSize(horizontal: false, vertical: true)
@@ -51,6 +54,7 @@ struct TitleAndCommentList: View {
                             .padding(.horizontal, 12)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .disabled(comment.userId != userId)
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
@@ -61,6 +65,9 @@ struct TitleAndCommentList: View {
         
         .sheet(isPresented: $isShowEditThreadSheet) {
             EditThreadView()
+        }
+        .sheet(isPresented: $isShowEditCommentSheet) {
+            EditCommentView()
         }
         
     }
