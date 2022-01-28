@@ -37,13 +37,16 @@ struct ThreadView: View {
                         Divider()
                         HStack {
                             Text("\(comment.order)")
+                                .fontWeight(.semibold)
                             Text(comment.userId)
+                                .fontWeight(.semibold)
                             Text("\(formatDate(inputDate: comment.createdAt))")
                                 .foregroundColor(.secondary)
                         }
                         .padding(.horizontal, 12)
                         Text(comment.content)
-                            .padding(.top, 2)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 6)
                             .padding(.horizontal, 12)
                     }
                     .listRowSeparator(.hidden)
