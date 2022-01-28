@@ -25,12 +25,15 @@ struct ThreadView: View {
 
     var body: some View {
         
-        ZStack(alignment: .bottomLeading) {
+        
+        
+        
+        ScrollViewReader {proxy in
             
-            // Thraed title and comments list
-            ScrollViewReader {proxy in
+            
+            ZStack(alignment: .bottomLeading) {
                 
-                
+                // Thraed title and comments list
                 List {
                     Text(threadViewModel.currentThread!.title)
                         .font(.title)
@@ -61,6 +64,7 @@ struct ThreadView: View {
                     .onTapGesture {
                         isTextEditorFocused = false
                     }
+                    .padding(.bottom, 76)
                 
                 // Input bar
                 HStack(alignment: .center) {
@@ -99,12 +103,8 @@ struct ThreadView: View {
                 }
                     .background(Color.secondary.opacity(0.2))
                 
-                
             }
             
-            
-            
-             
         }
         
             .navigationBarTitle("", displayMode: .inline)
