@@ -63,31 +63,23 @@ struct ThreadView: View {
                 .padding(.bottom, 76)
                 
                 // If comments changed, Scroll list to end
-                .onChange(of: commentViewModel.comments) {value in
+                .onChange(of: commentViewModel.comments) {_ in
                     withAnimation {
                         proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
                     }
                 }
                 
-                // TODO: When TextEditor focused, Scroll list to end
-//                .onChange(of: isTextEditorFocused) {value in
-//                    if value {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                            withAnimation {
-//                                proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
-//                            }
-//                        }
-//                    }
-//                }
-                
-//                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { value in
-//                    // Write code for keyboard opened.
-//                    if isTextEditorFocused {
-//                        print("HELLO \(value)")
-//
-//                    }
-//                }
-                
+                // When TextEditor focused, Scroll list to end
+                .onChange(of: isTextEditorFocused) {value in
+                    if value {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            withAnimation {
+                                proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                            }
+                        }
+                    }
+                }
+
                 // Input bar
                 HStack(alignment: .center) {
                     
