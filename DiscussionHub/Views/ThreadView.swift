@@ -59,15 +59,25 @@ struct ThreadView: View {
                     isTextEditorFocused = false
                 }
             
-            // New comment content input area
+            // Input bar
             HStack(alignment: .bottom) {
-                TextEditor(text: $inputStr)
-                    .focused($isTextEditorFocused)
-                    .frame(height: 60)
-                    .cornerRadius(10)
+                
+                // Input area
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $inputStr)
+                        .focused($isTextEditorFocused)
+                        .frame(height: 60)
+                        .cornerRadius(10)
+                    Text("コメント")
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .opacity(inputStr.isEmpty ? 1 : 0)
+                        .padding(.top, 8)
+                        .padding(.leading, 5)
+                }
                     .padding(.leading)
                     .padding(.vertical, 8)
                 
+                // Send button
                 Button(action: {
                     commentViewModel.addComment(content: inputStr)
                     inputStr = ""
