@@ -22,20 +22,20 @@ class ThreadViewModel: ObservableObject {
                 .document(threadId)
                 .addSnapshotListener { documentSnapshot, error in
                     guard let document = documentSnapshot else {
-                        print("HELLO! Error fetching document: \(error!)")
+                        print("HELLO! Fail! Error fetching document: \(error!)")
                         return
                     }
-                    guard let data = document.data() else {
-                        print("HELLO! Document data was empty.")
+                    guard document.data() != nil else {
+                        print("HELLO! Fail! Document data was empty.")
                         return
                     }
-                    print("Current data: \(data)")
-                        let title = document.get("title") as! String
-                        let authorId = document.get("authorId") as! String
-                        let createdAt = document.get("createdAt") as! Timestamp
-                        let createdDate = createdAt.dateValue()
-                        self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
-                    }
+                    let title = document.get("title") as! String
+                    let authorId = document.get("authorId") as! String
+                    let createdAt = document.get("createdAt") as! Timestamp
+                    let createdDate = createdAt.dateValue()
+                    self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
+                    print("HELLO! Success! Updated current thread \(threadId)")
+                }
         }
         
         // Get all threads
@@ -44,7 +44,7 @@ class ThreadViewModel: ObservableObject {
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
-                    print("HELLO Failed to getting documents: \(error)")
+                    print("HELLO! Fail! Error geting documents: \(error)")
                 } else {
                     
                     // Create threads array
@@ -58,8 +58,7 @@ class ThreadViewModel: ObservableObject {
                         let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate)
                         self.threads.append(newThread)
                     }
-                    
-                    print("HELLO threads: \(self.threads)")
+                    print("HELLO! Success! Threads updated")
                 }
             }
     }
@@ -75,9 +74,9 @@ class ThreadViewModel: ObservableObject {
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
-                    print("HELLO Failed to adding new document \(error)")
+                    print("HELLO! Fail! Error adding new document: \(error)")
                 } else {
-                    print("HELLO Successful adding new document \(ref!.documentID)")
+                    print("HELLO! Success! Added new document \(ref!.documentID)")
                     
                     // Add first opinion in this thread
                     let commentViewModel = CommentViewModel(threadId: ref!.documentID)
@@ -102,14 +101,14 @@ class ThreadViewModel: ObservableObject {
                             .document(threadId)
                             .delete() { err in
                                 if let err = err {
-                                    print("HELLO Error removing document: \(err)")
+                                    print("HELLO! Fail! Error removing document: \(err)")
                                 } else {
-                                    print("HELLO Document successfully removed!")
+                                    print("HELLO! Success! Removed document \(threadId)")
                                 }
                             }
                     }
                 } else {
-                    print("HELLO Document does not exist")
+                    print("HELLO! Fail! Document does not exist")
                 }
             }
     }

@@ -26,7 +26,7 @@ class CommentViewModel: ObservableObject {
             .addSnapshotListener {(snapshot, error) in
                 
                 if let error = error {
-                    print("HELLO Failed to getting documents: \(error)")
+                    print("HELLO! Fail! Error getting documents: \(error)")
                 } else {
                     
                     // Create comments array
@@ -42,7 +42,7 @@ class CommentViewModel: ObservableObject {
                         self.comments.append(newComment)
                     }
                     
-                    print("HELLO comments: \(self.comments)")
+                    print("HELLO! Success! Updated comments in thread \(self.threadId) ")
                 }
             }
     }
@@ -55,7 +55,8 @@ class CommentViewModel: ObservableObject {
         
         // Add new comment
         let db = Firestore.firestore()
-        db.collection("threads")
+        var ref: DocumentReference? = nil
+        ref = db.collection("threads")
             .document(threadId)
             .collection("comments")
             .addDocument(data: [
@@ -65,9 +66,9 @@ class CommentViewModel: ObservableObject {
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
-                    print("HELLO Failed to adding new document \(error)")
+                    print("HELLO! Fail! Error adding new document \(error)")
                 } else {
-                    print("HELLO Successful adding new document")
+                    print("HELLO! Success! Added new document \(ref!.documentID)")
                 }
             }
     }
