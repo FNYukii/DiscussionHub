@@ -34,6 +34,7 @@ struct CreateThreadView: View {
                         Text("作成")
                             .fontWeight(.bold)
                     }
+                        .disabled(title.isEmpty || firstCommentContent.isEmpty)
                 )
         }
     }
