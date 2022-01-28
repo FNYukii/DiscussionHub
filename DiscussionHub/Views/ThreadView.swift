@@ -45,10 +45,13 @@ struct ThreadView: View {
             // When TextEditor focused, Scroll list to end
             .onChange(of: isTextEditorFocused) {value in
                 if value {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        withAnimation {
-                            proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                    var second = 0.00
+                    Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) {timer in
+                        second += 0.01
+                        if second > 0.4 {
+                            timer.invalidate()
                         }
+                        proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
                     }
                 }
             }
