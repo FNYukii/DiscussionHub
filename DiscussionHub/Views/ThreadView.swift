@@ -27,13 +27,11 @@ struct ThreadView: View {
         ScrollViewReader {proxy in
             
             ZStack(alignment: .bottomLeading) {
-                
                 TitleAndCommentList(threadViewModel: threadViewModel, commentViewModel: commentViewModel)
                     .onTapGesture {
                         isTextEditorFocused = false
                     }
                     .padding(.bottom, 76)
-                
                 CreateCommentBar(commentViewModel: commentViewModel, isTextEditorFocused: $isTextEditorFocused)
             }
             
