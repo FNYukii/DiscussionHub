@@ -25,7 +25,7 @@ struct ThreadView: View {
 
     var body: some View {
         
-        VStack {
+        ZStack(alignment: .bottomLeading) {
             
             // Thraed title and comments list
             List {
@@ -58,6 +58,7 @@ struct ThreadView: View {
                 .onTapGesture {
                     isTextEditorFocused = false
                 }
+                .padding(.bottom, 76)
             
             // Input bar
             HStack(alignment: .center) {
@@ -92,7 +93,9 @@ struct ThreadView: View {
                     .padding(.leading, 6)
             }
                 .background(Color.secondary.opacity(0.2))
+             
         }
+        
             .navigationBarTitle("", displayMode: .inline)
     }
     
