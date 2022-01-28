@@ -12,15 +12,15 @@ struct ContentView: View {
         TabView {
             FirstView()
                 .tabItem {
-                    Label("home", systemImage: "house")
+                    Label("スレッド", systemImage: "rectangle.portrait.on.rectangle.portrait")
                 }
             SecondView()
                 .tabItem {
-                    Label("Star", systemImage: "star")
+                    Label("お気に入り", systemImage: "star")
                 }
             ThirdView()
                 .tabItem {
-                    Label("Notice", systemImage: "bell")
+                    Label("通知", systemImage: "bell")
                 }
         }
     }
