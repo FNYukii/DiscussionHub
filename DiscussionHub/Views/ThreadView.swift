@@ -60,7 +60,7 @@ struct ThreadView: View {
                 }
             
             // Input bar
-            HStack(alignment: .bottom) {
+            HStack(alignment: .center) {
                 
                 // Input area
                 ZStack(alignment: .topLeading) {
@@ -88,7 +88,6 @@ struct ThreadView: View {
                         .font(.title3)
                 }
                     .disabled(inputStr.isEmpty)
-                    .padding(.bottom)
                     .padding(.trailing)
                     .padding(.leading, 6)
             }
