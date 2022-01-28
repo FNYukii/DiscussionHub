@@ -22,14 +22,10 @@ struct ThreadView: View {
         self.threadViewModel = ThreadViewModel(threadId: threadId)
         self.commentViewModel = CommentViewModel(threadId: self.threadId)
     }
-
+    
     var body: some View {
         
-        
-        
-        
         ScrollViewReader {proxy in
-            
             
             ZStack(alignment: .bottomLeading) {
                 
@@ -60,11 +56,11 @@ struct ThreadView: View {
                         .padding(6)
                     }
                 }
-                    .listStyle(PlainListStyle())
-                    .onTapGesture {
-                        isTextEditorFocused = false
-                    }
-                    .padding(.bottom, 76)
+                .listStyle(PlainListStyle())
+                .onTapGesture {
+                    isTextEditorFocused = false
+                }
+                .padding(.bottom, 76)
                 
                 // Input bar
                 HStack(alignment: .center) {
@@ -82,8 +78,8 @@ struct ThreadView: View {
                             .padding(.top, 8)
                             .padding(.leading, 5)
                     }
-                        .padding(.leading)
-                        .padding(.vertical, 8)
+                    .padding(.leading)
+                    .padding(.vertical, 8)
                     
                     // Send button
                     Button(action: {
@@ -97,17 +93,15 @@ struct ThreadView: View {
                         Image(systemName: "paperplane.fill")
                             .font(.title3)
                     }
-                        .disabled(inputStr.isEmpty)
-                        .padding(.trailing)
-                        .padding(.leading, 6)
+                    .disabled(inputStr.isEmpty)
+                    .padding(.trailing)
+                    .padding(.leading, 6)
                 }
-                    .background(Color.secondary.opacity(0.2))
+                .background(Color.secondary.opacity(0.2))
                 
             }
-            
         }
-        
-            .navigationBarTitle("", displayMode: .inline)
+        .navigationBarTitle("", displayMode: .inline)
     }
     
     func formatDate(inputDate: Date) -> String {

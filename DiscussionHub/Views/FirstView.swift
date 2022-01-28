@@ -23,18 +23,18 @@ struct FirstView: View {
                     }
                 }
             }
-                .sheet(isPresented: $isShowSheet) {
-                    CreateThreadView()
+            .sheet(isPresented: $isShowSheet) {
+                CreateThreadView()
+            }
+            .navigationBarTitle("スレッド")
+            .navigationBarItems(
+                trailing: Button(action: {
+                    isShowSheet.toggle()
+                }){
+                    Image(systemName: "plus.circle.fill")
+                    Text("新規スレッド")
                 }
-                .navigationBarTitle("スレッド")
-                .navigationBarItems(
-                    trailing: Button(action: {
-                        isShowSheet.toggle()
-                    }){
-                        Image(systemName: "plus.circle.fill")
-                        Text("新規スレッド")
-                    }
-                )
+            )
         }
     }
 }

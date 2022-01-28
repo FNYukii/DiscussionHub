@@ -21,21 +21,21 @@ struct CreateThreadView: View {
                 TextField("コメント", text: $firstCommentContent)
                     .submitLabel(.done)
             }
-                .navigationBarTitle("新規スレッド", displayMode: .inline)
-                .navigationBarItems(leading:
-                    Button("キャンセル"){
-                        dismiss()
-                    }, trailing:
-                    Button(action: {
-                        let threadViewModel = ThreadViewModel()
-                        threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
-                        dismiss()
-                    }){
-                        Text("作成")
-                            .fontWeight(.bold)
-                    }
-                        .disabled(title.isEmpty || firstCommentContent.isEmpty)
-                )
+            .navigationBarTitle("新規スレッド", displayMode: .inline)
+            .navigationBarItems(
+                leading: Button("キャンセル"){
+                    dismiss()
+                },
+                trailing:  Button(action: {
+                    let threadViewModel = ThreadViewModel()
+                    threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
+                    dismiss()
+                }){
+                    Text("作成")
+                        .fontWeight(.bold)
+                }
+                    .disabled(title.isEmpty || firstCommentContent.isEmpty)
+            )
         }
     }
 }
