@@ -87,6 +87,7 @@ struct ThreadView: View {
                         inputStr = ""
                         isTextEditorFocused = false
                         withAnimation {
+                            // Scroll List to end
                             proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
                         }
                     }){
