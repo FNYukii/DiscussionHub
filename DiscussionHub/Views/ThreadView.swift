@@ -69,6 +69,25 @@ struct ThreadView: View {
                     }
                 }
                 
+                // TODO: When TextEditor focused, Scroll list to end
+//                .onChange(of: isTextEditorFocused) {value in
+//                    if value {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                            withAnimation {
+//                                proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+//                            }
+//                        }
+//                    }
+//                }
+                
+//                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { value in
+//                    // Write code for keyboard opened.
+//                    if isTextEditorFocused {
+//                        print("HELLO \(value)")
+//
+//                    }
+//                }
+                
                 // Input bar
                 HStack(alignment: .center) {
                     
