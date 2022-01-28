@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		543BA49D27A4112D00FF3B04 /* TitleAndCommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */; };
 		5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */; };
 		5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135D27A21FA300B2D5CD /* ContentView.swift */; };
 		5457136027A21FA300B2D5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5457135F27A21FA300B2D5CD /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndCommentList.swift; sourceTree = "<group>"; };
 		5457135827A21FA300B2D5CD /* DiscussionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscussionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionHubApp.swift; sourceTree = "<group>"; };
 		5457135D27A21FA300B2D5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				5457136A27A224CC00B2D5CD /* FirstView.swift */,
 				5457136E27A224E500B2D5CD /* ThirdView.swift */,
 				5457136C27A224DA00B2D5CD /* SecondView.swift */,
+				543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				5457136D27A224DA00B2D5CD /* SecondView.swift in Sources */,
 				5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */,
 				54F3A33027A2384E00C0AEE0 /* Thread.swift in Sources */,
+				543BA49D27A4112D00FF3B04 /* TitleAndCommentList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

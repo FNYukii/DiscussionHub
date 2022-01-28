@@ -30,33 +30,7 @@ struct ThreadView: View {
             ZStack(alignment: .bottomLeading) {
                 
                 // Thraed title and comments list
-                List {
-                    Text(threadViewModel.currentThread!.title)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    ForEach(commentViewModel.comments, id: \.self) {comment in
-                        VStack(alignment: .leading) {
-                            Divider()
-                            HStack {
-                                Text("\(comment.order)")
-                                    .fontWeight(.semibold)
-                                Text(comment.userId)
-                                    .fontWeight(.semibold)
-                                Text("\(formatDate(inputDate: comment.createdAt))")
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(.horizontal, 12)
-                            Text(comment.content)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.bottom, 6)
-                                .padding(.horizontal, 12)
-                        }
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets())
-                        .padding(6)
-                    }
-                }
-                .listStyle(PlainListStyle())
+                TitleAndCommentList(threadViewModel: threadViewModel, commentViewModel: commentViewModel)
                 .onTapGesture {
                     isTextEditorFocused = false
                 }
