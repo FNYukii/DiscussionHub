@@ -62,24 +62,6 @@ struct ThreadView: View {
                 }
                 .padding(.bottom, 76)
                 
-                // If comments changed, Scroll list to end
-                .onChange(of: commentViewModel.comments) {_ in
-                    withAnimation {
-                        proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
-                    }
-                }
-                
-                // When TextEditor focused, Scroll list to end
-                .onChange(of: isTextEditorFocused) {value in
-                    if value {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                            withAnimation {
-                                proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
-                            }
-                        }
-                    }
-                }
-
                 // Input bar
                 HStack(alignment: .center) {
                     
@@ -115,6 +97,25 @@ struct ThreadView: View {
                 .background(Color.secondary.opacity(0.2))
                 
             }
+            
+            // If comments changed, Scroll list to end
+            .onChange(of: commentViewModel.comments) {_ in
+                withAnimation {
+                    proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                }
+            }
+            
+            // When TextEditor focused, Scroll list to end
+            .onChange(of: isTextEditorFocused) {value in
+                if value {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        withAnimation {
+                            proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                        }
+                    }
+                }
+            }
+            
         }
         .navigationBarTitle("", displayMode: .inline)
     }
