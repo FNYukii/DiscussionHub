@@ -15,9 +15,18 @@ struct TitleAndCommentList: View {
     var body: some View {
         
         List {
-            Text(threadViewModel.currentThread!.title)
-                .font(.title)
-                .fontWeight(.bold)
+            
+            // Thread title
+            Button(action: {
+                // TODO: Open EditThreadView
+            }) {
+                Text(threadViewModel.currentThread!.title)
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            // Comments
             ForEach(commentViewModel.comments, id: \.self) {comment in
                 VStack(alignment: .leading) {
                     Divider()
@@ -30,10 +39,16 @@ struct TitleAndCommentList: View {
                             .foregroundColor(.secondary)
                     }
                     .padding(.horizontal, 12)
-                    Text(comment.content)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 6)
-                        .padding(.horizontal, 12)
+                    
+                    Button(action: {
+                        // TODO: Open EditCommentView
+                    }) {
+                        Text(comment.content)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 6)
+                            .padding(.horizontal, 12)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
