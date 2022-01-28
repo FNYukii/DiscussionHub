@@ -22,15 +22,20 @@ class ThreadViewModel: ObservableObject {
                 .document(threadId)
                 .addSnapshotListener { documentSnapshot, error in
                     guard let document = documentSnapshot else {
-                        print("Error fetching document: \(error!)")
+                        print("HELLO! Error fetching document: \(error!)")
                         return
                     }
-                    let title = document.get("title") as! String
-                    let authorId = document.get("authorId") as! String
-                    let createdAt = document.get("createdAt") as! Timestamp
-                    let createdDate = createdAt.dateValue()
-                    self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
-                }
+                    guard let data = document.data() else {
+                        print("HELLO! Document data was empty.")
+                        return
+                    }
+                    print("Current data: \(data)")
+                        let title = document.get("title") as! String
+                        let authorId = document.get("authorId") as! String
+                        let createdAt = document.get("createdAt") as! Timestamp
+                        let createdDate = createdAt.dateValue()
+                        self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
+                    }
         }
         
         // Get all threads
