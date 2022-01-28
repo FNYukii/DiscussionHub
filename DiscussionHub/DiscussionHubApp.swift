@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(newUserId, forKey: "userId")
         }
         
+        //TextEditorなどの背景色を非表示
+        UITextView.appearance().backgroundColor = .clear
+        
         return true
     }
 }

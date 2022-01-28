@@ -67,6 +67,7 @@ struct ThreadView: View {
                     TextEditor(text: $inputStr)
                         .focused($isTextEditorFocused)
                         .frame(height: 60)
+                        .background(Color("TextEditorBackground"))
                         .cornerRadius(10)
                     Text("コメント")
                         .foregroundColor(Color(UIColor.placeholderText))
