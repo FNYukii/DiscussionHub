@@ -46,7 +46,7 @@ class ThreadViewModel: ObservableObject {
         ref = db.collection("threads")
             .addDocument(data: [
                 "title": title,
-                "userId": userId,
+                "authorId": userId,
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
@@ -57,6 +57,34 @@ class ThreadViewModel: ObservableObject {
                     // Add first opinion in this thread
                     let commentViewModel = CommentViewModel(threadId: ref!.documentID)
                     commentViewModel.addComment(content: firstCommentContent)
+                }
+            }
+    }
+    
+    func deleteThread(threadId: String) {
+        // Get thread
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .getDocument { (document, error) in
+                if let document = document, document.exists {
+                    // Check authorId and userId
+                    let authorId = document.get("authorId") as! String
+                    let userId = UserDefaults.standard.string(forKey: "userId")
+                    // Delete thread
+                    if authorId == userId {
+                        db.collection("threads")
+                            .document(threadId)
+                            .delete() { err in
+                                if let err = err {
+                                    print("HELLO Error removing document: \(err)")
+                                } else {
+                                    print("HELLO Document successfully removed!")
+                                }
+                            }
+                    }
+                } else {
+                    print("HELLO Document does not exist")
                 }
             }
     }

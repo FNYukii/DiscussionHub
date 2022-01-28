@@ -81,6 +81,23 @@ struct ThreadView: View {
             }
         }
             .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(trailing:
+                HStack {
+                
+                    // Delete thread button
+                    Button(action: {
+                        let threadViewModel = ThreadViewModel()
+                        threadViewModel.deleteThread(threadId: threadId)
+                    }){
+                        Image(systemName: "trash")
+                    }
+                    Button(action: {
+                        
+                    }){
+                        Image(systemName: "star")
+                    }
+                }
+            )
     }
     
     func formatDate(inputDate: Date) -> String {
