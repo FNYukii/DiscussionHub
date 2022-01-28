@@ -32,7 +32,7 @@ struct FirstView: View {
                         isShowSheet.toggle()
                     }){
                         Image(systemName: "plus.circle.fill")
-                        Text("New thread")
+                        Text("新規スレッド")
                     }
                 )
         }

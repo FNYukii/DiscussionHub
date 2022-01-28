@@ -16,14 +16,14 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Title", text: $title)
+                TextField("タイトル", text: $title)
                     .submitLabel(.done)
-                TextField("Description", text: $firstCommentContent)
+                TextField("コメント", text: $firstCommentContent)
                     .submitLabel(.done)
             }
-                .navigationBarTitle("New Thread", displayMode: .inline)
+                .navigationBarTitle("新規スレッド", displayMode: .inline)
                 .navigationBarItems(leading:
-                    Button("Cancel"){
+                    Button("キャンセル"){
                         dismiss()
                     }, trailing:
                     Button(action: {
@@ -31,7 +31,7 @@ struct CreateThreadView: View {
                         threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
                         dismiss()
                     }){
-                        Text("Create")
+                        Text("作成")
                             .fontWeight(.bold)
                     }
                 )
