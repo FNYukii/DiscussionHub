@@ -62,6 +62,13 @@ struct ThreadView: View {
                 }
                 .padding(.bottom, 76)
                 
+                // If comments changed, Scroll list to end
+                .onChange(of: commentViewModel.comments) {value in
+                    withAnimation {
+                        proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                    }
+                }
+                
                 // Input bar
                 HStack(alignment: .center) {
                     
@@ -86,10 +93,6 @@ struct ThreadView: View {
                         commentViewModel.addComment(content: inputStr)
                         inputStr = ""
                         isTextEditorFocused = false
-                        withAnimation {
-                            // Scroll List to end
-                            proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
-                        }
                     }){
                         Image(systemName: "paperplane.fill")
                             .font(.title3)
