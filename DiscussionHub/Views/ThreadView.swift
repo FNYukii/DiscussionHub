@@ -27,7 +27,7 @@ struct ThreadView: View {
         
         VStack {
             
-            // Comments list
+            // Thraed title and comments list
             List {
                 Text(threadViewModel.currentThread!.title)
                     .font(.title)
@@ -60,16 +60,13 @@ struct ThreadView: View {
             HStack(alignment: .bottom) {
                 TextEditor(text: $inputStr)
                     .focused($isTextFieldFocused)
-                    .submitLabel(.done)
-                    .frame(height: 30)
-                    .padding(.vertical, 4)
-                    .padding(.leading, 16)
+                    .frame(height: 60)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 19)
+                        RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.secondary.opacity(0.8), lineWidth: 0.8)
                     )
+                    .padding(.leading)
                     .padding(.vertical, 8)
-                    .padding(.leading, 16)
                 
                 Button(action: {
                     commentViewModel.addComment(content: inputStr)
@@ -78,10 +75,11 @@ struct ThreadView: View {
                 }){
                     Image(systemName: "paperplane.fill")
                         .font(.title3)
-                        .padding(.trailing)
-                        .padding(.bottom)
                 }
                     .disabled(inputStr.isEmpty)
+                    .padding(.bottom)
+                    .padding(.trailing)
+                    .padding(.leading, 6)
             }
         }
             .navigationBarTitle("", displayMode: .inline)
