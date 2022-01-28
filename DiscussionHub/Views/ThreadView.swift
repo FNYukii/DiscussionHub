@@ -28,71 +28,82 @@ struct ThreadView: View {
         ZStack(alignment: .bottomLeading) {
             
             // Thraed title and comments list
-            List {
-                Text(threadViewModel.currentThread!.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                ForEach(commentViewModel.comments) {comment in
-                    VStack(alignment: .leading) {
-                        Divider()
-                        HStack {
-                            Text("\(comment.order)")
-                                .fontWeight(.semibold)
-                            Text(comment.userId)
-                                .fontWeight(.semibold)
-                            Text("\(formatDate(inputDate: comment.createdAt))")
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.horizontal, 12)
-                        Text(comment.content)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.bottom, 6)
+            ScrollViewReader {proxy in
+                
+                
+                List {
+                    Text(threadViewModel.currentThread!.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    ForEach(commentViewModel.comments, id: \.self) {comment in
+                        VStack(alignment: .leading) {
+                            Divider()
+                            HStack {
+                                Text("\(comment.order)")
+                                    .fontWeight(.semibold)
+                                Text(comment.userId)
+                                    .fontWeight(.semibold)
+                                Text("\(formatDate(inputDate: comment.createdAt))")
+                                    .foregroundColor(.secondary)
+                            }
                             .padding(.horizontal, 12)
+                            Text(comment.content)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 6)
+                                .padding(.horizontal, 12)
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .padding(6)
                     }
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    .padding(6)
                 }
+                    .listStyle(PlainListStyle())
+                    .onTapGesture {
+                        isTextEditorFocused = false
+                    }
+                
+                // Input bar
+                HStack(alignment: .center) {
+                    
+                    // Input area
+                    ZStack(alignment: .topLeading) {
+                        TextEditor(text: $inputStr)
+                            .focused($isTextEditorFocused)
+                            .frame(height: 60)
+                            .background(Color("TextEditorBackground"))
+                            .cornerRadius(10)
+                        Text("コメント")
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .opacity(inputStr.isEmpty ? 1 : 0)
+                            .padding(.top, 8)
+                            .padding(.leading, 5)
+                    }
+                        .padding(.leading)
+                        .padding(.vertical, 8)
+                    
+                    // Send button
+                    Button(action: {
+                        commentViewModel.addComment(content: inputStr)
+                        inputStr = ""
+                        isTextEditorFocused = false
+                        withAnimation {
+                            proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                        }
+                    }){
+                        Image(systemName: "paperplane.fill")
+                            .font(.title3)
+                    }
+                        .disabled(inputStr.isEmpty)
+                        .padding(.trailing)
+                        .padding(.leading, 6)
+                }
+                    .background(Color.secondary.opacity(0.2))
+                
+                
             }
-                .listStyle(PlainListStyle())
-                .onTapGesture {
-                    isTextEditorFocused = false
-                }
-                .padding(.bottom, 76)
             
-            // Input bar
-            HStack(alignment: .center) {
-                
-                // Input area
-                ZStack(alignment: .topLeading) {
-                    TextEditor(text: $inputStr)
-                        .focused($isTextEditorFocused)
-                        .frame(height: 60)
-                        .background(Color("TextEditorBackground"))
-                        .cornerRadius(10)
-                    Text("コメント")
-                        .foregroundColor(Color(UIColor.placeholderText))
-                        .opacity(inputStr.isEmpty ? 1 : 0)
-                        .padding(.top, 8)
-                        .padding(.leading, 5)
-                }
-                    .padding(.leading)
-                    .padding(.vertical, 8)
-                
-                // Send button
-                Button(action: {
-                    commentViewModel.addComment(content: inputStr)
-                    inputStr = ""
-                    isTextEditorFocused = false
-                }){
-                    Image(systemName: "paperplane.fill")
-                        .font(.title3)
-                }
-                    .disabled(inputStr.isEmpty)
-                    .padding(.trailing)
-                    .padding(.leading, 6)
-            }
-                .background(Color.secondary.opacity(0.2))
+            
+            
              
         }
         

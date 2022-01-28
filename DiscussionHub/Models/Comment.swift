@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Comment: Identifiable {
+struct Comment: Identifiable, Hashable {
     var id: String
     var order: Int
     var content :String
