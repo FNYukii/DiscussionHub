@@ -64,10 +64,7 @@ struct ThreadView: View {
                 TextEditor(text: $inputStr)
                     .focused($isTextEditorFocused)
                     .frame(height: 60)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.secondary.opacity(0.8), lineWidth: 0.8)
-                    )
+                    .cornerRadius(10)
                     .padding(.leading)
                     .padding(.vertical, 8)
                 
@@ -84,6 +81,7 @@ struct ThreadView: View {
                     .padding(.trailing)
                     .padding(.leading, 6)
             }
+                .background(Color.secondary.opacity(0.2))
         }
             .navigationBarTitle("", displayMode: .inline)
     }
