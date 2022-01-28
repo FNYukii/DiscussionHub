@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct CreateThreadView: View {
     
@@ -19,6 +20,9 @@ struct CreateThreadView: View {
                                 
                 ZStack(alignment: .topLeading) {
                     TextEditor(text: $title)
+                        .introspectTextView { textEditor in
+                            textEditor.becomeFirstResponder()
+                        }
                     Text("タイトル")
                         .foregroundColor(Color(UIColor.placeholderText))
                         .opacity(title.isEmpty ? 1 : 0)

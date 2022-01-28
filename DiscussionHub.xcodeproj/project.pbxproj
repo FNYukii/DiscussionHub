@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		543BA49D27A4112D00FF3B04 /* TitleAndCommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */; };
 		543BA4A027A414F200FF3B04 /* CreateCommentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */; };
+		543BA4A327A4242B00FF3B04 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 543BA4A227A4242B00FF3B04 /* Introspect */; };
 		5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */; };
 		5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135D27A21FA300B2D5CD /* ContentView.swift */; };
 		5457136027A21FA300B2D5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5457135F27A21FA300B2D5CD /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5457137427A22B1200B2D5CD /* FirebaseFirestore in Frameworks */,
+				543BA4A327A4242B00FF3B04 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +149,7 @@
 			name = DiscussionHub;
 			packageProductDependencies = (
 				5457137327A22B1200B2D5CD /* FirebaseFirestore */,
+				543BA4A227A4242B00FF3B04 /* Introspect */,
 			);
 			productName = DiscussionHub;
 			productReference = 5457135827A21FA300B2D5CD /* DiscussionHub.app */;
@@ -178,6 +181,7 @@
 			mainGroup = 5457134F27A21FA200B2D5CD;
 			packageReferences = (
 				5457137227A22B1200B2D5CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				543BA4A127A4242B00FF3B04 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 5457135927A21FA300B2D5CD /* Products */;
 			projectDirPath = "";
@@ -423,6 +427,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		543BA4A127A4242B00FF3B04 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		5457137227A22B1200B2D5CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -434,6 +446,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		543BA4A227A4242B00FF3B04 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 543BA4A127A4242B00FF3B04 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		5457137327A22B1200B2D5CD /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5457137227A22B1200B2D5CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
