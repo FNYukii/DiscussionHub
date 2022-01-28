@@ -38,7 +38,7 @@ struct TitleAndCommentList: View {
                     HStack {
                         Text("\(comment.order)")
                             .fontWeight(.semibold)
-                        Text(comment.userId)
+                        Text(comment.authorId)
                             .fontWeight(.semibold)
                         Text("\(formatDate(inputDate: comment.createdAt))")
                             .foregroundColor(.secondary)
@@ -54,7 +54,7 @@ struct TitleAndCommentList: View {
                             .padding(.horizontal, 12)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .disabled(comment.userId != userId)
+                    .disabled(comment.authorId != userId)
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())

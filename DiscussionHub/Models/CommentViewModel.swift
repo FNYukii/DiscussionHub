@@ -35,10 +35,10 @@ class CommentViewModel: ObservableObject {
                         let id = document.documentID
                         let order = document.get("order") as! Int
                         let content = document.get("content") as! String
-                        let userId = document.get("userId") as! String
+                        let authorId = document.get("authorId") as! String
                         let createdAt = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, order: order, content: content, userId: userId, createdAt: createdDate)
+                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
                         self.comments.append(newComment)
                     }
                     
@@ -62,7 +62,7 @@ class CommentViewModel: ObservableObject {
             .addDocument(data: [
                 "order": order,
                 "content": content,
-                "userId": userId,
+                "authorId": userId,
                 "createdAt": Date()
             ]) { error in
                 if let error = error {
