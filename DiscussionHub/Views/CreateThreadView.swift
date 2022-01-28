@@ -16,10 +16,24 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("タイトル", text: $title)
-                    .submitLabel(.done)
-                TextField("コメント", text: $firstCommentContent)
-                    .submitLabel(.done)
+                                
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $title)
+                    Text("タイトル")
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .opacity(title.isEmpty ? 1 : 0)
+                        .padding(.top, 8)
+                        .padding(.leading, 5)
+                }
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $firstCommentContent)
+                    Text("最初のコメント")
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .opacity(firstCommentContent.isEmpty ? 1 : 0)
+                        .padding(.top, 8)
+                        .padding(.leading, 5)
+                }
+                
             }
             .navigationBarTitle("新規スレッド", displayMode: .inline)
             .navigationBarItems(
