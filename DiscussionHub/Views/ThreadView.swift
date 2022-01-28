@@ -10,15 +10,16 @@ import SwiftUI
 struct ThreadView: View {
     
     let threadId: String
-    let threadTitle: String
+    
+    @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
     @State var inputStr = ""
     @FocusState var isTextFieldFocused: Bool
     
-    init(threadId: String, threadTitle: String) {
+    init(threadId: String) {
         self.threadId = threadId
-        self.threadTitle = threadTitle
+        self.threadViewModel = ThreadViewModel(threadId: threadId)
         self.commentViewModel = CommentViewModel(threadId: self.threadId)
     }
 
@@ -28,7 +29,7 @@ struct ThreadView: View {
             
             // Comments list
             List {
-                Text(threadTitle)
+                Text(threadViewModel.currentThread!.title)
                     .font(.title)
                     .fontWeight(.bold)
                 ForEach(commentViewModel.comments) {comment in
@@ -81,23 +82,6 @@ struct ThreadView: View {
             }
         }
             .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(trailing:
-                HStack {
-                
-                    // Delete thread button
-                    Button(action: {
-                        let threadViewModel = ThreadViewModel()
-                        threadViewModel.deleteThread(threadId: threadId)
-                    }){
-                        Image(systemName: "trash")
-                    }
-                    Button(action: {
-                        
-                    }){
-                        Image(systemName: "star")
-                    }
-                }
-            )
     }
     
     func formatDate(inputDate: Date) -> String {

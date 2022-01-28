@@ -11,10 +11,29 @@ import Firebase
 class ThreadViewModel: ObservableObject {
     
     @Published var threads: [Thread] = []
+    @Published var currentThread: Thread? = nil
     
-    init() {
+    init(threadId: String = "") {
         
-        // Get thread documents
+        // If threadId exists, get thread title
+        if !threadId.isEmpty {
+            let db = Firestore.firestore()
+            db.collection("threads")
+                .document(threadId)
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                        print("Error fetching document: \(error!)")
+                        return
+                    }
+                    let title = document.get("title") as! String
+                    let authorId = document.get("authorId") as! String
+                    let createdAt = document.get("createdAt") as! Timestamp
+                    let createdDate = createdAt.dateValue()
+                    self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
+                }
+        }
+        
+        // Get all threads
         let db = Firestore.firestore()
         db.collection("threads")
             .order(by: "createdAt", descending: true)
@@ -28,9 +47,10 @@ class ThreadViewModel: ObservableObject {
                     for document in snapshot!.documents {
                         let id = document.documentID
                         let title = document.get("title") as! String
+                        let authorId = document.get("authorId") as! String
                         let createdAt: Timestamp = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newThread = Thread(id: id, title: title, createdAt: createdDate)
+                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate)
                         self.threads.append(newThread)
                     }
                     

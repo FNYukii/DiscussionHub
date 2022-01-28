@@ -10,5 +10,6 @@ import Foundation
 struct Thread: Identifiable {
     var id: String
     var title: String
+    var authorId: String
     var createdAt: Date
 }
