@@ -14,7 +14,6 @@ struct ThreadView: View {
     @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
-    @State var inputStr = ""
     @FocusState var isTextEditorFocused: Bool
     
     init(threadId: String) {
@@ -29,47 +28,13 @@ struct ThreadView: View {
             
             ZStack(alignment: .bottomLeading) {
                 
-                // Thraed title and comments list
                 TitleAndCommentList(threadViewModel: threadViewModel, commentViewModel: commentViewModel)
-                .onTapGesture {
-                    isTextEditorFocused = false
-                }
-                .padding(.bottom, 76)
-                
-                // Input bar
-                HStack(alignment: .center) {
-                    
-                    // Input area
-                    ZStack(alignment: .topLeading) {
-                        TextEditor(text: $inputStr)
-                            .focused($isTextEditorFocused)
-                            .frame(height: 60)
-                            .background(Color("TextEditorBackground"))
-                            .cornerRadius(10)
-                        Text("コメント")
-                            .foregroundColor(Color(UIColor.placeholderText))
-                            .opacity(inputStr.isEmpty ? 1 : 0)
-                            .padding(.top, 8)
-                            .padding(.leading, 5)
-                    }
-                    .padding(.leading)
-                    .padding(.vertical, 8)
-                    
-                    // Send button
-                    Button(action: {
-                        commentViewModel.addComment(content: inputStr)
-                        inputStr = ""
+                    .onTapGesture {
                         isTextEditorFocused = false
-                    }){
-                        Image(systemName: "paperplane.fill")
-                            .font(.title3)
                     }
-                    .disabled(inputStr.isEmpty)
-                    .padding(.trailing)
-                    .padding(.leading, 6)
-                }
-                .background(Color.secondary.opacity(0.2))
+                    .padding(.bottom, 76)
                 
+                CreateCommentBar(commentViewModel: commentViewModel, isTextEditorFocused: $isTextEditorFocused)
             }
             
             // If comments changed, Scroll list to end
