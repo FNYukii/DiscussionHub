@@ -12,13 +12,15 @@ struct TitleAndCommentList: View {
     @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
+    @State var isShowEditThreadSheet = false
+    
     var body: some View {
         
         List {
             
             // Thread title
             Button(action: {
-                // TODO: Open EditThreadView
+                isShowEditThreadSheet.toggle()
             }) {
                 Text(threadViewModel.currentThread!.title)
                     .font(.title)
@@ -56,6 +58,11 @@ struct TitleAndCommentList: View {
             }
         }
         .listStyle(PlainListStyle())
+        
+        .sheet(isPresented: $isShowEditThreadSheet) {
+            EditThreadView()
+        }
+        
     }
     
     func formatDate(inputDate: Date) -> String {

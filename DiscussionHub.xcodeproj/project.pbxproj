@@ -11,6 +11,7 @@
 		543BA4A027A414F200FF3B04 /* CreateCommentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */; };
 		543BA4A327A4242B00FF3B04 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 543BA4A227A4242B00FF3B04 /* Introspect */; };
 		543BA4A927A4450E00FF3B04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */; };
+		543BA4AB27A44DC400FF3B04 /* EditThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA4AA27A44DC400FF3B04 /* EditThreadView.swift */; };
 		5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */; };
 		5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135D27A21FA300B2D5CD /* ContentView.swift */; };
 		5457136027A21FA300B2D5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5457135F27A21FA300B2D5CD /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndCommentList.swift; sourceTree = "<group>"; };
 		543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentBar.swift; sourceTree = "<group>"; };
 		543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		543BA4AA27A44DC400FF3B04 /* EditThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditThreadView.swift; sourceTree = "<group>"; };
 		5457135827A21FA300B2D5CD /* DiscussionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscussionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionHubApp.swift; sourceTree = "<group>"; };
 		5457135D27A21FA300B2D5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				5457135D27A21FA300B2D5CD /* ContentView.swift */,
 				54C2E77527A266A6001EFE27 /* ThreadView.swift */,
+				543BA4AA27A44DC400FF3B04 /* EditThreadView.swift */,
 				547047C527A250AF00D4A6BA /* CreateThreadView.swift */,
 				5457136A27A224CC00B2D5CD /* FirstView.swift */,
 				5457136E27A224E500B2D5CD /* ThirdView.swift */,
@@ -218,6 +221,7 @@
 				543BA4A027A414F200FF3B04 /* CreateCommentBar.swift in Sources */,
 				5457136F27A224E500B2D5CD /* ThirdView.swift in Sources */,
 				5457136B27A224CC00B2D5CD /* FirstView.swift in Sources */,
+				543BA4AB27A44DC400FF3B04 /* EditThreadView.swift in Sources */,
 				54F3A33227A2385B00C0AEE0 /* ThreadViewModel.swift in Sources */,
 				5457136D27A224DA00B2D5CD /* SecondView.swift in Sources */,
 				5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */,
