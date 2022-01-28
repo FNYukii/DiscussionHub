@@ -15,7 +15,7 @@ struct ThreadView: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     @State var inputStr = ""
-    @FocusState var isTextFieldFocused: Bool
+    @FocusState var isTextEditorFocused: Bool
     
     init(threadId: String) {
         self.threadId = threadId
@@ -55,11 +55,14 @@ struct ThreadView: View {
                 }
             }
                 .listStyle(PlainListStyle())
+                .onTapGesture {
+                    isTextEditorFocused = false
+                }
             
             // New comment content input area
             HStack(alignment: .bottom) {
                 TextEditor(text: $inputStr)
-                    .focused($isTextFieldFocused)
+                    .focused($isTextEditorFocused)
                     .frame(height: 60)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -71,7 +74,7 @@ struct ThreadView: View {
                 Button(action: {
                     commentViewModel.addComment(content: inputStr)
                     inputStr = ""
-                    isTextFieldFocused = false
+                    isTextEditorFocused = false
                 }){
                     Image(systemName: "paperplane.fill")
                         .font(.title3)
