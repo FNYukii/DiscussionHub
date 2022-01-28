@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndCommentList.swift; sourceTree = "<group>"; };
 		543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentBar.swift; sourceTree = "<group>"; };
-		543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5457135827A21FA300B2D5CD /* DiscussionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscussionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionHubApp.swift; sourceTree = "<group>"; };
 		5457135D27A21FA300B2D5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,7 +72,6 @@
 		5457134F27A21FA200B2D5CD = {
 			isa = PBXGroup;
 			children = (
-				543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */,
 				5457135A27A21FA300B2D5CD /* DiscussionHub */,
 				5457135927A21FA300B2D5CD /* Products */,
 			);
@@ -89,6 +88,7 @@
 		5457135A27A21FA300B2D5CD /* DiscussionHub */ = {
 			isa = PBXGroup;
 			children = (
+				543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */,
 				5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */,
 				543BA49E27A4121900FF3B04 /* Components */,
 				54F3A32E27A2383700C0AEE0 /* Models */,
