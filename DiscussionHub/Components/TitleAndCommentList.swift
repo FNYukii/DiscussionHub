@@ -13,6 +13,7 @@ struct TitleAndCommentList: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     let userId = UserDefaults.standard.string(forKey: "userId")
+    @State var isShowDeleteCommentConfirmation = false
     
     var body: some View {
         
@@ -44,7 +45,7 @@ struct TitleAndCommentList: View {
                             }
                             if comment.authorId == userId {
                                 Button(role: .destructive) {
-                                    // TODO: Delete comment
+                                    isShowDeleteCommentConfirmation.toggle()
                                 } label: {
                                     Label("コメントを削除", systemImage: "trash")
                                 }
@@ -63,6 +64,7 @@ struct TitleAndCommentList: View {
                         } label: {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.secondary)
+                                .padding(6)
                         }
                     }
                     .padding(.horizontal, 12)
@@ -75,6 +77,14 @@ struct TitleAndCommentList: View {
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
                 .padding(6)
+                .confirmationDialog("", isPresented: $isShowDeleteCommentConfirmation, titleVisibility: .hidden) {
+                    Button("コメントを削除", role: .destructive) {
+                        // TODO: Delete comment
+                        print("HELLO I will delete \(comment.content)")
+                    }
+                } message: {
+                    Text("このコメントを削除してもよろしいですか?")
+                }
             }
         }
         .listStyle(PlainListStyle())
