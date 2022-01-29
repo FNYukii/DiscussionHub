@@ -40,7 +40,7 @@ struct TitleAndCommentList: View {
                             Button(action: {
                                 // TODO: Bookmark comment
                             }){
-                                Label("ブックマークに追加", systemImage: "bookmark")
+                                Label("コメントをブックマークに追加", systemImage: "bookmark")
                             }
                             if comment.authorId == userId {
                                 Button(role: .destructive) {

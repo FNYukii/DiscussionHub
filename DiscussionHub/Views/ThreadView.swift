@@ -74,7 +74,7 @@ struct ThreadView: View {
                     Button(action: {
                         // TODO: Bookmark comment
                     }){
-                        Label("ブックマークに追加", systemImage: "bookmark")
+                        Label("スレッドをブックマークに追加", systemImage: "bookmark")
                     }
                     if threadViewModel.currentThread?.authorId == userId {
                         Button(role: .destructive) {
