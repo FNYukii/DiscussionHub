@@ -26,9 +26,10 @@ struct TitleAndCommentList: View {
             
             // Comments
             ForEach(commentViewModel.comments, id: \.self) {comment in
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     Divider()
-                    HStack {
+                        .padding(.bottom, 6)
+                    HStack() {
                         Text("\(comment.order)")
                             .fontWeight(.semibold)
                         Text(comment.authorId)
