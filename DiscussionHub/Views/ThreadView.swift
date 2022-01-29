@@ -68,9 +68,9 @@ struct ThreadView: View {
                         Label("ブックマークに追加", systemImage: "bookmark")
                     }
                     if threadViewModel.currentThread?.authorId == userId {
-                        Button(action: {
+                        Button(role: .destructive) {
                             // TODO: Delete thread
-                        }){
+                        } label: {
                             Label("スレッドを削除", systemImage: "trash")
                         }
                     }
