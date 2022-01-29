@@ -17,7 +17,7 @@ struct CreateThreadView: View {
     var body: some View {
         NavigationView {
             Form {
-                                
+                
                 ZStack(alignment: .topLeading) {
                     TextEditor(text: $title)
                         .introspectTextView { textEditor in
@@ -40,20 +40,24 @@ struct CreateThreadView: View {
                 
             }
             .navigationBarTitle("新規スレッド", displayMode: .inline)
-            .navigationBarItems(
-                leading: Button("キャンセル"){
-                    dismiss()
-                },
-                trailing:  Button(action: {
-                    let threadViewModel = ThreadViewModel()
-                    threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
-                    dismiss()
-                }){
-                    Text("作成")
-                        .fontWeight(.bold)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("キャンセル"){
+                        dismiss()
+                    }
                 }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        let threadViewModel = ThreadViewModel()
+                        threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
+                        dismiss()
+                    }){
+                        Text("作成")
+                            .fontWeight(.bold)
+                    }
                     .disabled(title.isEmpty || firstCommentContent.isEmpty)
-            )
+                }
+            }
         }
     }
 }

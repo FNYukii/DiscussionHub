@@ -27,14 +27,16 @@ struct FirstView: View {
                 CreateThreadView()
             }
             .navigationBarTitle("スレッド")
-            .navigationBarItems(
-                trailing: Button(action: {
-                    isShowSheet.toggle()
-                }){
-                    Image(systemName: "plus.circle.fill")
-                    Text("新規スレッド")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowSheet.toggle()
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                        Text("新規スレッド")
+                    }
                 }
-            )
+            }
         }
     }
 }
