@@ -28,6 +28,7 @@ class CommentViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error getting documents: \(error)")
                 } else {
+                    print("HELLO! Success! Read comments in thread \(self.threadId) ")
                     
                     // Create comments array
                     self.comments = []
@@ -41,8 +42,6 @@ class CommentViewModel: ObservableObject {
                         let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
                         self.comments.append(newComment)
                     }
-                    
-                    print("HELLO! Success! Updated comments in thread \(self.threadId) ")
                 }
             }
     }
@@ -68,7 +67,7 @@ class CommentViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error adding new document \(error)")
                 } else {
-                    print("HELLO! Success! Added new document \(ref!.documentID)")
+                    print("HELLO! Success! Added new document \(ref!.documentID) to comments")
                 }
             }
     }

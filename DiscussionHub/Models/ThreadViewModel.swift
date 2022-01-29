@@ -29,12 +29,12 @@ class ThreadViewModel: ObservableObject {
                         print("HELLO! Fail! Document data was empty.")
                         return
                     }
+                    print("HELLO! Success! Read thread \(threadId)")
                     let title = document.get("title") as! String
                     let authorId = document.get("authorId") as! String
                     let createdAt = document.get("createdAt") as! Timestamp
                     let createdDate = createdAt.dateValue()
                     self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
-                    print("HELLO! Success! Updated current thread \(threadId)")
                 }
         }
         
@@ -46,6 +46,7 @@ class ThreadViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error geting documents: \(error)")
                 } else {
+                    print("HELLO! Success! Read threads")
                     
                     // Create threads array
                     self.threads = []
@@ -58,7 +59,6 @@ class ThreadViewModel: ObservableObject {
                         let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate)
                         self.threads.append(newThread)
                     }
-                    print("HELLO! Success! Threads updated")
                 }
             }
     }
@@ -76,7 +76,7 @@ class ThreadViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error adding new document: \(error)")
                 } else {
-                    print("HELLO! Success! Added new document \(ref!.documentID)")
+                    print("HELLO! Success! Added new document \(ref!.documentID) to threads")
                     
                     // Add first comment in this thread
                     let commentViewModel = CommentViewModel(threadId: ref!.documentID)
