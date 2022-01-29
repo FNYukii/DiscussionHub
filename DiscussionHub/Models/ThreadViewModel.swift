@@ -78,7 +78,7 @@ class ThreadViewModel: ObservableObject {
                 } else {
                     print("HELLO! Success! Added new document \(ref!.documentID)")
                     
-                    // Add first opinion in this thread
+                    // Add first comment in this thread
                     let commentViewModel = CommentViewModel(threadId: ref!.documentID)
                     commentViewModel.addComment(content: firstCommentContent)
                 }
@@ -86,29 +86,29 @@ class ThreadViewModel: ObservableObject {
     }
     
     func deleteThread(threadId: String) {
-        // Get thread
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
-            .getDocument { (document, error) in
-                if let document = document, document.exists {
-                    // Check authorId and userId
-                    let authorId = document.get("authorId") as! String
-                    let userId = UserDefaults.standard.string(forKey: "userId")
-                    // Delete thread
-                    if authorId == userId {
-                        db.collection("threads")
-                            .document(threadId)
-                            .delete() { err in
-                                if let err = err {
-                                    print("HELLO! Fail! Error removing document: \(err)")
-                                } else {
-                                    print("HELLO! Success! Removed document \(threadId)")
-                                }
-                            }
-                    }
+            .delete() { err in
+                if let err = err {
+                    print("HELLO! Fail! Error removing document: \(err)")
                 } else {
-                    print("HELLO! Fail! Document does not exist")
+                    print("HELLO! Success! Removed document \(threadId)")
+                }
+            }
+    }
+    
+    func updateThread(threadId: String, threadTitle: String) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .updateData([
+                "title": threadTitle
+            ]) { err in
+                if let err = err {
+                    print("HELLO! Fail! Error updating document: \(err)")
+                } else {
+                    print("HELLO! Success! Updated document \(threadId)")
                 }
             }
     }
