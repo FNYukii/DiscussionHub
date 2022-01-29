@@ -10,7 +10,14 @@ import SwiftUI
 struct EditThreadView: View {
     
     @Environment(\.dismiss) var dismiss
+    
+    let thread: Thread
     @State var title = ""
+    
+    init(thread: Thread) {
+        self.thread = thread
+        _title = State(initialValue: self.thread.title)
+    }
     
     var body: some View {
         
@@ -40,6 +47,7 @@ struct EditThreadView: View {
                     dismiss()
                 },
                 trailing:  Button(action: {
+                    // TODO: Update thread
                     dismiss()
                 }){
                     Text("完了")

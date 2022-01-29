@@ -64,7 +64,7 @@ struct TitleAndCommentList: View {
         .listStyle(PlainListStyle())
         
         .sheet(isPresented: $isShowEditThreadSheet) {
-            EditThreadView()
+            EditThreadView(thread: threadViewModel.currentThread!)
         }
         .sheet(isPresented: $isShowEditCommentSheet) {
             EditCommentView()
