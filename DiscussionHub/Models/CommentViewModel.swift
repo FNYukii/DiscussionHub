@@ -13,7 +13,7 @@ class CommentViewModel: ObservableObject {
     @Published var comments: [Comment] = []
     var threadId = ""
     
-    init(threadId: String) {
+    init(threadId: String = "") {
         // Set threadId
         self.threadId = threadId
         
@@ -68,6 +68,38 @@ class CommentViewModel: ObservableObject {
                     print("HELLO! Fail! Error adding new document \(error)")
                 } else {
                     print("HELLO! Success! Added new document \(ref!.documentID) to comments")
+                }
+            }
+    }
+    
+    func deleteComment(threadId: String, commentId: String) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .collection("comments")
+            .document(commentId)
+            .delete() { err in
+                if let err = err {
+                    print("HELLO! Fail! Error removing document: \(err)")
+                } else {
+                    print("HELLO! Success! Removed document \(commentId) from comments")
+                }
+            }
+    }
+    
+    func updateComment(threadId: String, commentId: String, commentContent: String) {
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .collection("comments")
+            .document(commentId)
+            .updateData([
+                "content": commentContent
+            ]) { err in
+                if let err = err {
+                    print("HELLO! Fail! Error updating document: \(err)")
+                } else {
+                    print("HELLO! Success! Updated document \(commentId) in comments")
                 }
             }
     }
