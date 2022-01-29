@@ -10,17 +10,27 @@ import SwiftUI
 struct EditCommentView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var content = ""
+    
+    let parentThreadId: String
+    let comment: Comment
+    @State var newContent = ""
+    
+    init(parendThreadId: String, comment: Comment) {
+        self.parentThreadId = parendThreadId
+        self.comment = comment
+        print("HELLO! parentThreadId: \(parendThreadId)")
+        _newContent = State(initialValue: self.comment.content)
+    }
     
     var body: some View {
         
         NavigationView {
             Form {
                 ZStack(alignment: .topLeading) {
-                    TextEditor(text: $content)
+                    TextEditor(text: $newContent)
                     Text("コメント")
                         .foregroundColor(Color(UIColor.placeholderText))
-                        .opacity(content.isEmpty ? 1 : 0)
+                        .opacity(newContent.isEmpty ? 1 : 0)
                         .padding(.top, 8)
                         .padding(.leading, 5)
                 }
@@ -28,6 +38,8 @@ struct EditCommentView: View {
                 Section {
                     Button("コメントを削除") {
                         // TODO: Delete comment
+                        let commentViewModel = CommentViewModel()
+                        commentViewModel.deleteComment(threadId: parentThreadId, commentId: comment.id)
                     }
                     .foregroundColor(.red)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -40,12 +52,15 @@ struct EditCommentView: View {
                     dismiss()
                 },
                 trailing:  Button(action: {
+                    // TODO: Update comment
+                    let commentViewModel = CommentViewModel()
+                    commentViewModel.updateComment(threadId: parentThreadId, commentId: comment.id, commentContent: newContent)
                     dismiss()
                 }){
                     Text("完了")
                         .fontWeight(.bold)
                 }
-                    .disabled(content.isEmpty)
+                    .disabled(newContent.isEmpty)
             )
         }
     }
