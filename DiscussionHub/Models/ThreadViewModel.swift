@@ -93,7 +93,7 @@ class ThreadViewModel: ObservableObject {
                 if let err = err {
                     print("HELLO! Fail! Error removing document: \(err)")
                 } else {
-                    print("HELLO! Success! Removed document \(threadId)")
+                    print("HELLO! Success! Removed document \(threadId) from threads")
                 }
             }
     }
@@ -108,7 +108,7 @@ class ThreadViewModel: ObservableObject {
                 if let err = err {
                     print("HELLO! Fail! Error updating document: \(err)")
                 } else {
-                    print("HELLO! Success! Updated document \(threadId)")
+                    print("HELLO! Success! Updated document \(threadId) in threads")
                 }
             }
     }
