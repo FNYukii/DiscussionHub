@@ -13,23 +13,15 @@ struct TitleAndCommentList: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     let userId = UserDefaults.standard.string(forKey: "userId")
-    @State var isShowEditThreadSheet = false
-    @State var isShowEditCommentSheet = false
     
     var body: some View {
         
         List {
             
             // Thread title
-            Button(action: {
-                isShowEditThreadSheet.toggle()
-            }) {
-                Text(threadViewModel.currentThread!.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-            }
-            .buttonStyle(PlainButtonStyle())
-            .disabled(threadViewModel.currentThread!.authorId != userId)
+            Text(threadViewModel.currentThread!.title)
+                .font(.title)
+                .fontWeight(.bold)
             
             // Comments
             ForEach(commentViewModel.comments, id: \.self) {comment in
@@ -42,20 +34,38 @@ struct TitleAndCommentList: View {
                             .fontWeight(.semibold)
                         Text("\(formatDate(inputDate: comment.createdAt))")
                             .foregroundColor(.secondary)
+                        Spacer()
+                        
+                        Menu {
+                            Button(action: {
+                                // TODO: Bookmark comment
+                            }){
+                                Label("ブックマークに追加", systemImage: "bookmark")
+                            }
+                            if comment.authorId == userId {
+                                Button(role: .destructive) {
+                                    // TODO: Delete comment
+                                } label: {
+                                    Label("コメントを削除", systemImage: "trash")
+                                }
+                            } else {
+                                Button(action: {
+                                    // TODO: Mute user
+                                }){
+                                    Label("\(comment.authorId)さんをミュート", systemImage: "flag")
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .foregroundColor(.secondary)
+                        }
                     }
                     .padding(.horizontal, 12)
                     
-                    Button(action: {
-                        // TODO: Open EditCommentView
-                        isShowEditCommentSheet.toggle()
-                    }) {
-                        Text(comment.content)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.bottom, 6)
-                            .padding(.horizontal, 12)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .disabled(comment.authorId != userId)
+                    Text(comment.content)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 6)
+                        .padding(.horizontal, 12)
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
@@ -63,19 +73,11 @@ struct TitleAndCommentList: View {
             }
         }
         .listStyle(PlainListStyle())
-        
-        .sheet(isPresented: $isShowEditThreadSheet) {
-            EditThreadView(thread: threadViewModel.currentThread!)
-        }
-        .sheet(isPresented: $isShowEditCommentSheet) {
-//            EditCommentView()
-        }
-        
     }
     
     func formatDate(inputDate: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd E HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd E HH:mm"
         return dateFormatter.string(from: inputDate)
     }
 }
