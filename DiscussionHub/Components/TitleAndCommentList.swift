@@ -52,7 +52,12 @@ struct TitleAndCommentList: View {
                                 Button(action: {
                                     // TODO: Mute user
                                 }){
-                                    Label("\(comment.authorId)さんをミュート", systemImage: "flag")
+                                    Label("\(comment.authorId)さんをミュート", systemImage: "speaker.slash")
+                                }
+                                Button(action: {
+                                    // TODO: Mute user
+                                }){
+                                    Label("コメントを報告する", systemImage: "flag")
                                 }
                             }
                         } label: {
