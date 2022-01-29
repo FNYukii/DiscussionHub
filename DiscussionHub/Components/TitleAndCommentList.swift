@@ -46,6 +46,7 @@ struct TitleAndCommentList: View {
                     .padding(.horizontal, 12)
                     
                     Button(action: {
+                        // TODO: Open EditCommentView
                         isShowEditCommentSheet.toggle()
                     }) {
                         Text(comment.content)
@@ -67,7 +68,7 @@ struct TitleAndCommentList: View {
             EditThreadView(thread: threadViewModel.currentThread!)
         }
         .sheet(isPresented: $isShowEditCommentSheet) {
-            EditCommentView()
+//            EditCommentView()
         }
         
     }
