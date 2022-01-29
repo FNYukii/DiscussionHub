@@ -15,6 +15,7 @@ struct ThreadView: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     @FocusState var isTextEditorFocused: Bool
+    let userId = UserDefaults.standard.string(forKey: "userId")
     
     init(threadId: String) {
         self.threadId = threadId
@@ -58,6 +59,26 @@ struct ThreadView: View {
             
         }
         .navigationBarTitle("", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(action: {
+                        // TODO: Bookmark comment
+                    }){
+                        Label("ブックマークに追加", systemImage: "bookmark")
+                    }
+                    if threadViewModel.currentThread?.authorId == userId {
+                        Button(action: {
+                            // TODO: Delete thread
+                        }){
+                            Label("スレッドを削除", systemImage: "trash")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+        }
     }
     
     func formatDate(inputDate: Date) -> String {
