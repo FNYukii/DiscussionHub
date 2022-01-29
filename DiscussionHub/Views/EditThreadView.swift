@@ -12,11 +12,11 @@ struct EditThreadView: View {
     @Environment(\.dismiss) var dismiss
     
     let thread: Thread
-    @State var title = ""
+    @State var newTitle = ""
     
     init(thread: Thread) {
         self.thread = thread
-        _title = State(initialValue: self.thread.title)
+        _newTitle = State(initialValue: self.thread.title)
     }
     
     var body: some View {
@@ -24,17 +24,19 @@ struct EditThreadView: View {
         NavigationView {
             Form {
                 ZStack(alignment: .topLeading) {
-                    TextEditor(text: $title)
+                    TextEditor(text: $newTitle)
                     Text("タイトル")
                         .foregroundColor(Color(UIColor.placeholderText))
-                        .opacity(title.isEmpty ? 1 : 0)
+                        .opacity(newTitle.isEmpty ? 1 : 0)
                         .padding(.top, 8)
                         .padding(.leading, 5)
                 }
                 
                 Section {
                     Button("スレッドを削除") {
-                        // TODO: Delete thread
+                        let threadViewModel = ThreadViewModel()
+                        threadViewModel.deleteThread(threadId: thread.id)
+                        dismiss()
                     }
                     .foregroundColor(.red)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -47,13 +49,14 @@ struct EditThreadView: View {
                     dismiss()
                 },
                 trailing:  Button(action: {
-                    // TODO: Update thread
+                    let threadViewModel = ThreadViewModel()
+                    threadViewModel.updateThread(threadId: thread.id, threadTitle: newTitle)
                     dismiss()
                 }){
                     Text("完了")
                         .fontWeight(.bold)
                 }
-                    .disabled(title.isEmpty)
+                    .disabled(newTitle.isEmpty)
             )
         }
     }
