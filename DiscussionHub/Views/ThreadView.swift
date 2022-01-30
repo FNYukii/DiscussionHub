@@ -82,6 +82,12 @@ struct ThreadView: View {
                         } label: {
                             Label("スレッドを削除", systemImage: "trash")
                         }
+                    } else {
+                        Button(action: {
+                            // TODO: Report thread
+                        }){
+                            Label("スレッドを報告する", systemImage: "flag")
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
