@@ -45,6 +45,11 @@ struct TitleAndCommentList: View {
                             }){
                                 Label("コメントをブックマークに追加", systemImage: "bookmark")
                             }
+                            Button(action: {
+                                // TODO: Reply to comment
+                            }){
+                                Label("このコメントに返信", systemImage: "arrowshape.turn.up.left")
+                            }
                             if comment.authorId == userId {
                                 Button(role: .destructive) {
                                     isShowDeleteCommentConfirmation.toggle()
