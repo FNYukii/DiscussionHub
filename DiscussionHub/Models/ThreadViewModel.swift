@@ -11,32 +11,8 @@ import Firebase
 class ThreadViewModel: ObservableObject {
     
     @Published var threads: [Thread] = []
-    var currentThread: Thread? = nil
     
     init(threadId: String = "") {
-        
-        // If threadId exists, get thread
-        if !threadId.isEmpty {
-            let db = Firestore.firestore()
-            db.collection("threads")
-                .document(threadId)
-                .addSnapshotListener { documentSnapshot, error in
-                    guard let document = documentSnapshot else {
-                        print("HELLO! Fail! Error fetching document: \(error!)")
-                        return
-                    }
-                    guard document.data() != nil else {
-                        print("HELLO! Fail! Document data was empty.")
-                        return
-                    }
-                    print("HELLO! Success! Read thread \(threadId)")
-                    let title = document.get("title") as! String
-                    let authorId = document.get("authorId") as! String
-                    let createdAt = document.get("createdAt") as! Timestamp
-                    let createdDate = createdAt.dateValue()
-                    self.currentThread = Thread(id: threadId, title: title, authorId: authorId, createdAt: createdDate)
-                }
-        }
         
         // Get all threads
         let db = Firestore.firestore()
