@@ -15,7 +15,6 @@ struct TitleAndCommentList: View {
     var body: some View {
         
         List {
-            
             // Thread title
             Text(showingThread.title)
                 .font(.title)
@@ -50,8 +49,6 @@ struct TitleAndCommentList: View {
             }
         }
         .listStyle(PlainListStyle())
-        
-        
     }
     
     func formatDate(inputDate: Date) -> String {
