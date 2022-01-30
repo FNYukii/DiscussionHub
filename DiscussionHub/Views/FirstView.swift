@@ -13,6 +13,10 @@ struct FirstView: View {
     @ObservedObject var threadViewModel = ThreadViewModel()
     @State var isShowSheet = false
     
+    init() {
+        threadViewModel.readThreads()
+    }
+    
     var body: some View {
         
         NavigationView {

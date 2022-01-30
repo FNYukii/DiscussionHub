@@ -12,9 +12,7 @@ class ThreadViewModel: ObservableObject {
     
     @Published var threads: [Thread] = []
     
-    init() {
-        
-        // Get all threads
+    func readThreads() {
         let db = Firestore.firestore()
         db.collection("threads")
             .order(by: "createdAt", descending: true)
