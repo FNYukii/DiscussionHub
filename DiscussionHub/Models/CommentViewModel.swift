@@ -11,15 +11,12 @@ import Firebase
 class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
-    var threadId = ""
     
     func readComments(threadId: String) {
         
-        self.threadId = threadId
-
         let db = Firestore.firestore()
         db.collection("threads")
-            .document(self.threadId)
+            .document(threadId)
             .collection("comments")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
@@ -27,7 +24,7 @@ class CommentViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error getting documents: \(error)")
                 } else {
-                    print("HELLO! Success! Read comments in thread \(self.threadId) ")
+                    print("HELLO! Success! Read comments in thread \(threadId) ")
                     
                     // Create comments array
                     self.comments = []
@@ -45,7 +42,7 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func addComment(content: String) {
+    func addComment(threadId: String, content: String) {
         // Create order and speakerId value
         let latestCommentOrder = comments.last?.order ?? 0
         let order = latestCommentOrder + 1
