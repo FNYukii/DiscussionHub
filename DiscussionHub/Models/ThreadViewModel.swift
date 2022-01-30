@@ -12,7 +12,7 @@ class ThreadViewModel: ObservableObject {
     
     @Published var threads: [Thread] = []
     
-    init(threadId: String = "") {
+    init() {
         
         // Get all threads
         let db = Firestore.firestore()
@@ -38,7 +38,7 @@ class ThreadViewModel: ObservableObject {
                 }
             }
     }
-    
+        
     func addThread(title: String, firstCommentContent: String) {
         let userId = UserDefaults.standard.string(forKey: "userId")!
         let db = Firestore.firestore()
