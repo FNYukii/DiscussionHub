@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ThreadView: View {
+struct ShowThreadView: View {
     
     let threadId: String
     
