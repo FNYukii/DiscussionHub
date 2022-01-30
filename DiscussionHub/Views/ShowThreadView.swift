@@ -16,7 +16,8 @@ struct ShowThreadView: View {
     
     init(thread: Thread) {
         self.thread = thread
-        self.commentViewModel = CommentViewModel(threadId: thread.id)
+        self.commentViewModel = CommentViewModel()
+        self.commentViewModel.readComments(threadId: thread.id)
     }
     
     var body: some View {

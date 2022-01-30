@@ -53,7 +53,7 @@ class ThreadViewModel: ObservableObject {
                     print("HELLO! Success! Added new document \(ref!.documentID) to threads")
                     
                     // Add first comment in this thread
-                    let commentViewModel = CommentViewModel(threadId: ref!.documentID)
+                    let commentViewModel = CommentViewModel()
                     commentViewModel.addComment(content: firstCommentContent)
                 }
             }
