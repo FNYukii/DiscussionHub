@@ -72,4 +72,33 @@ class ThreadViewModel: ObservableObject {
             }
     }
     
+    func incrementCommentCount(threadId: String) {
+        // Get thread
+        let db = Firestore.firestore()
+        db.collection("threads")
+            .document(threadId)
+            .getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("HELLO! Success! Read document \(threadId) from threads")
+                    
+                    // Increment comment counter
+                    let commentCount = document.get("commentCount") as! Int
+                    let newCommentCount = commentCount + 1
+                    db.collection("threads")
+                        .document(threadId)
+                        .updateData([
+                            "commentCount": newCommentCount
+                        ]) { err in
+                            if let err = err {
+                                print("HELLO! Fail! Error updating document: \(err)")
+                            } else {
+                                print("HELLO! Success! Updated document \(threadId) in threads")
+                            }
+                        }
+                } else {
+                    print("HELLO! Fail! Document does not exist")
+                }
+            }
+    }
+    
 }
