@@ -12,10 +12,6 @@ struct TitleAndCommentList: View {
     @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
-    let userId = UserDefaults.standard.string(forKey: "userId")
-    @State var isShowDeleteCommentConfirmation = false
-    @State var selectedCommentId = ""
-    
     var body: some View {
         
         List {
@@ -40,41 +36,8 @@ struct TitleAndCommentList: View {
                             .lineLimit(1)
                         Spacer()
                         
-                        Menu {
-                            Button(action: {
-                                // TODO: Bookmark comment
-                            }){
-                                Label("コメントをブックマークに追加", systemImage: "bookmark")
-                            }
-                            Button(action: {
-                                // TODO: Reply to comment
-                            }){
-                                Label("このコメントに返信", systemImage: "arrowshape.turn.up.left")
-                            }
-                            if comment.authorId == userId {
-                                Button(role: .destructive) {
-                                    selectedCommentId = comment.id
-                                    isShowDeleteCommentConfirmation.toggle()
-                                } label: {
-                                    Label("コメントを削除", systemImage: "trash")
-                                }
-                            } else {
-                                Button(action: {
-                                    // TODO: Mute user
-                                }){
-                                    Label("\(comment.authorId)さんをミュート", systemImage: "speaker.slash")
-                                }
-                                Button(action: {
-                                    // TODO: Report comment
-                                }){
-                                    Label("コメントを報告する", systemImage: "flag")
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.secondary)
-                                .padding(.vertical, 6)
-                        }
+                        CommentMenu(threadId: threadViewModel.currentThread!.id, comment: comment)
+                        
                     }
                     .padding(.horizontal, 12)
                     
@@ -90,13 +53,7 @@ struct TitleAndCommentList: View {
         }
         .listStyle(PlainListStyle())
         
-        .confirmationDialog("", isPresented: $isShowDeleteCommentConfirmation, titleVisibility: .hidden) {
-            Button("コメントを削除", role: .destructive) {
-                commentViewModel.deleteComment(threadId: threadViewModel.currentThread!.id, commentId: selectedCommentId)
-            }
-        } message: {
-            Text("このコメントを削除してもよろしいですか?")
-        }
+        
     }
     
     func formatDate(inputDate: Date) -> String {

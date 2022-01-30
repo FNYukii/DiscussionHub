@@ -14,6 +14,7 @@
 		543BA4AB27A44DC400FF3B04 /* EditThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA4AA27A44DC400FF3B04 /* EditThreadView.swift */; };
 		543BA4AD27A4547500FF3B04 /* EditCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA4AC27A4547500FF3B04 /* EditCommentView.swift */; };
 		543BA4B127A69BC300FF3B04 /* ThreadMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */; };
+		543BA4B327A69D1E00FF3B04 /* CommentMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA4B227A69D1E00FF3B04 /* CommentMenu.swift */; };
 		5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */; };
 		5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457135D27A21FA300B2D5CD /* ContentView.swift */; };
 		5457136027A21FA300B2D5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5457135F27A21FA300B2D5CD /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		543BA4AA27A44DC400FF3B04 /* EditThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditThreadView.swift; sourceTree = "<group>"; };
 		543BA4AC27A4547500FF3B04 /* EditCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentView.swift; sourceTree = "<group>"; };
 		543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMenu.swift; sourceTree = "<group>"; };
+		543BA4B227A69D1E00FF3B04 /* CommentMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMenu.swift; sourceTree = "<group>"; };
 		5457135827A21FA300B2D5CD /* DiscussionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscussionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5457135B27A21FA300B2D5CD /* DiscussionHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionHubApp.swift; sourceTree = "<group>"; };
 		5457135D27A21FA300B2D5CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				543BA49C27A4112D00FF3B04 /* TitleAndCommentList.swift */,
+				543BA4B227A69D1E00FF3B04 /* CommentMenu.swift */,
 				543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */,
 				543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */,
 			);
@@ -230,6 +233,7 @@
 				543BA4B127A69BC300FF3B04 /* ThreadMenu.swift in Sources */,
 				5457136B27A224CC00B2D5CD /* FirstView.swift in Sources */,
 				543BA4AB27A44DC400FF3B04 /* EditThreadView.swift in Sources */,
+				543BA4B327A69D1E00FF3B04 /* CommentMenu.swift in Sources */,
 				54F3A33227A2385B00C0AEE0 /* ThreadViewModel.swift in Sources */,
 				5457136D27A224DA00B2D5CD /* SecondView.swift in Sources */,
 				5457135C27A21FA300B2D5CD /* DiscussionHubApp.swift in Sources */,
