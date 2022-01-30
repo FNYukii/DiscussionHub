@@ -36,6 +36,7 @@ struct TitleAndCommentList: View {
                             .fontWeight(.semibold)
                         Text("\(formatDate(inputDate: comment.createdAt))")
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
                         Spacer()
                         
                         Menu {
@@ -65,7 +66,7 @@ struct TitleAndCommentList: View {
                         } label: {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.secondary)
-                                .padding(6)
+                                .padding(.vertical, 6)
                         }
                     }
                     .padding(.horizontal, 12)
