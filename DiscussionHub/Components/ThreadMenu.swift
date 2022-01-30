@@ -13,7 +13,7 @@ struct ThreadMenu: View {
     
     let userId = UserDefaults.standard.string(forKey: "userId")
     @State var isShowDeleteThreadConfirmation = false
-
+    
     var body: some View {
         Menu {
             Button(action: {

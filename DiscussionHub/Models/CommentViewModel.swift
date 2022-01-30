@@ -43,8 +43,8 @@ class CommentViewModel: ObservableObject {
     }
     
     func addComment(destinationThreadId: String, content: String) {
-        let userId = UserDefaults.standard.string(forKey: "userId")!
         
+        let userId = UserDefaults.standard.string(forKey: "userId")!
         let order = 99
         
         // Add new comment
@@ -81,5 +81,5 @@ class CommentViewModel: ObservableObject {
                 }
             }
     }
-
+    
 }

@@ -36,7 +36,7 @@ class ThreadViewModel: ObservableObject {
                 }
             }
     }
-        
+    
     func addThread(title: String, firstCommentContent: String) {
         let userId = UserDefaults.standard.string(forKey: "userId")!
         let db = Firestore.firestore()

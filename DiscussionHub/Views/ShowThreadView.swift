@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShowThreadView: View {
-        
+    
     let showingThread: Thread
     @ObservedObject var commentViewModel: CommentViewModel
     
