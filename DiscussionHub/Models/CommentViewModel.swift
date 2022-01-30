@@ -41,7 +41,8 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func addComment(destinationThreadId: String, content: String) {
+    func addComment(parentThreadId: String, content: String) {
+        // TODO: Get parent thread commentCount
         let order = 1
         let userId = UserDefaults.standard.string(forKey: "userId")!
         
@@ -49,7 +50,7 @@ class CommentViewModel: ObservableObject {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("threads")
-            .document(destinationThreadId)
+            .document(parentThreadId)
             .collection("comments")
             .addDocument(data: [
                 "order": order,
@@ -61,6 +62,7 @@ class CommentViewModel: ObservableObject {
                     print("HELLO! Fail! Error adding new document \(error)")
                 } else {
                     print("HELLO! Success! Added new document \(ref!.documentID) to comments")
+                    // TODO: Increment commentCount in parent thread
                 }
             }
     }

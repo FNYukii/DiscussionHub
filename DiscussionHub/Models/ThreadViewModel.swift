@@ -54,7 +54,7 @@ class ThreadViewModel: ObservableObject {
                     
                     // Add first comment in this thread
                     let commentViewModel = CommentViewModel()
-                    commentViewModel.addComment(destinationThreadId: ref!.documentID, content: firstCommentContent)
+                    commentViewModel.addComment(parentThreadId: ref!.documentID, content: firstCommentContent)
                 }
             }
     }

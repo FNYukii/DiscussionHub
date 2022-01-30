@@ -30,7 +30,7 @@ struct ShowThreadView: View {
                         isTextEditorFocused = false
                     }
                     .padding(.bottom, 76)
-                CreateCommentBar(destinationThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
+                CreateCommentBar(parentThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
             }
             
             // If comments changed, Scroll list to end
