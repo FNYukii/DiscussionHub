@@ -13,7 +13,6 @@ class CommentViewModel: ObservableObject {
     @Published var comments: [Comment] = []
     
     func readComments(parentThreadId: String) {
-        
         let db = Firestore.firestore()
         db.collection("threads")
             .document(parentThreadId)
@@ -43,9 +42,8 @@ class CommentViewModel: ObservableObject {
     }
     
     func addComment(destinationThreadId: String, content: String) {
-        
-        let userId = UserDefaults.standard.string(forKey: "userId")!
         let order = 99
+        let userId = UserDefaults.standard.string(forKey: "userId")!
         
         // Add new comment
         let db = Firestore.firestore()
