@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentMenu: View {
     
-    let threadId: String
+    let thread: Thread
     let comment: Comment
     
     let userId = UserDefaults.standard.string(forKey: "userId")
@@ -30,9 +30,8 @@ struct CommentMenu: View {
             }
             if comment.authorId == userId {
                 Button(role: .destructive) {
-                    print("HELLO! I will delete \(comment.content)")
-//                    selectedCommentId = comment.id
-//                    isShowDeleteCommentConfirmation.toggle()
+                    selectedCommentId = comment.id
+                    isShowDeleteCommentConfirmation.toggle()
                 } label: {
                     Label("コメントを削除", systemImage: "trash")
                 }
@@ -57,7 +56,7 @@ struct CommentMenu: View {
         .confirmationDialog("", isPresented: $isShowDeleteCommentConfirmation, titleVisibility: .hidden) {
             Button("コメントを削除", role: .destructive) {
                 let commentViewModel = CommentViewModel()
-                commentViewModel.deleteComment(threadId: threadId, commentId: selectedCommentId)
+                commentViewModel.deleteComment(threadId: thread.id, commentId: selectedCommentId)
             }
         } message: {
             Text("このコメントを削除してもよろしいですか?")

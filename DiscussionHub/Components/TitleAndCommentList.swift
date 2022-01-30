@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TitleAndCommentList: View {
     
-    @ObservedObject var threadViewModel: ThreadViewModel
+//    @ObservedObject var threadViewModel: ThreadViewModel
+    let thread: Thread
     @ObservedObject var commentViewModel: CommentViewModel
     
     var body: some View {
@@ -17,7 +18,7 @@ struct TitleAndCommentList: View {
         List {
             
             // Thread title
-            Text(threadViewModel.currentThread!.title)
+            Text(thread.title)
                 .font(.title)
                 .fontWeight(.bold)
             
@@ -36,7 +37,7 @@ struct TitleAndCommentList: View {
                             .lineLimit(1)
                         Spacer()
                         
-                        CommentMenu(threadId: threadViewModel.currentThread!.id, comment: comment)
+                        CommentMenu(thread: thread, comment: comment)
                         
                     }
                     .padding(.horizontal, 12)

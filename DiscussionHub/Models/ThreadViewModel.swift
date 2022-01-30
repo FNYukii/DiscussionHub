@@ -11,7 +11,7 @@ import Firebase
 class ThreadViewModel: ObservableObject {
     
     @Published var threads: [Thread] = []
-    @Published var currentThread: Thread? = nil
+    var currentThread: Thread? = nil
     
     init(threadId: String = "") {
         
