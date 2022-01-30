@@ -14,9 +14,7 @@ struct ShowThreadView: View {
     @ObservedObject var threadViewModel: ThreadViewModel
     @ObservedObject var commentViewModel: CommentViewModel
     
-    let userId = UserDefaults.standard.string(forKey: "userId")
     @FocusState var isTextEditorFocused: Bool
-    @State var isShowDeleteThreadConfirmation = false
     
     init(threadId: String) {
         self.threadId = threadId
@@ -59,39 +57,10 @@ struct ShowThreadView: View {
             }
         }
         
-        .confirmationDialog("", isPresented: $isShowDeleteThreadConfirmation, titleVisibility: .hidden) {
-            Button("スレッドを削除", role: .destructive) {
-                threadViewModel.deleteThread(threadId: threadViewModel.currentThread!.id)
-            }
-        } message: {
-            Text("このスレッドを削除してもよろしいですか?").bold()
-        }
-        
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button(action: {
-                        // TODO: Bookmark comment
-                    }){
-                        Label("スレッドをブックマークに追加", systemImage: "bookmark")
-                    }
-                    if threadViewModel.currentThread?.authorId == userId {
-                        Button(role: .destructive) {
-                            isShowDeleteThreadConfirmation.toggle()
-                        } label: {
-                            Label("スレッドを削除", systemImage: "trash")
-                        }
-                    } else {
-                        Button(action: {
-                            // TODO: Report thread
-                        }){
-                            Label("スレッドを報告する", systemImage: "flag")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
+                ThreadMenu(thread: threadViewModel.currentThread!)
             }
         }
     }
