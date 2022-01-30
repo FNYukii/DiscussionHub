@@ -15,7 +15,7 @@ class ThreadViewModel: ObservableObject {
     
     init(threadId: String = "") {
         
-        // If threadId exists, get thread title
+        // If threadId exists, get thread
         if !threadId.isEmpty {
             let db = Firestore.firestore()
             db.collection("threads")
