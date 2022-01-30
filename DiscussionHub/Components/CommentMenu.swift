@@ -28,14 +28,15 @@ struct CommentMenu: View {
             }){
                 Label("このコメントに返信", systemImage: "arrowshape.turn.up.left")
             }
-            if comment.authorId == userId {
+            if comment.authorId == userId && comment.order != 1{
                 Button(role: .destructive) {
                     selectedCommentId = comment.id
                     isShowDeleteCommentConfirmation.toggle()
                 } label: {
                     Label("コメントを削除", systemImage: "trash")
                 }
-            } else {
+            }
+            if comment.authorId != userId {
                 Button(action: {
                     // TODO: Mute user
                 }){
