@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThreadMenu: View {
     
-    let thread: Thread
+    let showingThread: Thread
     
     let userId = UserDefaults.standard.string(forKey: "userId")
     @State var isShowDeleteThreadConfirmation = false
@@ -21,7 +21,7 @@ struct ThreadMenu: View {
             }){
                 Label("スレッドをブックマークに追加", systemImage: "bookmark")
             }
-            if thread.authorId == userId {
+            if showingThread.authorId == userId {
                 Button(role: .destructive) {
                     isShowDeleteThreadConfirmation.toggle()
                 } label: {
@@ -41,7 +41,7 @@ struct ThreadMenu: View {
         .confirmationDialog("", isPresented: $isShowDeleteThreadConfirmation, titleVisibility: .hidden) {
             Button("スレッドを削除", role: .destructive) {
                 let threadViewModel = ThreadViewModel()
-                threadViewModel.deleteThread(threadId: thread.id)
+                threadViewModel.deleteThread(threadId: showingThread.id)
             }
         } message: {
             Text("このスレッドを削除してもよろしいですか?").bold()

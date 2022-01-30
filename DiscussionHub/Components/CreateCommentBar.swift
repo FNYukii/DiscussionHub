@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateCommentBar: View {
     
-    var targetThreadId: String
+    var destinationThreadId: String
     var isTextEditorFocused: FocusState<Bool>.Binding
     
     @State var inputStr = ""
@@ -36,7 +36,7 @@ struct CreateCommentBar: View {
             // Send button
             Button(action: {
                 let commentViewModel = CommentViewModel()
-                commentViewModel.addComment(threadId: targetThreadId, content: inputStr)
+                commentViewModel.addComment(destinationThreadId: destinationThreadId, content: inputStr)
                 inputStr = ""
                 isTextEditorFocused.wrappedValue = false
             }){

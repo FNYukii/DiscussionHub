@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ShowThreadView: View {
         
-    let thread: Thread
+    let showingThread: Thread
     @ObservedObject var commentViewModel: CommentViewModel
     
     @FocusState var isTextEditorFocused: Bool
     
     init(thread: Thread) {
-        self.thread = thread
+        self.showingThread = thread
         self.commentViewModel = CommentViewModel()
-        self.commentViewModel.readComments(threadId: thread.id)
+        self.commentViewModel.readComments(parentThreadId: thread.id)
     }
     
     var body: some View {
@@ -25,12 +25,12 @@ struct ShowThreadView: View {
         ScrollViewReader {proxy in
             
             ZStack(alignment: .bottomLeading) {
-                TitleAndCommentList(thread: thread, commentViewModel: commentViewModel)
+                TitleAndCommentList(showingThread: showingThread, commentViewModel: commentViewModel)
                     .onTapGesture {
                         isTextEditorFocused = false
                     }
                     .padding(.bottom, 76)
-                CreateCommentBar(targetThreadId: thread.id, isTextEditorFocused: $isTextEditorFocused)
+                CreateCommentBar(destinationThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
             }
             
             // If comments changed, Scroll list to end
@@ -40,7 +40,7 @@ struct ShowThreadView: View {
                 }
             }
             
-            // When TextEditor focused, Scroll list to end
+            // When keyboard appeared, Scroll list to end
             .onChange(of: isTextEditorFocused) {value in
                 if value {
                     var second = 0.00
@@ -58,7 +58,7 @@ struct ShowThreadView: View {
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                ThreadMenu(thread: thread)
+                ThreadMenu(showingThread: showingThread)
             }
         }
     }

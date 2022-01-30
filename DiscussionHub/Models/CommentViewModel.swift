@@ -12,11 +12,11 @@ class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
     
-    func readComments(threadId: String) {
+    func readComments(parentThreadId: String) {
         
         let db = Firestore.firestore()
         db.collection("threads")
-            .document(threadId)
+            .document(parentThreadId)
             .collection("comments")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
@@ -24,7 +24,7 @@ class CommentViewModel: ObservableObject {
                 if let error = error {
                     print("HELLO! Fail! Error getting documents: \(error)")
                 } else {
-                    print("HELLO! Success! Read comments in thread \(threadId) ")
+                    print("HELLO! Success! Read comments in thread \(parentThreadId) ")
                     
                     // Create comments array
                     self.comments = []
@@ -42,7 +42,7 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func addComment(threadId: String, content: String) {
+    func addComment(destinationThreadId: String, content: String) {
         // Create order and speakerId value
         let latestCommentOrder = comments.last?.order ?? 0
         let order = latestCommentOrder + 1
@@ -52,7 +52,7 @@ class CommentViewModel: ObservableObject {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("threads")
-            .document(threadId)
+            .document(destinationThreadId)
             .collection("comments")
             .addDocument(data: [
                 "order": order,
@@ -68,11 +68,10 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func deleteComment(threadId: String, commentId: String) {
-        print("HELLO! threadId: \(threadId), commentId: \(commentId)")
+    func deleteComment(parentThreadId: String, commentId: String) {
         let db = Firestore.firestore()
         db.collection("threads")
-            .document(threadId)
+            .document(parentThreadId)
             .collection("comments")
             .document(commentId)
             .delete() { err in
@@ -83,21 +82,5 @@ class CommentViewModel: ObservableObject {
                 }
             }
     }
-    
-    func updateComment(threadId: String, commentId: String, commentContent: String) {
-        let db = Firestore.firestore()
-        db.collection("threads")
-            .document(threadId)
-            .collection("comments")
-            .document(commentId)
-            .updateData([
-                "content": commentContent
-            ]) { err in
-                if let err = err {
-                    print("HELLO! Fail! Error updating document: \(err)")
-                } else {
-                    print("HELLO! Success! Updated document \(commentId) in comments")
-                }
-            }
-    }
+
 }
