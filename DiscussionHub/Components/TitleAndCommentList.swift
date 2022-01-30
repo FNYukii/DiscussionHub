@@ -35,9 +35,7 @@ struct TitleAndCommentList: View {
                             .foregroundColor(.secondary)
                             .lineLimit(1)
                         Spacer()
-                        
                         CommentMenu(parentThreadId: showingThread.id, comment: comment)
-                        
                     }
                     .padding(.horizontal, 12)
                     
