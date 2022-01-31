@@ -11,10 +11,12 @@ import Firebase
 class ThreadViewModel: ObservableObject {
     
     @Published var allThreads: [Thread] = []
+    var listener: ListenerRegistration? = nil
     
     func startListenThreads() {
+        print("HELLO! Start threads listener")
         let db = Firestore.firestore()
-        db.collection("threads")
+        listener = db.collection("threads")
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
                 if let error = error {
@@ -36,6 +38,11 @@ class ThreadViewModel: ObservableObject {
                     }
                 }
             }
+    }
+    
+    func stopListenThreads() {
+        print("HELLO! Stop threads lister")
+        listener?.remove()
     }
     
     func addThread(title: String, firstCommentContent: String) {

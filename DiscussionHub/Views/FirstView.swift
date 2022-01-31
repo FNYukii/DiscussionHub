@@ -14,7 +14,9 @@ struct FirstView: View {
     @State var isShowSheet = false
     
     init() {
+        
         threadViewModel.startListenThreads()
+        print("HELLO! FirstView initialized")
     }
     
     var body: some View {
@@ -27,6 +29,13 @@ struct FirstView: View {
                     }
                 }
             }
+            .onDisappear {
+                print("HELLO! List disappeared")
+            }
+            .onAppear {
+                print("HELLO! List appeared")
+            }
+            
             .sheet(isPresented: $isShowSheet) {
                 CreateThreadView()
             }
