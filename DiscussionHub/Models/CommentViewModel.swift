@@ -11,10 +11,12 @@ import Firebase
 class CommentViewModel: ObservableObject {
     
     @Published var allComments: [Comment] = []
+    var listener: ListenerRegistration? = nil
     
     func startListenComments(parentThreadId: String) {
+        print("HELLO! Start listening comments")
         let db = Firestore.firestore()
-        db.collection("threads")
+        listener = db.collection("threads")
             .document(parentThreadId)
             .collection("comments")
             .order(by: "createdAt", descending: false)
@@ -38,6 +40,11 @@ class CommentViewModel: ObservableObject {
                     }
                 }
             }
+    }
+    
+    func stopListenComments() {
+        print("HELLO! Stop listening comments")
+        listener?.remove()
     }
     
     func addComment(parentThreadId: String, content: String) {
