@@ -18,7 +18,7 @@ struct FirstView: View {
         NavigationView {
             List {
                 ForEach(threadViewModel.allThreads) {thread in
-                    NavigationLink(destination: ShowThreadView(thread: thread)) {
+                    NavigationLink(destination: ShowThreadView(showingThread: thread)) {
                         Text(thread.title)
                     }
                 }

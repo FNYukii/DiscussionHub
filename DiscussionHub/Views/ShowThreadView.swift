@@ -10,17 +10,11 @@ import SwiftUI
 struct ShowThreadView: View {
     
     let showingThread: Thread
-    @ObservedObject var commentViewModel: CommentViewModel
+    @ObservedObject var commentViewModel = CommentViewModel()
     
     @FocusState var isTextEditorFocused: Bool
     @State var isScrolledToEnd = false
     @State var isShowScrollButton = true
-    
-    init(thread: Thread) {
-        self.showingThread = thread
-        self.commentViewModel = CommentViewModel()
-        self.commentViewModel.startListenComments(parentThreadId: thread.id)
-    }
     
     var body: some View {
         
@@ -99,6 +93,12 @@ struct ShowThreadView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            commentViewModel.startListenComments(parentThreadId: showingThread.id)
+        }
+        .onDisappear {
+            commentViewModel.stopListenComments()
         }
         
         .navigationBarTitle("", displayMode: .inline)
