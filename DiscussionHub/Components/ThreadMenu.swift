@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ThreadMenu: View {
+    @Environment(\.dismiss) var dismiss
     
     let showingThread: Thread
     
@@ -42,6 +43,7 @@ struct ThreadMenu: View {
             Button("スレッドを削除", role: .destructive) {
                 let threadViewModel = ThreadViewModel()
                 threadViewModel.deleteThread(threadId: showingThread.id)
+                dismiss()
             }
         } message: {
             Text("このスレッドを削除してもよろしいですか?").bold()
