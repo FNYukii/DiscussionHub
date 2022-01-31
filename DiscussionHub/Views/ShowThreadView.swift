@@ -13,7 +13,7 @@ struct ShowThreadView: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     @FocusState var isTextEditorFocused: Bool
-    @State var isScrollButtonEnabled = true
+    @State var isShowScrollButton = true
     
     init(thread: Thread) {
         self.showingThread = thread
@@ -39,7 +39,7 @@ struct ShowThreadView: View {
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
                         .onAppear {
-                            isScrollButtonEnabled = false
+                            isShowScrollButton = false
                             print("HELLO! Appeared")
                         }
                         .onDisappear {
@@ -60,6 +60,7 @@ struct ShowThreadView: View {
                     withAnimation {
                         proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
                     }
+                    isShowScrollButton = false
                 }){
                     Label("新着コメント", systemImage: "arrow.down")
                         .foregroundColor(.white)
@@ -69,13 +70,13 @@ struct ShowThreadView: View {
                 }
                 .padding(.bottom, 90.0)
                 .padding(.leading)
-                .opacity(isScrollButtonEnabled ? 1 : 0)
+                .opacity(isShowScrollButton ? 1 : 0)
                 
             }
             
             // If comments changed, enable scroll button
             .onChange(of: commentViewModel.allComments) {_ in
-                isScrollButtonEnabled = true
+                isShowScrollButton = true
             }
             
             // When keyboard appeared, Scroll list to end
