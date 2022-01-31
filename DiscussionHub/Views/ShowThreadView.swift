@@ -25,7 +25,7 @@ struct ShowThreadView: View {
         
         ScrollViewReader {proxy in
             
-            ZStack(alignment: .bottomLeading) {
+            ZStack(alignment: .bottom) {
                 TitleAndCommentList(showingThread: showingThread, allComments: commentViewModel.allComments)
                     .onTapGesture {
                         isTextEditorFocused = false
@@ -39,11 +39,12 @@ struct ShowThreadView: View {
                     }
                     isScrollButtonEnabled = false
                 }){
-                    Image(systemName: "arrow.down")
+                    
+                    Label("新着コメント", systemImage: "arrow.down")
                         .foregroundColor(.white)
-                        .padding()
+                        .padding(8)
                         .background(Color.accentColor)
-                        .clipShape(Circle())
+                        .cornerRadius(16)
                 }
                 .padding(.bottom, 90.0)
                 .padding(.leading)
