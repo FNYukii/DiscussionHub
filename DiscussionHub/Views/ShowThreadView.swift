@@ -40,11 +40,12 @@ struct ShowThreadView: View {
                         .listRowSeparator(.hidden)
                         .onAppear {
                             isShowScrollButton = false
-                            print("HELLO! Appeared")
+                            print("HELLO! List bottom Appeared")
                         }
                         .onDisappear {
-                            print("HELL0! Disappeared")
+                            print("HELL0! List bottom Disappeared")
                         }
+                        .id(9999)
                 }
                 .listStyle(PlainListStyle())
                 .environment(\.defaultMinListRowHeight, 0)
@@ -58,9 +59,8 @@ struct ShowThreadView: View {
                 // Scroll button
                 Button(action: {
                     withAnimation {
-                        proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
+                        proxy.scrollTo(9999)
                     }
-                    isShowScrollButton = false
                 }){
                     Label("新着コメント", systemImage: "arrow.down")
                         .foregroundColor(.white)
@@ -88,7 +88,7 @@ struct ShowThreadView: View {
                         if second > 0.4 {
                             timer.invalidate()
                         }
-                        proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
+                        proxy.scrollTo(9999)
                     }
                 }
             }
