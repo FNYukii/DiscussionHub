@@ -26,11 +26,20 @@ struct ShowThreadView: View {
         ScrollViewReader {proxy in
             
             ZStack(alignment: .bottom) {
-                TitleAndCommentList(showingThread: showingThread, allComments: commentViewModel.allComments)
-                    .onTapGesture {
-                        isTextEditorFocused = false
-                    }
-                    .padding(.bottom, 76)
+                
+                List {
+                    Text(showingThread.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    
+                    AllCommentForeach(showingThread: showingThread, allComments: commentViewModel.allComments)
+                }
+                .listStyle(PlainListStyle())
+                .onTapGesture {
+                    isTextEditorFocused = false
+                }
+                .padding(.bottom, 76)
+
                 CreateCommentBar(parentThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
                 
                 Button(action: {
