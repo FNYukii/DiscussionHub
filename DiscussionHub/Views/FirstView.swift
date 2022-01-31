@@ -13,12 +13,6 @@ struct FirstView: View {
     @ObservedObject var threadViewModel = ThreadViewModel()
     @State var isShowSheet = false
     
-    init() {
-        
-        threadViewModel.startListenThreads()
-        print("HELLO! FirstView initialized")
-    }
-    
     var body: some View {
         
         NavigationView {
@@ -30,10 +24,10 @@ struct FirstView: View {
                 }
             }
             .onDisappear {
-                print("HELLO! List disappeared")
+                threadViewModel.stopListenThreads()
             }
             .onAppear {
-                print("HELLO! List appeared")
+                threadViewModel.startListenThreads()
             }
             
             .sheet(isPresented: $isShowSheet) {
