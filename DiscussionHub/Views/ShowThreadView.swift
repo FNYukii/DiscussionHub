@@ -13,6 +13,7 @@ struct ShowThreadView: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     @FocusState var isTextEditorFocused: Bool
+    @State var isScrolledToEnd = false
     @State var isShowScrollButton = true
     
     init(thread: Thread) {
@@ -40,10 +41,10 @@ struct ShowThreadView: View {
                         .listRowSeparator(.hidden)
                         .onAppear {
                             isShowScrollButton = false
-                            print("HELLO! List bottom Appeared")
+                            isScrolledToEnd = true
                         }
                         .onDisappear {
-                            print("HELL0! List bottom Disappeared")
+                            isScrolledToEnd = false
                         }
                         .id(9999)
                 }
@@ -74,9 +75,15 @@ struct ShowThreadView: View {
                 
             }
             
-            // If comments changed, enable scroll button
+            // If comments changed, scroll to end or show scroll button
             .onChange(of: commentViewModel.allComments) {_ in
-                isShowScrollButton = true
+                if isScrolledToEnd {
+                    withAnimation {
+                        proxy.scrollTo(9999)
+                    }
+                } else {
+                    isShowScrollButton = true
+                }
             }
             
             // When keyboard appeared, Scroll list to end
