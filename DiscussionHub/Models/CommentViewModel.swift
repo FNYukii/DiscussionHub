@@ -10,7 +10,7 @@ import Firebase
 
 class CommentViewModel: ObservableObject {
     
-    @Published var comments: [Comment] = []
+    @Published var allComments: [Comment] = []
     
     func readComments(parentThreadId: String) {
         let db = Firestore.firestore()
@@ -26,7 +26,7 @@ class CommentViewModel: ObservableObject {
                     print("HELLO! Success! Read comments in thread \(parentThreadId) ")
                     
                     // Create comments array
-                    self.comments = []
+                    self.allComments = []
                     for document in snapshot!.documents {
                         let id = document.documentID
                         let order = document.get("order") as! Int
@@ -35,34 +35,48 @@ class CommentViewModel: ObservableObject {
                         let createdAt = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
                         let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
-                        self.comments.append(newComment)
+                        self.allComments.append(newComment)
                     }
                 }
             }
     }
     
     func addComment(parentThreadId: String, content: String) {
-        // TODO: Get parent thread commentCount
-        let order = 1
-        let userId = UserDefaults.standard.string(forKey: "userId")!
-        
-        // Add new comment
+        // Get parent thread commentCount
         let db = Firestore.firestore()
-        var ref: DocumentReference? = nil
-        ref = db.collection("threads")
+        db.collection("threads")
             .document(parentThreadId)
-            .collection("comments")
-            .addDocument(data: [
-                "order": order,
-                "content": content,
-                "authorId": userId,
-                "createdAt": Date()
-            ]) { error in
-                if let error = error {
-                    print("HELLO! Fail! Error adding new document \(error)")
+            .getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("HELLO! Success! Read document \(parentThreadId) from threads")
+                    let commentCount = document.get("commentCount") as! Int
+                    
+                    // Add new comment
+                    let order = commentCount + 1
+                    let userId = UserDefaults.standard.string(forKey: "userId")!
+                    var ref: DocumentReference? = nil
+                    ref = db.collection("threads")
+                        .document(parentThreadId)
+                        .collection("comments")
+                        .addDocument(data: [
+                            "order": order,
+                            "content": content,
+                            "authorId": userId,
+                            "createdAt": Date()
+                        ]) { error in
+                            if let error = error {
+                                print("HELLO! Fail! Error adding new document \(error)")
+                            } else {
+                                print("HELLO! Success! Added new document \(ref!.documentID) to comments")
+                                
+                                // Increment commentCount in parent thread
+                                let threadViewModel = ThreadViewModel()
+                                threadViewModel.incrementCommentCount(threadId: parentThreadId)
+                            }
+                        }
+                    
                 } else {
-                    print("HELLO! Success! Added new document \(ref!.documentID) to comments")
-                    // TODO: Increment commentCount in parent thread
+                    print("HELLO! Fail! Document does not exist")
                 }
             }
     }

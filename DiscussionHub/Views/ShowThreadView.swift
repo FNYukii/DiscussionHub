@@ -34,9 +34,9 @@ struct ShowThreadView: View {
             }
             
             // If comments changed, Scroll list to end
-            .onChange(of: commentViewModel.comments) {_ in
+            .onChange(of: commentViewModel.allComments) {_ in
                 withAnimation {
-                    proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                    proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
                 }
             }
             
@@ -49,7 +49,7 @@ struct ShowThreadView: View {
                         if second > 0.4 {
                             timer.invalidate()
                         }
-                        proxy.scrollTo(commentViewModel.comments[commentViewModel.comments.endIndex - 1])
+                        proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
                     }
                 }
             }

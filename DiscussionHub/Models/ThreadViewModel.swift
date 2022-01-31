@@ -30,7 +30,8 @@ class ThreadViewModel: ObservableObject {
                         let authorId = document.get("authorId") as! String
                         let createdAt: Timestamp = document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate)
+                        let commentCount = document.get("commentCount") as! Int
+                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
                         self.allThreads.append(newThread)
                     }
                 }
@@ -45,7 +46,8 @@ class ThreadViewModel: ObservableObject {
             .addDocument(data: [
                 "title": title,
                 "authorId": userId,
-                "createdAt": Date()
+                "createdAt": Date(),
+                "commentCount": 0
             ]) { error in
                 if let error = error {
                     print("HELLO! Fail! Error adding new document: \(error)")

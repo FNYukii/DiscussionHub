@@ -21,7 +21,7 @@ struct TitleAndCommentList: View {
                 .fontWeight(.bold)
             
             // Comments
-            ForEach(commentViewModel.comments, id: \.self) {comment in
+            ForEach(commentViewModel.allComments, id: \.self) {comment in
                 VStack(alignment: .leading, spacing: 0) {
                     Divider()
                         .padding(.bottom, 6)
