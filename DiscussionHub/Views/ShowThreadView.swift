@@ -33,6 +33,12 @@ struct ShowThreadView: View {
                         .fontWeight(.bold)
                     
                     AllCommentForeach(showingThread: showingThread, allComments: commentViewModel.allComments)
+                    
+                    Color.clear
+                        .frame(height: 0, alignment: .bottom)
+                        .onAppear {
+                            isScrollButtonEnabled = false
+                        }
                 }
                 .listStyle(PlainListStyle())
                 .onTapGesture {
