@@ -19,7 +19,6 @@ class CommentViewModel: ObservableObject {
             .collection("comments")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
-                
                 if let error = error {
                     print("HELLO! Fail! Error getting documents: \(error)")
                 } else {

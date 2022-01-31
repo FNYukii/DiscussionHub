@@ -83,5 +83,4 @@ struct ShowThreadView: View {
         dateFormatter.dateFormat = "yyyy-MM-dd E HH:mm:ss"
         return dateFormatter.string(from: inputDate)
     }
-    
 }
