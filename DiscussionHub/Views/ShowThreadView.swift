@@ -35,12 +35,19 @@ struct ShowThreadView: View {
                     AllCommentForeach(showingThread: showingThread, allComments: commentViewModel.allComments)
                     
                     Color.clear
-                        .frame(height: 0, alignment: .bottom)
+                        .frame(height: 1, alignment: .bottom)
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
                         .onAppear {
                             isScrollButtonEnabled = false
+                            print("HELLO! Appeared")
+                        }
+                        .onDisappear {
+                            print("HELL0! Disappeared")
                         }
                 }
                 .listStyle(PlainListStyle())
+                .environment(\.defaultMinListRowHeight, 0)
                 .onTapGesture {
                     isTextEditorFocused = false
                 }
