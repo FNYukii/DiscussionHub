@@ -95,10 +95,10 @@ struct ShowThreadView: View {
             }
         }
         .onAppear {
-            commentViewModel.startListenComments(parentThreadId: showingThread.id)
+            commentViewModel.startListeningComments(parentThreadId: showingThread.id)
         }
         .onDisappear {
-            commentViewModel.stopListenComments()
+            commentViewModel.stopListeningComments()
         }
         
         .navigationBarTitle("", displayMode: .inline)

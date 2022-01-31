@@ -13,7 +13,7 @@ class ThreadViewModel: ObservableObject {
     @Published var allThreads: [Thread] = []
     var listener: ListenerRegistration? = nil
     
-    func startListenThreads() {
+    func startListeningThreads() {
         print("HELLO! Start listening threads")
         let db = Firestore.firestore()
         listener = db.collection("threads")
@@ -40,7 +40,7 @@ class ThreadViewModel: ObservableObject {
             }
     }
     
-    func stopListenThreads() {
+    func stopListeningThreads() {
         print("HELLO! Stop listening threads")
         listener?.remove()
     }

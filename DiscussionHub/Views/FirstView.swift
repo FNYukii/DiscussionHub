@@ -24,10 +24,10 @@ struct FirstView: View {
                 }
             }
             .onDisappear {
-                threadViewModel.stopListenThreads()
+                threadViewModel.stopListeningThreads()
             }
             .onAppear {
-                threadViewModel.startListenThreads()
+                threadViewModel.startListeningThreads()
             }
             
             .sheet(isPresented: $isShowSheet) {

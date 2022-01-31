@@ -13,7 +13,7 @@ class CommentViewModel: ObservableObject {
     @Published var allComments: [Comment] = []
     var listener: ListenerRegistration? = nil
     
-    func startListenComments(parentThreadId: String) {
+    func startListeningComments(parentThreadId: String) {
         print("HELLO! Start listening comments")
         let db = Firestore.firestore()
         listener = db.collection("threads")
@@ -42,7 +42,7 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func stopListenComments() {
+    func stopListeningComments() {
         print("HELLO! Stop listening comments")
         listener?.remove()
     }
