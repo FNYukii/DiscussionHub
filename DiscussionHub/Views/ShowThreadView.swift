@@ -55,13 +55,12 @@ struct ShowThreadView: View {
 
                 CreateCommentBar(parentThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
                 
+                // Scroll button
                 Button(action: {
                     withAnimation {
                         proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
                     }
-                    isScrollButtonEnabled = false
                 }){
-                    
                     Label("新着コメント", systemImage: "arrow.down")
                         .foregroundColor(.white)
                         .padding(8)
@@ -71,6 +70,7 @@ struct ShowThreadView: View {
                 .padding(.bottom, 90.0)
                 .padding(.leading)
                 .opacity(isScrollButtonEnabled ? 1 : 0)
+                
             }
             
             // If comments changed, enable scroll button
