@@ -109,9 +109,4 @@ struct ShowThreadView: View {
         }
     }
     
-    func formatDate(inputDate: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd E HH:mm:ss"
-        return dateFormatter.string(from: inputDate)
-    }
 }
