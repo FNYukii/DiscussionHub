@@ -25,7 +25,7 @@ struct ShowThreadView: View {
         ScrollViewReader {proxy in
             
             ZStack(alignment: .bottomLeading) {
-                TitleAndCommentList(showingThread: showingThread, commentViewModel: commentViewModel)
+                TitleAndCommentList(showingThread: showingThread, allComments: commentViewModel.allComments)
                     .onTapGesture {
                         isTextEditorFocused = false
                     }

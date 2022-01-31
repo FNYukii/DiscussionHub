@@ -10,7 +10,7 @@ import SwiftUI
 struct TitleAndCommentList: View {
     
     let showingThread: Thread
-    @ObservedObject var commentViewModel: CommentViewModel
+    let allComments: [Comment]
     
     var body: some View {
         
@@ -21,7 +21,7 @@ struct TitleAndCommentList: View {
                 .fontWeight(.bold)
             
             // Comments
-            ForEach(commentViewModel.allComments, id: \.self) {comment in
+            ForEach(allComments, id: \.self) {comment in
                 VStack(alignment: .leading, spacing: 0) {
                     Divider()
                         .padding(.bottom, 6)
