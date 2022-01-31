@@ -12,7 +12,7 @@ class CommentViewModel: ObservableObject {
     
     @Published var allComments: [Comment] = []
     
-    func readComments(parentThreadId: String) {
+    func startListenComments(parentThreadId: String) {
         let db = Firestore.firestore()
         db.collection("threads")
             .document(parentThreadId)

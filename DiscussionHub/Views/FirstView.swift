@@ -14,7 +14,7 @@ struct FirstView: View {
     @State var isShowSheet = false
     
     init() {
-        threadViewModel.readThreads()
+        threadViewModel.startListenThreads()
     }
     
     var body: some View {

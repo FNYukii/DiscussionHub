@@ -19,7 +19,7 @@ struct ShowThreadView: View {
     init(thread: Thread) {
         self.showingThread = thread
         self.commentViewModel = CommentViewModel()
-        self.commentViewModel.readComments(parentThreadId: thread.id)
+        self.commentViewModel.startListenComments(parentThreadId: thread.id)
     }
     
     var body: some View {
