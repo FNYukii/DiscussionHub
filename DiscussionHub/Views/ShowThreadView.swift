@@ -13,6 +13,7 @@ struct ShowThreadView: View {
     @ObservedObject var commentViewModel: CommentViewModel
     
     @FocusState var isTextEditorFocused: Bool
+    @State var isScrollButtonEnabled = true
     
     init(thread: Thread) {
         self.showingThread = thread
@@ -31,13 +32,27 @@ struct ShowThreadView: View {
                     }
                     .padding(.bottom, 76)
                 CreateCommentBar(parentThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
+                
+                Button(action: {
+                    withAnimation {
+                        proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
+                    }
+                    isScrollButtonEnabled = false
+                }){
+                    Image(systemName: "arrow.down")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
+                        .clipShape(Circle())
+                }
+                .padding(.bottom, 90.0)
+                .padding(.leading)
+                .opacity(isScrollButtonEnabled ? 1 : 0)
             }
             
-            // If comments changed, Scroll list to end
+            // If comments changed, enable scroll button
             .onChange(of: commentViewModel.allComments) {_ in
-                withAnimation {
-                    proxy.scrollTo(commentViewModel.allComments[commentViewModel.allComments.endIndex - 1])
-                }
+                isScrollButtonEnabled = true
             }
             
             // When keyboard appeared, Scroll list to end
