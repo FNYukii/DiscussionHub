@@ -16,6 +16,11 @@ struct ShowThreadView: View {
     @State var isScrolledToEnd = false
     @State var isShowScrollButton = true
     
+    init(showingThread: Thread) {
+        self.showingThread = showingThread
+        commentViewModel.startListeningComments(parentThreadId: showingThread.id)
+    }
+    
     var body: some View {
         
         ScrollViewReader {proxy in
@@ -93,12 +98,6 @@ struct ShowThreadView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            commentViewModel.startListeningComments(parentThreadId: showingThread.id)
-        }
-        .onDisappear {
-            commentViewModel.stopListeningComments()
         }
         
         .navigationBarTitle("", displayMode: .inline)
