@@ -23,31 +23,30 @@ class ThreadViewModel: ObservableObject {
                     print("HELLO! Fail! Error fetching snapshots: \(error!)")
                     return
                 }
+                print("HELLO! Success! Read documents in threads")
                 
-                // Print diff
+                // Update allThreads array
                 snapshot.documentChanges.forEach { diff in
                     if (diff.type == .added) {
-                        print("HELLO! New thread: \(diff.document.data())")
+                        print("HELLO! New thread: \(diff.document.documentID)")
+                        let id = diff.document.documentID
+                        let title = diff.document.get("title") as! String
+                        let authorId = diff.document.get("authorId") as! String
+                        let createdAt: Timestamp = diff.document.get("createdAt") as! Timestamp
+                        let createdDate = createdAt.dateValue()
+                        let commentCount = diff.document.get("commentCount") as! Int
+                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
+                        self.allThreads.append(newThread)
+                        
                     }
                     if (diff.type == .modified) {
-                        print("HELLO! Modified thread: \(diff.document.data())")
+                        print("HELLO! Modified thread: \(diff.document.documentID)")
                     }
                     if (diff.type == .removed) {
-                        print("HELLO! Removed thread: \(diff.document.data())")
+                        print("HELLO! Removed thread: \(diff.document.documentID)")
+                        let id = diff.document.documentID
+                        self.allThreads.removeAll(where: {$0.id == id})
                     }
-                }
-                
-                // Create threads array
-                self.allThreads = []
-                for document in snapshot.documents {
-                    let id = document.documentID
-                    let title = document.get("title") as! String
-                    let authorId = document.get("authorId") as! String
-                    let createdAt: Timestamp = document.get("createdAt") as! Timestamp
-                    let createdDate = createdAt.dateValue()
-                    let commentCount = document.get("commentCount") as! Int
-                    let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
-                    self.allThreads.append(newThread)
                 }
             }
     }

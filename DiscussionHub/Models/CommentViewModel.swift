@@ -21,22 +21,32 @@ class CommentViewModel: ObservableObject {
             .collection("comments")
             .order(by: "createdAt", descending: false)
             .addSnapshotListener {(snapshot, error) in
-                if let error = error {
-                    print("HELLO! Fail! Error getting documents: \(error)")
-                } else {
-                    print("HELLO! Success! Read comments in thread \(parentThreadId) ")
-                    
-                    // Create comments array
-                    self.allComments = []
-                    for document in snapshot!.documents {
-                        let id = document.documentID
-                        let order = document.get("order") as! Int
-                        let content = document.get("content") as! String
-                        let authorId = document.get("authorId") as! String
-                        let createdAt = document.get("createdAt") as! Timestamp
+                guard let snapshot = snapshot else {
+                    print("HELLO! Fail! Error fetching snapshots: \(error!)")
+                    return
+                }
+                print("HELLO! Success! Read documents in threads")
+                
+                // Update allComments array
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        print("HELLO! New comment: \(diff.document.documentID)")
+                        let id = diff.document.documentID
+                        let order = diff.document.get("order") as! Int
+                        let content = diff.document.get("content") as! String
+                        let authorId = diff.document.get("authorId") as! String
+                        let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
                         let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
                         self.allComments.append(newComment)
+                    }
+                    if (diff.type == .modified) {
+                        print("HELLO! Modified comment: \(diff.document.documentID)")
+                    }
+                    if (diff.type == .removed) {
+                        print("HELLO! Removed comment: \(diff.document.documentID)")
+                        let id = diff.document.documentID
+                        self.allComments.removeAll(where: {$0.id == id})
                     }
                 }
             }
