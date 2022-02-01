@@ -41,7 +41,7 @@ struct CommentMenu: View {
                 Button(action: {
                     // TODO: Mute user
                 }){
-                    Label("\(comment.authorId)さんをミュート", systemImage: "speaker.slash")
+                    Label("\(comment.authorDisplayname)さんをミュート", systemImage: "speaker.slash")
                 }
                 Button(action: {
                     // TODO: Report comment
