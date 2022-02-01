@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct CommentMenu: View {
     
     let parentThreadId: String
     let comment: Comment
     
-    let userId = UserDefaults.standard.string(forKey: "userId")
+    let userId = Auth.auth().currentUser?.uid ?? ""
     @State var isShowDeleteCommentConfirmation = false
     @State var selectedCommentId = ""
     

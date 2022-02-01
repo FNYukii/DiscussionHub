@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ThreadMenu: View {
     @Environment(\.dismiss) var dismiss
     
     let showingThread: Thread
-    
-    let userId = UserDefaults.standard.string(forKey: "userId")
+    let userId = Auth.auth().currentUser?.uid ?? ""
+
     @State var isShowDeleteThreadConfirmation = false
-    
+        
     var body: some View {
         Menu {
             Button(action: {

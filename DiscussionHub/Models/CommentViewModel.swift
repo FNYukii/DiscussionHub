@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class CommentViewModel: ObservableObject {
     
@@ -64,7 +65,7 @@ class CommentViewModel: ObservableObject {
                     
                     // Add new comment
                     let order = commentCount + 1
-                    let userId = UserDefaults.standard.string(forKey: "userId")!
+                    let userId = Auth.auth().currentUser?.uid ?? ""
                     var ref: DocumentReference? = nil
                     ref = db.collection("threads")
                         .document(parentThreadId)

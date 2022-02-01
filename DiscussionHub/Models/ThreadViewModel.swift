@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class ThreadViewModel: ObservableObject {
     
@@ -51,7 +52,10 @@ class ThreadViewModel: ObservableObject {
     }
     
     func addThread(title: String, firstCommentContent: String) {
-        let userId = UserDefaults.standard.string(forKey: "userId")!
+        // Get uid from Firebase Authentication
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        
+        // Add new thread
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("threads")
