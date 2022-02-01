@@ -37,7 +37,6 @@ class ThreadViewModel: ObservableObject {
                         let commentCount = diff.document.get("commentCount") as! Int
                         let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
                         self.allThreads.append(newThread)
-                        
                     }
                     if (diff.type == .modified) {
                         print("HELLO! Modified thread: \(diff.document.documentID)")
