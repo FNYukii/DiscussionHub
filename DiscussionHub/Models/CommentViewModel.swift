@@ -30,7 +30,6 @@ class CommentViewModel: ObservableObject {
                 // Update allComments array
                 snapshot.documentChanges.forEach { diff in
                     if (diff.type == .added) {
-                        print("HELLO! New comment: \(diff.document.documentID)")
                         let id = diff.document.documentID
                         let order = diff.document.get("order") as! Int
                         let content = diff.document.get("content") as! String
@@ -40,11 +39,7 @@ class CommentViewModel: ObservableObject {
                         let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
                         self.allComments.append(newComment)
                     }
-                    if (diff.type == .modified) {
-                        print("HELLO! Modified comment: \(diff.document.documentID)")
-                    }
                     if (diff.type == .removed) {
-                        print("HELLO! Removed comment: \(diff.document.documentID)")
                         let id = diff.document.documentID
                         self.allComments.removeAll(where: {$0.id == id})
                     }

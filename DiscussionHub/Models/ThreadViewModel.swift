@@ -28,7 +28,6 @@ class ThreadViewModel: ObservableObject {
                 // Update allThreads array
                 snapshot.documentChanges.forEach { diff in
                     if (diff.type == .added) {
-                        print("HELLO! New thread: \(diff.document.documentID)")
                         let id = diff.document.documentID
                         let title = diff.document.get("title") as! String
                         let authorId = diff.document.get("authorId") as! String
@@ -38,11 +37,7 @@ class ThreadViewModel: ObservableObject {
                         let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
                         self.allThreads.append(newThread)
                     }
-                    if (diff.type == .modified) {
-                        print("HELLO! Modified thread: \(diff.document.documentID)")
-                    }
                     if (diff.type == .removed) {
-                        print("HELLO! Removed thread: \(diff.document.documentID)")
                         let id = diff.document.documentID
                         self.allThreads.removeAll(where: {$0.id == id})
                     }
