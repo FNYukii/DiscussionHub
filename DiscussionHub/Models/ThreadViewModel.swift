@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import SwiftUI
 
 class ThreadViewModel: ObservableObject {
     
@@ -37,11 +38,15 @@ class ThreadViewModel: ObservableObject {
                         let createdDate = createdAt.dateValue()
                         let commentCount = diff.document.get("commentCount") as! Int
                         let newThread = Thread(id: id, title: title, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate, commentCount: commentCount)
-                        self.allThreads.append(newThread)
+                        withAnimation {
+                            self.allThreads.append(newThread)
+                        }
                     }
                     if (diff.type == .removed) {
                         let id = diff.document.documentID
-                        self.allThreads.removeAll(where: {$0.id == id})
+                        withAnimation {
+                            self.allThreads.removeAll(where: {$0.id == id})
+                        }
                     }
                 }
             }

@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import SwiftUI
 
 class CommentViewModel: ObservableObject {
     
@@ -39,11 +40,15 @@ class CommentViewModel: ObservableObject {
                         let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
                         let newComment = Comment(id: id, order: order, content: content, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate)
-                        self.allComments.append(newComment)
+                        withAnimation {
+                            self.allComments.append(newComment)
+                        }
                     }
                     if (diff.type == .removed) {
                         let id = diff.document.documentID
-                        self.allComments.removeAll(where: {$0.id == id})
+                        withAnimation {
+                            self.allComments.removeAll(where: {$0.id == id})
+                        }
                     }
                 }
             }
