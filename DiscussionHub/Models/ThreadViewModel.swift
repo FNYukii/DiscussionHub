@@ -19,23 +19,35 @@ class ThreadViewModel: ObservableObject {
         listener = db.collection("threads")
             .order(by: "createdAt", descending: true)
             .addSnapshotListener {(snapshot, error) in
-                if let error = error {
-                    print("HELLO! Fail! Error geting documents: \(error)")
-                } else {
-                    print("HELLO! Success! Read threads")
-                    
-                    // Create threads array
-                    self.allThreads = []
-                    for document in snapshot!.documents {
-                        let id = document.documentID
-                        let title = document.get("title") as! String
-                        let authorId = document.get("authorId") as! String
-                        let createdAt: Timestamp = document.get("createdAt") as! Timestamp
-                        let createdDate = createdAt.dateValue()
-                        let commentCount = document.get("commentCount") as! Int
-                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
-                        self.allThreads.append(newThread)
+                guard let snapshot = snapshot else {
+                    print("HELLO! Fail! Error fetching snapshots: \(error!)")
+                    return
+                }
+                
+                // Print diff
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        print("HELLO! New thread: \(diff.document.data())")
                     }
+                    if (diff.type == .modified) {
+                        print("HELLO! Modified thread: \(diff.document.data())")
+                    }
+                    if (diff.type == .removed) {
+                        print("HELLO! Removed thread: \(diff.document.data())")
+                    }
+                }
+                
+                // Create threads array
+                self.allThreads = []
+                for document in snapshot.documents {
+                    let id = document.documentID
+                    let title = document.get("title") as! String
+                    let authorId = document.get("authorId") as! String
+                    let createdAt: Timestamp = document.get("createdAt") as! Timestamp
+                    let createdDate = createdAt.dateValue()
+                    let commentCount = document.get("commentCount") as! Int
+                    let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
+                    self.allThreads.append(newThread)
                 }
             }
     }
