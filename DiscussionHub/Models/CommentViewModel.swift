@@ -35,9 +35,10 @@ class CommentViewModel: ObservableObject {
                         let order = diff.document.get("order") as! Int
                         let content = diff.document.get("content") as! String
                         let authorId = diff.document.get("authorId") as! String
+                        let authorDisplayname = diff.document.get("authorDisplayname") as! String
                         let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, createdAt: createdDate)
+                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate)
                         self.allComments.append(newComment)
                     }
                     if (diff.type == .removed) {
@@ -61,11 +62,13 @@ class CommentViewModel: ObservableObject {
             .getDocument { (document, error) in
                 if let document = document, document.exists {
                     print("HELLO! Success! Read document \(parentThreadId) from threads")
-                    let commentCount = document.get("commentCount") as! Int
                     
-                    // Add new comment
+                    let commentCount = document.get("commentCount") as! Int
                     let order = commentCount + 1
                     let userId = Auth.auth().currentUser?.uid ?? ""
+                    let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
+                    
+                    // Add new comment
                     var ref: DocumentReference? = nil
                     ref = db.collection("threads")
                         .document(parentThreadId)
@@ -74,6 +77,7 @@ class CommentViewModel: ObservableObject {
                             "order": order,
                             "content": content,
                             "authorId": userId,
+                            "authorDisplayname": userDisplayname,
                             "createdAt": Date()
                         ]) { error in
                             if let error = error {

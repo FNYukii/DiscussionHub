@@ -11,6 +11,7 @@ struct Thread: Identifiable {
     var id: String
     var title: String
     var authorId: String
+    var authorDisplayname: String
     var createdAt: Date
     var commentCount: Int
 }

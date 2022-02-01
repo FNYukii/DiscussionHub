@@ -32,10 +32,11 @@ class ThreadViewModel: ObservableObject {
                         let id = diff.document.documentID
                         let title = diff.document.get("title") as! String
                         let authorId = diff.document.get("authorId") as! String
+                        let authorDisplayname = diff.document.get("authorDisplayname") as! String
                         let createdAt: Timestamp = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
                         let commentCount = diff.document.get("commentCount") as! Int
-                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
+                        let newThread = Thread(id: id, title: title, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate, commentCount: commentCount)
                         self.allThreads.append(newThread)
                     }
                     if (diff.type == .removed) {
@@ -52,8 +53,9 @@ class ThreadViewModel: ObservableObject {
     }
     
     func addThread(title: String, firstCommentContent: String) {
-        // Get uid from Firebase Authentication
+        // User id and displayname
         let userId = Auth.auth().currentUser?.uid ?? ""
+        let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
         
         // Add new thread
         let db = Firestore.firestore()
@@ -62,6 +64,7 @@ class ThreadViewModel: ObservableObject {
             .addDocument(data: [
                 "title": title,
                 "authorId": userId,
+                "authorDisplayname": userDisplayname,
                 "createdAt": Date(),
                 "commentCount": 0
             ]) { error in

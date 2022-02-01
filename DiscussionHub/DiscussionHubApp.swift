@@ -29,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Auth.auth().signInAnonymously()
         
         // At the first startup, create userId
-        let userId = UserDefaults.standard.string(forKey: "userId")
-        if userId == nil {
+        let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname")
+        if userDisplayname == nil {
             let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            let newUserId = String((0..<10).map{ _ in characters.randomElement()! })
-            UserDefaults.standard.set(newUserId, forKey: "userId")
+            let newUserDisplayname = String((0..<10).map{ _ in characters.randomElement()! })
+            UserDefaults.standard.set(newUserDisplayname, forKey: "userDisplayname")
         }
         
         //TextEditorなどの背景色を非表示
