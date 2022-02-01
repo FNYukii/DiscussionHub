@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Log in
         Auth.auth().signInAnonymously()
         
-        // At the first startup, create userId
+        // At the first startup, create user displayname
         let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname")
         if userDisplayname == nil {
             let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
