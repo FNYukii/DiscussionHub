@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 @main
 struct DiscussionHubApp: App {
@@ -23,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Connect to Firebase
         FirebaseApp.configure()
+        
+        // Log in
+        Auth.auth().signInAnonymously()
         
         // At the first startup, create userId
         let userId = UserDefaults.standard.string(forKey: "userId")
