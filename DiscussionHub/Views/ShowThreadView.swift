@@ -34,15 +34,17 @@ struct ShowThreadView: View {
                     
                     AllCommentForeach(showingThread: showingThread, allComments: commentViewModel.allComments)
                     
-                    Color.clear
+                    Color.red
                         .frame(height: 1, alignment: .bottom)
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
                         .onAppear {
+                            print("HELLO! List bottom appeared")
                             isShowScrollButton = false
                             isScrolledToEnd = true
                         }
                         .onDisappear {
+                            print("HELLO! List bottom disappeared")
                             isScrolledToEnd = false
                         }
                         .id(9999)
