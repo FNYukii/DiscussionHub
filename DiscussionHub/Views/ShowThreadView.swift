@@ -34,7 +34,7 @@ struct ShowThreadView: View {
                     
                     AllCommentForeach(showingThread: showingThread, allComments: commentViewModel.allComments)
                     
-                    Color.red
+                    Color.clear
                         .frame(height: 1, alignment: .bottom)
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
