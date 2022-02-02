@@ -29,6 +29,9 @@ struct CreateCommentBar: View {
                     .opacity(inputStr.isEmpty ? 1 : 0)
                     .padding(.top, 8)
                     .padding(.leading, 5)
+                    .onTapGesture {
+                        isTextEditorFocused.wrappedValue = true
+                    }
             }
             .padding(.leading)
             .padding(.vertical, 8)
