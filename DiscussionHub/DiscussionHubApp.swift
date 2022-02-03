@@ -27,15 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Log in
         Auth.auth().signInAnonymously()
-        
-        // At the first startup, create user displayname
-        let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname")
-        if userDisplayname == nil {
-            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            let newUserDisplayname = String((0..<10).map{ _ in characters.randomElement()! })
-            UserDefaults.standard.set(newUserDisplayname, forKey: "userDisplayname")
-        }
-        
+                
         //TextEditorなどの背景色を非表示
         UITextView.appearance().backgroundColor = .clear
         

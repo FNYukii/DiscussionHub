@@ -58,9 +58,18 @@ class ThreadViewModel: ObservableObject {
     }
     
     func addThread(title: String, firstCommentContent: String) {
-        // User id and displayname
+        // User id
         let userId = Auth.auth().currentUser?.uid ?? ""
-        let userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
+        
+        // User displayname
+        let isUseRandomDisplayname = UserDefaults.standard.object(forKey: "isUseRandomDisplayname") as? Bool ?? true
+        var userDisplayname = ""
+        if isUseRandomDisplayname {
+            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            userDisplayname = String((0..<10).map{ _ in characters.randomElement()! })
+        } else {
+            userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
+        }
         
         // Add new thread
         let db = Firestore.firestore()

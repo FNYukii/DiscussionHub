@@ -22,6 +22,7 @@ struct AllCommentForeach: View {
                         .fontWeight(.semibold)
                     Text(comment.authorDisplayname)
                         .fontWeight(.semibold)
+                        .lineLimit(1)
                     Text("\(formatDate(inputDate: comment.createdAt))")
                         .foregroundColor(.secondary)
                         .lineLimit(1)
