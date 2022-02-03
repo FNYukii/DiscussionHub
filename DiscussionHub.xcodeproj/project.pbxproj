@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5427801F27AB9D5C006AD35F /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427801E27AB9D5C006AD35F /* UserSettingView.swift */; };
 		543BA4A027A414F200FF3B04 /* CreateCommentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */; };
 		543BA4A327A4242B00FF3B04 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 543BA4A227A4242B00FF3B04 /* Introspect */; };
 		543BA4A927A4450E00FF3B04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5427801E27AB9D5C006AD35F /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
 		543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentBar.swift; sourceTree = "<group>"; };
 		543BA4A827A4450E00FF3B04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMenu.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				5457135D27A21FA300B2D5CD /* ContentView.swift */,
+				5427801E27AB9D5C006AD35F /* UserSettingView.swift */,
 				54C2E77527A266A6001EFE27 /* ShowThreadView.swift */,
 				547047C527A250AF00D4A6BA /* CreateThreadView.swift */,
 			);
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5427801F27AB9D5C006AD35F /* UserSettingView.swift in Sources */,
 				54DB5DF127A27F52007089EC /* CommentViewModel.swift in Sources */,
 				547047C627A250AF00D4A6BA /* CreateThreadView.swift in Sources */,
 				5457135E27A21FA300B2D5CD /* ContentView.swift in Sources */,

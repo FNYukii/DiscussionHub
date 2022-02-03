@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var threadViewModel = ThreadViewModel()
-    @State var isShowSheet = false
+    @State var isShowCreateThreadSheet = false
+    @State var isShowUserSettingSheet = false
     
     init() {
         threadViewModel.startListeningThreads()
@@ -27,14 +28,18 @@ struct ContentView: View {
                 }
             }
             
-            .sheet(isPresented: $isShowSheet) {
+            .sheet(isPresented: $isShowCreateThreadSheet) {
                 CreateThreadView()
             }
+            .sheet(isPresented: $isShowUserSettingSheet) {
+                UserSettingView()
+            }
+            
             .navigationBarTitle("スレッド")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        isShowSheet.toggle()
+                        isShowCreateThreadSheet.toggle()
                     }){
                         Image(systemName: "plus.circle.fill")
                         Text("新規スレッド")
@@ -42,7 +47,7 @@ struct ContentView: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button(action: {
-                        //TODO: Open UserSettingView
+                        isShowUserSettingSheet.toggle()
                     }){
                         Image(systemName: "person.crop.circle")
                     }
