@@ -61,16 +61,6 @@ class ThreadViewModel: ObservableObject {
         // User id
         let userId = Auth.auth().currentUser?.uid ?? ""
         
-        // User displayname
-        var userDisplayname = ""
-        let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
-        if isUseHandleName {
-            userDisplayname = UserDefaults.standard.string(forKey: "handleName") ?? ""
-        } else {
-            let crypto = Crypto()
-            userDisplayname = crypto.toCaesarCipher(from: userId, wordCount: 10)
-        }
-        
         // Add new thread
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
@@ -78,7 +68,6 @@ class ThreadViewModel: ObservableObject {
             .addDocument(data: [
                 "title": title,
                 "authorId": userId,
-                "authorDisplayname": userDisplayname,
                 "createdAt": Date(),
                 "commentCount": 0
             ]) { error in
