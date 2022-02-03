@@ -40,6 +40,13 @@ struct ContentView: View {
                         Text("新規スレッド")
                     }
                 }
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button(action: {
+                        //TODO: Open UserSettingView
+                    }){
+                        Image(systemName: "person.crop.circle")
+                    }
+                }
             }
         }
     }
