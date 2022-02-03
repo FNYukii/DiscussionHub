@@ -11,18 +11,18 @@ struct UserSettingView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State var displayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
-    @State var isUseRandomDisplayname = UserDefaults.standard.object(forKey: "isUseRandomDisplayname") as? Bool ?? true
+    @State var handleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
+    @State var isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
 
     var body: some View {
         NavigationView {
             Form {
                 
-                Section(header: Text("ディスプレイネーム設定")) {
-                    TextField("ディスプレイネーム", text: $displayname)
-                        .disabled(isUseRandomDisplayname)
-                        .foregroundColor(isUseRandomDisplayname ? .secondary : .primary)
-                    Toggle("投稿ごとにランダムな文字列を使用する", isOn: $isUseRandomDisplayname)
+                Section(header: Text("表示名")) {
+                    Toggle("固定されたハンドルネームを使用する", isOn: $isUseHandleName.animation())
+                    if isUseHandleName {
+                        TextField("ハンドルネーム", text: $handleName)
+                    }
                 }
             }
             .navigationBarTitle("ユーザー設定", displayMode: .inline)
@@ -35,14 +35,14 @@ struct UserSettingView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         // Save settings
-                        UserDefaults.standard.set(displayname, forKey: "userDisplayname")
-                        UserDefaults.standard.set(isUseRandomDisplayname, forKey: "isUseRandomDisplayname")
+                        UserDefaults.standard.set(handleName, forKey: "userDisplayname")
+                        UserDefaults.standard.set(isUseHandleName, forKey: "isUseRandomDisplayname")
                         dismiss()
                     }){
                         Text("完了")
                             .fontWeight(.bold)
                     }
-                    .disabled(!isUseRandomDisplayname && displayname.isEmpty)
+                    .disabled(isUseHandleName && handleName.isEmpty)
                 }
             }
         }
