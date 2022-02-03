@@ -35,8 +35,8 @@ struct UserSettingView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         // Save settings
-                        UserDefaults.standard.set(handleName, forKey: "userDisplayname")
-                        UserDefaults.standard.set(isUseHandleName, forKey: "isUseRandomDisplayname")
+                        UserDefaults.standard.set(handleName, forKey: "handleName")
+                        UserDefaults.standard.set(isUseHandleName, forKey: "isUseHandleName")
                         dismiss()
                     }){
                         Text("完了")

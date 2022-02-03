@@ -62,8 +62,14 @@ class ThreadViewModel: ObservableObject {
         let userId = Auth.auth().currentUser?.uid ?? ""
         
         // User displayname
-        let crypto = Crypto()
-        let userDisplayname = crypto.toCaesarCipher(from: userId, wordCount: 10)
+        var userDisplayname = ""
+        let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
+        if isUseHandleName {
+            userDisplayname = UserDefaults.standard.string(forKey: "handleName") ?? ""
+        } else {
+            let crypto = Crypto()
+            userDisplayname = crypto.toCaesarCipher(from: userId, wordCount: 10)
+        }
         
         // Add new thread
         let db = Firestore.firestore()
