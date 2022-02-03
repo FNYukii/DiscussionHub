@@ -62,14 +62,8 @@ class ThreadViewModel: ObservableObject {
         let userId = Auth.auth().currentUser?.uid ?? ""
         
         // User displayname
-        let isUseRandomDisplayname = UserDefaults.standard.object(forKey: "isUseRandomDisplayname") as? Bool ?? true
-        var userDisplayname = ""
-        if isUseRandomDisplayname {
-            let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            userDisplayname = String((0..<10).map{ _ in characters.randomElement()! })
-        } else {
-            userDisplayname = UserDefaults.standard.string(forKey: "userDisplayname") ?? ""
-        }
+        let crypto = Crypto()
+        let userDisplayname = crypto.toCaesarCipher(from: userId, wordCount: 10)
         
         // Add new thread
         let db = Firestore.firestore()
