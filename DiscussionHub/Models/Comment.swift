@@ -12,6 +12,7 @@ struct Comment: Identifiable, Hashable {
     var order: Int
     var content :String
     var authorId: String
-    var authorDisplayname: String
+    var authorDailyId: String
+    var authorDisplayName: String
     var createdAt: Date
 }

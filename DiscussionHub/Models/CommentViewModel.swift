@@ -36,10 +36,11 @@ class CommentViewModel: ObservableObject {
                         let order = diff.document.get("order") as! Int
                         let content = diff.document.get("content") as! String
                         let authorId = diff.document.get("authorId") as! String
-                        let authorDisplayname = diff.document.get("authorDisplayname") as! String
+                        let authorDailyId = diff.document.get("authorDailyId") as! String
+                        let authorDisplayName = diff.document.get("authorDisplayName") as! String
                         let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate)
+                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, authorDailyId: authorDailyId, authorDisplayName: authorDisplayName, createdAt: createdDate)
                         withAnimation {
                             self.allComments.append(newComment)
                         }
@@ -68,18 +69,22 @@ class CommentViewModel: ObservableObject {
                 if let document = document, document.exists {
                     print("HELLO! Success! Read document \(parentThreadId) from threads")
                     
+                    // Order
                     let commentCount = document.get("commentCount") as! Int
                     let order = commentCount + 1
-                    let userId = Auth.auth().currentUser?.uid ?? ""
                     
-                    // User displayname
-                    var userDisplayname = ""
+                    // author id
+                    let authorId = Auth.auth().currentUser?.uid ?? ""
+                    
+                    // author daily id
+                    let crypto = Crypto()
+                    let authorDailyId = crypto.toCaesarCipher(from: authorId, wordCount: 10)
+                    
+                    // author display name
+                    var authorDisplayName = "名無し"
                     let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
                     if isUseHandleName {
-                        userDisplayname = UserDefaults.standard.string(forKey: "handleName") ?? ""
-                    } else {
-                        let crypto = Crypto()
-                        userDisplayname = crypto.toCaesarCipher(from: userId, wordCount: 10)
+                        authorDisplayName = UserDefaults.standard.string(forKey: "handleName") ?? ""
                     }
                     
                     // Add new comment
@@ -90,8 +95,9 @@ class CommentViewModel: ObservableObject {
                         .addDocument(data: [
                             "order": order,
                             "content": content,
-                            "authorId": userId,
-                            "authorDisplayname": userDisplayname,
+                            "authorId": authorId,
+                            "authorDailyId": authorDailyId,
+                            "authorDisplayName": authorDisplayName,
                             "createdAt": Date()
                         ]) { error in
                             if let error = error {

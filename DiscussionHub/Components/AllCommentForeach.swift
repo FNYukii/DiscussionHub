@@ -20,8 +20,11 @@ struct AllCommentForeach: View {
                 HStack() {
                     Text("\(comment.order)")
                         .fontWeight(.semibold)
-                    Text(comment.authorDisplayname)
+                    Text(comment.authorDisplayName)
                         .fontWeight(.semibold)
+                        .lineLimit(1)
+                    Text("@\(comment.authorDailyId)")
+                        .foregroundColor(.secondary)
                         .lineLimit(1)
                     Text("\(formatDate(inputDate: comment.createdAt))")
                         .foregroundColor(.secondary)

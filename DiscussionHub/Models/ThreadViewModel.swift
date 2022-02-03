@@ -33,11 +33,10 @@ class ThreadViewModel: ObservableObject {
                         let id = diff.document.documentID
                         let title = diff.document.get("title") as! String
                         let authorId = diff.document.get("authorId") as! String
-                        let authorDisplayname = diff.document.get("authorDisplayname") as! String
                         let createdAt: Timestamp = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
                         let commentCount = diff.document.get("commentCount") as! Int
-                        let newThread = Thread(id: id, title: title, authorId: authorId, authorDisplayname: authorDisplayname, createdAt: createdDate, commentCount: commentCount)
+                        let newThread = Thread(id: id, title: title, authorId: authorId, createdAt: createdDate, commentCount: commentCount)
                         withAnimation {
                             self.allThreads.append(newThread)
                         }
