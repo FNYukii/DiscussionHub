@@ -40,16 +40,16 @@ class Crypto {
     
     private func toEncryptedCharCodes(from: [Int], key: Int) -> [Int] {
         let charCodes = from
-        let badNums01 = [58, 59, 60, 61, 62, 63, 64]
-        let badNums02 = [91, 92, 93, 94, 95, 96]
+        let badCharCodes01 = [58, 59, 60, 61, 62, 63, 64]
+        let badCharCodes02 = [91, 92, 93, 94, 95, 96]
         var encryptedCharCodes: [Int] = []
         for index in 0..<charCodes.count {
             let charCode: Int = charCodes[index]
             var encryptedCharCode: Int = ((charCode + key) % 74) + 48
-            if badNums01.contains(encryptedCharCode) {
+            if badCharCodes01.contains(encryptedCharCode) {
                 encryptedCharCode += 7
             }
-            if badNums02.contains(encryptedCharCode) {
+            if badCharCodes02.contains(encryptedCharCode) {
                 encryptedCharCode += 6
             }
             encryptedCharCodes.append(encryptedCharCode)
