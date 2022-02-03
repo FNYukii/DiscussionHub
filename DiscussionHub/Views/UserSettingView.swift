@@ -42,6 +42,7 @@ struct UserSettingView: View {
                         Text("完了")
                             .fontWeight(.bold)
                     }
+                    .disabled(!isUseRandomDisplayname && displayname.isEmpty)
                 }
             }
         }
