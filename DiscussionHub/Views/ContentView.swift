@@ -8,20 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var threadViewModel = ThreadViewModel()
+    @State var isShowSheet = false
+    
+    init() {
+        threadViewModel.startListeningThreads()
+    }
+    
     var body: some View {
-        TabView {
-            FirstView()
-                .tabItem {
-                    Label("スレッド", systemImage: "rectangle.portrait.on.rectangle.portrait")
+        
+        NavigationView {
+            List {
+                ForEach(threadViewModel.allThreads) {thread in
+                    NavigationLink(destination: ShowThreadView(showingThread: thread)) {
+                        Text(thread.title)
+                    }
                 }
-            SecondView()
-                .tabItem {
-                    Label("お気に入り", systemImage: "star")
+            }
+            
+            .sheet(isPresented: $isShowSheet) {
+                CreateThreadView()
+            }
+            .navigationBarTitle("スレッド")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowSheet.toggle()
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                        Text("新規スレッド")
+                    }
                 }
-            ThirdView()
-                .tabItem {
-                    Label("通知", systemImage: "bell")
-                }
+            }
         }
     }
 }
