@@ -24,7 +24,6 @@ class Crypto {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         let dateNum: Int = Int(dateFormatter.string(from: Date()))!
-        print("HELLO! dateNum: \(dateNum)")
         return dateNum // 20220203
     }
     
@@ -36,7 +35,6 @@ class Crypto {
             let charCode: Int = Int(UnicodeScalar(oneChar)!.value)
             charCodes.append(charCode)
         }
-        print("HELLO! charCodes: \(charCodes)")
         return charCodes // [119, 74, 81, 103, ...]
     }
     
@@ -56,7 +54,6 @@ class Crypto {
             }
             encryptedCharCodes.append(encryptedCharCode)
         }
-        print("HELLO! encryptedCharCodes: \(encryptedCharCodes)")
         return encryptedCharCodes // [78, 56, 49, 91, ...]
     }
     
@@ -70,7 +67,6 @@ class Crypto {
             let char: Character = Character(charCodeScalar)
             outputStr.append(char)
         }
-        print("HELLO! outputStr: \(outputStr)")
         return outputStr // "wA4jX3mNyL"
     }
 }
