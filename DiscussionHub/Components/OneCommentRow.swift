@@ -48,6 +48,9 @@ struct OneCommentRow: View {
         let inputDate = from
         
         let secondDiff: Int = (Calendar.current.dateComponents([.second], from: inputDate, to: Date())).second!
+        if secondDiff < 1 {
+            return "たった今"
+        }
         if secondDiff < 60 {
             return "\(secondDiff)秒前"
         }
