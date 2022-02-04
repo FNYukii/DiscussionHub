@@ -20,9 +20,11 @@ struct ShowCommentView: View {
                 HStack() {
                     Text("\(showingComment.order)")
                         .fontWeight(.semibold)
-                    Text(showingComment.authorDisplayName)
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
+                    if !showingComment.authorDisplayName.isEmpty {
+                        Text(showingComment.authorDisplayName)
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                    }
                     Text("@\(showingComment.authorDailyId)")
                         .foregroundColor(.secondary)
                         .lineLimit(1)
