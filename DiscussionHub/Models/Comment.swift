@@ -8,12 +8,12 @@
 import Foundation
 
 struct Comment: Identifiable, Hashable {
-    var id: String
-    var parentThreadId: String
-    var order: Int
-    var content :String
-    var authorId: String
-    var authorDailyId: String
-    var authorDisplayName: String
-    var createdAt: Date
+    let id: String
+    let parentThreadId: String
+    let order: Int
+    let content :String
+    let authorId: String
+    let authorDailyId: String
+    let authorDisplayName: String
+    let createdAt: Date
 }

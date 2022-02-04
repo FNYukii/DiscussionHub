@@ -8,9 +8,9 @@
 import Foundation
 
 struct Thread: Identifiable {
-    var id: String
-    var title: String
-    var authorId: String
-    var createdAt: Date
-    var commentCount: Int
+    let id: String
+    let title: String
+    let authorId: String
+    let createdAt: Date
+    let commentCount: Int
 }
