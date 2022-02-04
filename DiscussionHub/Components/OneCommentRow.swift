@@ -7,42 +7,40 @@
 
 import SwiftUI
 
-struct AllCommentForeach: View {
+struct OneCommentRow: View {
     
-    let showingThread: Thread
-    let allComments: [Comment]
+    let parentThread: Thread
+    let showingComment: Comment
     
     var body: some View {
-        ForEach(allComments, id: \.self) {comment in
-            VStack(alignment: .leading, spacing: 0) {
-                Divider()
-                    .padding(.bottom, 6)
-                HStack() {
-                    Text("\(comment.order)")
-                        .fontWeight(.semibold)
-                    Text(comment.authorDisplayName)
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                    Text("@\(comment.authorDailyId)")
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                    Text("\(toHowManyAgo(from: comment.createdAt))")
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                    Spacer()
-                    CommentMenu(parentThreadId: showingThread.id, comment: comment)
-                }
-                .padding(.horizontal, 12)
-                
-                Text(comment.content)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, 6)
-                    .padding(.horizontal, 12)
+        VStack(alignment: .leading, spacing: 0) {
+            Divider()
+                .padding(.bottom, 6)
+            HStack() {
+                Text("\(showingComment.order)")
+                    .fontWeight(.semibold)
+                Text(showingComment.authorDisplayName)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+                Text("@\(showingComment.authorDailyId)")
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                Text("\(toHowManyAgo(from: showingComment.createdAt))")
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                Spacer()
+                CommentMenu(parentThreadId: parentThread.id, comment: showingComment)
             }
-            .listRowSeparator(.hidden)
-            .listRowInsets(EdgeInsets())
-            .padding(6)
+            .padding(.horizontal, 12)
+            
+            Text(showingComment.content)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 6)
+                .padding(.horizontal, 12)
         }
+        .listRowSeparator(.hidden)
+        .listRowInsets(EdgeInsets())
+        .padding(6)
     }
     
     private func formatDate(inputDate: Date) -> String {
