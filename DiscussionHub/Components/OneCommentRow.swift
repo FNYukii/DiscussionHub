@@ -16,20 +16,26 @@ struct OneCommentRow: View {
         VStack(alignment: .leading, spacing: 0) {
             Divider()
                 .padding(.bottom, 6)
-            HStack() {
+            HStack(spacing: 0) {
                 Text("\(showingComment.order)")
                     .fontWeight(.semibold)
                 if !showingComment.authorHandleName.isEmpty {
-                    Text(showingComment.authorHandleName)
+                    Text(toOnlyHandleName(from: showingComment.authorHandleName))
                         .fontWeight(.semibold)
+                        .lineLimit(1)
+                        .padding(.leading, 8)
+                    Text(toOnlyHandleNameTag(from: showingComment.authorHandleName))
+                        .foregroundColor(.secondary)
                         .lineLimit(1)
                 }
                 Text("@\(showingComment.authorDailyId)")
                     .foregroundColor(.secondary)
                     .lineLimit(1)
+                    .padding(.leading, 8)
                 Text("\(toHowManyAgo(from: showingComment.createdAt))")
                     .foregroundColor(.secondary)
                     .lineLimit(1)
+                    .padding(.leading, 8)
                 Spacer()
                 CommentMenu(showingComment: showingComment)
             }
@@ -44,6 +50,17 @@ struct OneCommentRow: View {
         .listRowInsets(EdgeInsets())
         .padding(6)
         
+    }
+    
+    private func toOnlyHandleName(from: String) -> String {
+        var handleName = from
+        let onlyHandleNameTag = toOnlyHandleNameTag(from: handleName)
+        handleName.removeAll(where: {onlyHandleNameTag.contains($0)})
+        return handleName
+    }
+    
+    private func toOnlyHandleNameTag(from: String) -> String {
+        return String(from.suffix(5))
     }
     
     private func toHowManyAgo(from: Date) -> String {
