@@ -33,7 +33,7 @@ struct ShowThreadView: View {
                         .fontWeight(.bold)
                     
                     ForEach(commentViewModel.allComments, id: \.self) {comment in
-                        OneCommentRow(parentThread: showingThread, showingComment: comment)
+                        OneCommentRow(showingComment: comment)
                     }
                     
                     Color.clear

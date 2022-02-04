@@ -10,8 +10,7 @@ import FirebaseAuth
 
 struct CommentMenu: View {
     
-    let parentThreadId: String
-    let comment: Comment
+    let showingComment: Comment
     
     let userId = Auth.auth().currentUser?.uid ?? ""
     @State var isShowDeleteCommentConfirmation = false
@@ -29,19 +28,19 @@ struct CommentMenu: View {
             }){
                 Label("このコメントに返信", systemImage: "arrowshape.turn.up.left")
             }
-            if comment.authorId == userId && comment.order != 1{
+            if showingComment.authorId == userId && showingComment.order != 1{
                 Button(role: .destructive) {
-                    selectedCommentId = comment.id
+                    selectedCommentId = showingComment.id
                     isShowDeleteCommentConfirmation.toggle()
                 } label: {
                     Label("コメントを削除", systemImage: "trash")
                 }
             }
-            if comment.authorId != userId {
+            if showingComment.authorId != userId {
                 Button(action: {
                     // TODO: Mute user
                 }){
-                    Label("\(comment.authorDailyId)さんをミュート", systemImage: "speaker.slash")
+                    Label("\(showingComment.authorDailyId)さんをミュート", systemImage: "speaker.slash")
                 }
                 Button(action: {
                     // TODO: Report comment
@@ -58,7 +57,7 @@ struct CommentMenu: View {
         .confirmationDialog("", isPresented: $isShowDeleteCommentConfirmation, titleVisibility: .hidden) {
             Button("コメントを削除", role: .destructive) {
                 let commentViewModel = CommentViewModel()
-                commentViewModel.deleteComment(parentThreadId: parentThreadId, commentId: selectedCommentId)
+                commentViewModel.deleteComment(parentThreadId: showingComment.parentThreadId, commentId: selectedCommentId)
             }
         } message: {
             Text("このコメントを削除してもよろしいですか?")

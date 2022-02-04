@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OneCommentRow: View {
     
-    let parentThread: Thread
     let showingComment: Comment
     
     var body: some View {
@@ -29,7 +28,7 @@ struct OneCommentRow: View {
                     .foregroundColor(.secondary)
                     .lineLimit(1)
                 Spacer()
-                CommentMenu(parentThreadId: parentThread.id, comment: showingComment)
+                CommentMenu(showingComment: showingComment)
             }
             .padding(.horizontal, 12)
             

@@ -40,7 +40,7 @@ class CommentViewModel: ObservableObject {
                         let authorDisplayName = diff.document.get("authorDisplayName") as! String
                         let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, order: order, content: content, authorId: authorId, authorDailyId: authorDailyId, authorDisplayName: authorDisplayName, createdAt: createdDate)
+                        let newComment = Comment(id: id, parentThreadId: parentThreadId, order: order, content: content, authorId: authorId, authorDailyId: authorDailyId, authorDisplayName: authorDisplayName, createdAt: createdDate)
                         withAnimation {
                             self.allComments.append(newComment)
                         }
