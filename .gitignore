@@ -5,7 +5,7 @@
 ### Xcode ###
 ## User settings
 xcuserdata/
-GoogleService-Info.plist
+GoogleService-Info
 
 ## Xcode 8 and earlier
 *.xcscmblueprint
