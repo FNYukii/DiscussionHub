@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct UserSettingView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State var handleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
     @State var isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
+    @State var handleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
+    let handleNameTag: String
+    
+    init() {
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        let crypto = Crypto()
+        self.handleNameTag = crypto.toCaesarCipher(from: userId, key: 3, wordCount: 4)
+    }
 
     var body: some View {
         NavigationView {
@@ -21,7 +29,14 @@ struct UserSettingView: View {
                 Section {
                     Toggle("固定されたハンドルネームを使用する", isOn: $isUseHandleName.animation())
                     if isUseHandleName {
-                        TextField("ハンドルネーム", text: $handleName)
+                        
+                        HStack {
+                            TextField("ハンドルネーム", text: $handleName)
+                                .submitLabel(.done)
+                            Divider()
+                            Text("#\(handleNameTag)")
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }

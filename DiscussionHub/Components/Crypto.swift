@@ -9,22 +9,14 @@ import Foundation
 
 class Crypto {
     
-    func toCaesarCipher(from: String, wordCount: Int) -> String {
+    func toCaesarCipher(from: String, key: Int, wordCount: Int) -> String {
         let inputStr = from
         let prefixedInputStr = String(inputStr.prefix(wordCount))
-        let key = dateNum()
         
         let charCodes = toCharCodes(from: prefixedInputStr)
         let encryptedCharCodes = toEncryptedCharCodes(from: charCodes, key: key)
         let outputStr = toString(from: encryptedCharCodes)
         return outputStr
-    }
-    
-    private func dateNum() -> Int {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let dateNum: Int = Int(dateFormatter.string(from: Date()))!
-        return dateNum // 20220203
     }
     
     private func toCharCodes(from: String) -> [Int] {

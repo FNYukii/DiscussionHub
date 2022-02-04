@@ -77,14 +77,20 @@ class CommentViewModel: ObservableObject {
                     let authorId = Auth.auth().currentUser?.uid ?? ""
                     
                     // author daily id
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyyMMdd"
+                    let dateNum: Int = Int(dateFormatter.string(from: Date()))!
                     let crypto = Crypto()
-                    let authorDailyId = crypto.toCaesarCipher(from: authorId, wordCount: 10)
+                    let authorDailyId = crypto.toCaesarCipher(from: authorId, key: dateNum, wordCount: 10)
                     
                     // author handle name
                     var authorHandleName = ""
                     let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
                     if isUseHandleName {
-                        authorHandleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
+                        let handleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
+                        let crypto = Crypto()
+                        let handleNameTag = crypto.toCaesarCipher(from: authorId, key: 3, wordCount: 4)
+                        authorHandleName = handleName + "#" + handleNameTag
                     }
                     
                     // Add new comment
