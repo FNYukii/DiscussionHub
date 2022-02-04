@@ -81,7 +81,7 @@ class CommentViewModel: ObservableObject {
                     let authorDailyId = crypto.toCaesarCipher(from: authorId, wordCount: 10)
                     
                     // author display name
-                    var authorDisplayName = "名無し"
+                    var authorDisplayName = "匿名"
                     let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
                     if isUseHandleName {
                         authorDisplayName = UserDefaults.standard.string(forKey: "handleName") ?? ""
