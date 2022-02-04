@@ -37,10 +37,10 @@ class CommentViewModel: ObservableObject {
                         let content = diff.document.get("content") as! String
                         let authorId = diff.document.get("authorId") as! String
                         let authorDailyId = diff.document.get("authorDailyId") as! String
-                        let authorDisplayName = diff.document.get("authorDisplayName") as! String
+                        let authorHandleName = diff.document.get("authorHandleName") as! String
                         let createdAt = diff.document.get("createdAt") as! Timestamp
                         let createdDate = createdAt.dateValue()
-                        let newComment = Comment(id: id, parentThreadId: parentThreadId, order: order, content: content, authorId: authorId, authorDailyId: authorDailyId, authorDisplayName: authorDisplayName, createdAt: createdDate)
+                        let newComment = Comment(id: id, parentThreadId: parentThreadId, order: order, content: content, authorId: authorId, authorDailyId: authorDailyId, authorHandleName: authorHandleName, createdAt: createdDate)
                         withAnimation {
                             self.allComments.append(newComment)
                         }
@@ -80,11 +80,11 @@ class CommentViewModel: ObservableObject {
                     let crypto = Crypto()
                     let authorDailyId = crypto.toCaesarCipher(from: authorId, wordCount: 10)
                     
-                    // author display name
-                    var authorDisplayName = ""
+                    // author handle name
+                    var authorHandleName = ""
                     let isUseHandleName = UserDefaults.standard.bool(forKey: "isUseHandleName")
                     if isUseHandleName {
-                        authorDisplayName = UserDefaults.standard.string(forKey: "handleName") ?? ""
+                        authorHandleName = UserDefaults.standard.string(forKey: "handleName") ?? ""
                     }
                     
                     // Add new comment
@@ -97,7 +97,7 @@ class CommentViewModel: ObservableObject {
                             "content": content,
                             "authorId": authorId,
                             "authorDailyId": authorDailyId,
-                            "authorDisplayName": authorDisplayName,
+                            "authorHandleName": authorHandleName,
                             "createdAt": Date()
                         ]) { error in
                             if let error = error {

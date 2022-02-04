@@ -18,7 +18,7 @@ struct UserSettingView: View {
         NavigationView {
             Form {
                 
-                Section(header: Text("表示名")) {
+                Section {
                     Toggle("固定されたハンドルネームを使用する", isOn: $isUseHandleName.animation())
                     if isUseHandleName {
                         TextField("ハンドルネーム", text: $handleName)

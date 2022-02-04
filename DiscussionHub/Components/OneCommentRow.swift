@@ -19,8 +19,8 @@ struct OneCommentRow: View {
             HStack() {
                 Text("\(showingComment.order)")
                     .fontWeight(.semibold)
-                if !showingComment.authorDisplayName.isEmpty {
-                    Text(showingComment.authorDisplayName)
+                if !showingComment.authorHandleName.isEmpty {
+                    Text(showingComment.authorHandleName)
                         .fontWeight(.semibold)
                         .lineLimit(1)
                 }

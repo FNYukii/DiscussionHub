@@ -14,6 +14,6 @@ struct Comment: Identifiable, Hashable {
     let content :String
     let authorId: String
     let authorDailyId: String
-    let authorDisplayName: String
+    let authorHandleName: String
     let createdAt: Date
 }
