@@ -16,26 +16,25 @@ struct OneCommentRow: View {
         VStack(alignment: .leading, spacing: 0) {
             Divider()
                 .padding(.bottom, 6)
-            HStack(spacing: 0) {
+            HStack {
                 Text("\(showingComment.order)")
                     .fontWeight(.semibold)
                 if !showingComment.authorHandleName.isEmpty {
-                    Text(toOnlyHandleName(from: showingComment.authorHandleName))
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                        .padding(.leading, 8)
-                    Text(toOnlyHandleNameTag(from: showingComment.authorHandleName))
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
+                    HStack(spacing: 0) {
+                        Text(toOnlyHandleName(from: showingComment.authorHandleName))
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                        Text(toOnlyHandleNameTag(from: showingComment.authorHandleName))
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                    }
                 }
                 Text("@\(showingComment.authorDailyId)")
                     .foregroundColor(.secondary)
                     .lineLimit(1)
-                    .padding(.leading, 8)
                 Text("\(toHowManyAgo(from: showingComment.createdAt))")
                     .foregroundColor(.secondary)
                     .lineLimit(1)
-                    .padding(.leading, 8)
                 Spacer()
                 CommentMenu(showingComment: showingComment)
             }
