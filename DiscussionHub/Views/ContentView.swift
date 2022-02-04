@@ -50,6 +50,7 @@ struct ContentView: View {
                         isShowUserSettingSheet.toggle()
                     }){
                         Image(systemName: "person.crop.circle")
+                            .font(.title3)
                     }
                 }
             }
