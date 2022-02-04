@@ -37,7 +37,14 @@ class Crypto {
         var encryptedCharCodes: [Int] = []
         for index in 0..<charCodes.count {
             let charCode: Int = charCodes[index]
-            var encryptedCharCode: Int = ((charCode + key) % 74) + 48
+            
+            // keyの数だけ文字コードを後ろにずらす
+            var encryptedCharCode: Int = charCode + key
+            
+            // 文字コードが48...122の範囲に収まるように調整
+            encryptedCharCode = (encryptedCharCode % 74) + 48
+                
+            // ;や]などの記号の文字コードだった場合も調整
             if badCharCodes01.contains(encryptedCharCode) {
                 encryptedCharCode += 7
             }
