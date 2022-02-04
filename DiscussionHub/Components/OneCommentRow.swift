@@ -12,6 +12,7 @@ struct OneCommentRow: View {
     let showingComment: Comment
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 0) {
             Divider()
                 .padding(.bottom, 6)
@@ -40,12 +41,7 @@ struct OneCommentRow: View {
         .listRowSeparator(.hidden)
         .listRowInsets(EdgeInsets())
         .padding(6)
-    }
-    
-    private func formatDate(inputDate: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd E HH:mm:ss"
-        return dateFormatter.string(from: inputDate)
+        
     }
     
     private func toHowManyAgo(from: Date) -> String {
