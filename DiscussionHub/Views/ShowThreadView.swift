@@ -57,7 +57,7 @@ struct ShowThreadView: View {
                     isTextEditorFocused = false
                 }
                 .padding(.bottom, 76)
-
+                
                 CreateCommentBar(parentThreadId: showingThread.id, isTextEditorFocused: $isTextEditorFocused)
                 
                 // Scroll button

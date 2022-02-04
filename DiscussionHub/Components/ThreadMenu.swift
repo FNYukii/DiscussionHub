@@ -13,9 +13,9 @@ struct ThreadMenu: View {
     
     let showingThread: Thread
     let userId = Auth.auth().currentUser?.uid ?? ""
-
+    
     @State var isShowDeleteThreadConfirmation = false
-        
+    
     var body: some View {
         Menu {
             Button(action: {

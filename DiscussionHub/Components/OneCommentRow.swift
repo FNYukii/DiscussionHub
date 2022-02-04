@@ -92,7 +92,7 @@ struct OneCommentRow: View {
         if monthDiff < 12 {
             return "\(monthDiff)ヶ月前"
         }
-
+        
         let yearDiff = (Calendar.current.dateComponents([.year], from: inputDate, to: Date())).year!
         return "\(yearDiff)年前"
     }

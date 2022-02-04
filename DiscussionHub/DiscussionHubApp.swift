@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Log in
         Auth.auth().signInAnonymously()
-                
+        
         //TextEditorなどの背景色を非表示
         UITextView.appearance().backgroundColor = .clear
         

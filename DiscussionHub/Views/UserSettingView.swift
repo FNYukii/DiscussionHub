@@ -21,7 +21,7 @@ struct UserSettingView: View {
         let crypto = Crypto()
         self.handleNameTag = crypto.toCaesarCipher(from: userId, key: 3, wordCount: 4)
     }
-
+    
     var body: some View {
         NavigationView {
             Form {
