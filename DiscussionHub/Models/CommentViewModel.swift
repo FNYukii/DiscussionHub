@@ -60,7 +60,7 @@ class CommentViewModel: ObservableObject {
         listener?.remove()
     }
     
-    func addComment(parentThreadId: String, content: String) {
+    static func addComment(parentThreadId: String, content: String) {
         // Get parent thread commentCount
         let db = Firestore.firestore()
         db.collection("threads")
@@ -112,8 +112,7 @@ class CommentViewModel: ObservableObject {
                                 print("HELLO! Success! Added new document \(ref!.documentID) to comments")
                                 
                                 // Increment commentCount in parent thread
-                                let threadViewModel = ThreadViewModel()
-                                threadViewModel.incrementCommentCount(threadId: parentThreadId)
+                                ThreadViewModel.incrementCommentCount(threadId: parentThreadId)
                             }
                         }
                     
@@ -123,7 +122,7 @@ class CommentViewModel: ObservableObject {
             }
     }
     
-    func deleteComment(parentThreadId: String, commentId: String) {
+    static func deleteComment(parentThreadId: String, commentId: String) {
         let db = Firestore.firestore()
         db.collection("threads")
             .document(parentThreadId)

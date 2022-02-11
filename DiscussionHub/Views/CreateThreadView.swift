@@ -48,8 +48,7 @@ struct CreateThreadView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        let threadViewModel = ThreadViewModel()
-                        threadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
+                        ThreadViewModel.addThread(title: title, firstCommentContent: firstCommentContent)
                         dismiss()
                     }){
                         Text("作成")

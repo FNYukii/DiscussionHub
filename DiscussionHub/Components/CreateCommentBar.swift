@@ -38,8 +38,7 @@ struct CreateCommentBar: View {
             
             // Send button
             Button(action: {
-                let commentViewModel = CommentViewModel()
-                commentViewModel.addComment(parentThreadId: parentThreadId, content: inputStr)
+                CommentViewModel.addComment(parentThreadId: parentThreadId, content: inputStr)
                 inputStr = ""
                 isTextEditorFocused.wrappedValue = false
             }){

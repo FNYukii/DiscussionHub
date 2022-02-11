@@ -56,7 +56,7 @@ class ThreadViewModel: ObservableObject {
         listener?.remove()
     }
     
-    func addThread(title: String, firstCommentContent: String) {
+    static func addThread(title: String, firstCommentContent: String) {
         // User id
         let userId = Auth.auth().currentUser?.uid ?? ""
         
@@ -76,13 +76,12 @@ class ThreadViewModel: ObservableObject {
                     print("HELLO! Success! Added new document \(ref!.documentID) to threads")
                     
                     // Add first comment in this thread
-                    let commentViewModel = CommentViewModel()
-                    commentViewModel.addComment(parentThreadId: ref!.documentID, content: firstCommentContent)
+                    CommentViewModel.addComment(parentThreadId: ref!.documentID, content: firstCommentContent)
                 }
             }
     }
     
-    func deleteThread(threadId: String) {
+    static func deleteThread(threadId: String) {
         let db = Firestore.firestore()
         db.collection("threads")
             .document(threadId)
@@ -95,7 +94,7 @@ class ThreadViewModel: ObservableObject {
             }
     }
     
-    func incrementCommentCount(threadId: String) {
+    static func incrementCommentCount(threadId: String) {
         // Get thread
         let db = Firestore.firestore()
         db.collection("threads")

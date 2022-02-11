@@ -42,8 +42,7 @@ struct ThreadMenu: View {
         
         .confirmationDialog("", isPresented: $isShowDeleteThreadConfirmation, titleVisibility: .hidden) {
             Button("スレッドを削除", role: .destructive) {
-                let threadViewModel = ThreadViewModel()
-                threadViewModel.deleteThread(threadId: showingThread.id)
+                ThreadViewModel.deleteThread(threadId: showingThread.id)
                 dismiss()
             }
         } message: {

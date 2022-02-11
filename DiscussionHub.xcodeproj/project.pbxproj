@@ -69,10 +69,10 @@
 		543BA49E27A4121900FF3B04 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */,
 				543BA4B227A69D1E00FF3B04 /* CommentMenu.swift */,
 				5438D5CD27ABB61F00EA2106 /* Crypto.swift */,
 				547BED0E27A776070045A664 /* OneCommentRow.swift */,
-				543BA4B027A69BC300FF3B04 /* ThreadMenu.swift */,
 				543BA49F27A414F200FF3B04 /* CreateCommentBar.swift */,
 			);
 			path = Components;

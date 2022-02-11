@@ -56,8 +56,7 @@ struct CommentMenu: View {
         
         .confirmationDialog("", isPresented: $isShowDeleteCommentConfirmation, titleVisibility: .hidden) {
             Button("コメントを削除", role: .destructive) {
-                let commentViewModel = CommentViewModel()
-                commentViewModel.deleteComment(parentThreadId: showingComment.parentThreadId, commentId: selectedCommentId)
+                CommentViewModel.deleteComment(parentThreadId: showingComment.parentThreadId, commentId: selectedCommentId)
             }
         } message: {
             Text("このコメントを削除してもよろしいですか?")
